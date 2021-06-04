@@ -8,15 +8,104 @@
 	<link th:rel="stylesheet" th:href="@{/css/index.css}"/>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+	<nav class="navbar navbar-expand-lg navbar-light">
 		<a class="navbar-brand" th:href="@{/}">EasyFix</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		<div class="ml-auto">
+			<span th:text="${username}"></span>
+		</div>
 	</nav>
+
+	<div class="h-100 mt-5 container d-flex flex-column">
+		<div>
+			<h3>Klanten</h3>
+
+			<form id="customerForm" class="mt-2 h-100">
+				<div class="row">
+					<div class="col form-row">
+						<label class="col-12" for="action">Acties</label>
+						<div class="col">
+							<select class="form-control" id="action">
+								<option>Verwijderen</option>
+							</select>
+						</div>
+						<div class="col">
+							<button type="submit" class="btn btn-primary">Toepassen</button>
+						</div>
+					</div>
+
+					<div class="col form-row">
+						<label class="col-12" for="status">Status</label>
+						<div class="col">
+							<select class="form-control" id="status">
+								<option>Voor controle</option>
+								<option>Geen reparatie</option>
+								<option>Voor reparatie</option>
+								<option>Voltooid</option>
+								<option>Succes</option>
+							</select>
+						</div>
+						<div class="col">
+							<button type="submit" class="btn btn-primary">Toepassen</button>
+						</div>
+					</div>
+				</div>
+
+				<table class="mt-2 table table-striped">
+					<thead>
+					<tr>
+						<th scope="col">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="bulkSelect">
+								<label class="custom-control-label" for="bulkSelect"></label>
+							</div>
+						</th>
+						<th scope="col">ID</th>
+						<th scope="col">Naam</th>
+						<th scope="col">Email</th>
+						<th scope="col">Telefoon</th>
+						<th scope="col">Computer</th>
+						<th scope="col">Afspraken</th>
+						<th scope="col">Status</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<th>
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="customerSelect">
+								<label class="custom-control-label" for="customerSelect"></label>
+							</div>
+						</th>
+						<th>1</th>
+						<td>Mark Otto</td>
+						<td>MarkOtto@gmail.com</td>
+						<td>0611223344</td>
+						<td>HP Super</td>
+						<td>1</td>
+						<td>-</td>
+					</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
 
 	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 	<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+	<script>
+		const form = document.getElementById("customerForm");
+		const bulkSelect = document.getElementById("bulkSelect");
+		bulkSelect.addEventListener("click", () => {
+			const checkBoxes = form.querySelectorAll("input[id^='customerSelect']");
+			Array.from(checkBoxes).forEach(checkbox => {
+				$(checkbox).prop("checked", bulkSelect.checked)
+			})
+		})
+	</script>
 </body>
 </html>
