@@ -101,7 +101,7 @@
 	<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
-	<script>
+	<script th:if="${is_admin}">
 		const customerTable = document.getElementById("customerTable");
 		const bulkSelect = document.getElementById("bulkSelect");
 		bulkSelect.addEventListener("click", () => {
