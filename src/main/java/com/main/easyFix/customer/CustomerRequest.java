@@ -1,4 +1,4 @@
-package com.main.easyFix.registration;
+package com.main.easyFix.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,12 +9,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class ClientRequest {
+public class CustomerRequest {
   private final String firstName;
   private final String lastName;
   private final String address;
   private final String postalCode;
   private final String email;
   private final String phone;
-  private final String computer;
 }

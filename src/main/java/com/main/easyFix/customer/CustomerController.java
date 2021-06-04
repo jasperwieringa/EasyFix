@@ -1,4 +1,4 @@
-package com.main.easyFix.registration;
+package com.main.easyFix.customer;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "api/v1/client")
+@RequestMapping(path = "api/v1/customer")
 @AllArgsConstructor
-public class ClientController {
-  private final ClientService clientService;
+public class CustomerController {
+  private final CustomerService customerService;
 
   @PostMapping
-  public String register(@RequestBody ClientRequest request) {
-    return clientService.register(request);
+  public String register(@RequestBody CustomerRequest request) {
+    return customerService.register(request);
   }
 }

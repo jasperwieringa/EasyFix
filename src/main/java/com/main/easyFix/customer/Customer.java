@@ -25,15 +25,13 @@ public class Customer {
   private String postalCode;
   private String email;
   private String phone;
-  private String computer;
 
-  public Customer(String firstName, String lastName, String address, String postalCode, String email, String phone, String computer) {
+  public Customer(String firstName, String lastName, String address, String postalCode, String email, String phone) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.postalCode = postalCode;
     this.email = email;
     this.phone = phone;
-    this.computer = computer;
   }
 }

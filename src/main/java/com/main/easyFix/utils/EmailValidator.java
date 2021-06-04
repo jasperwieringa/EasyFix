@@ -1,4 +1,4 @@
-package com.main.easyFix.registration;
+package com.main.easyFix.utils;
 
 import org.springframework.stereotype.Service;
 
