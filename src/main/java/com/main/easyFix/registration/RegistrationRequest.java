@@ -1,5 +1,6 @@
 package com.main.easyFix.registration;
 
+import com.main.easyFix.appuser.AppUserDepartment;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,4 +15,5 @@ public class RegistrationRequest {
     private final String password;
     private final String firstName;
     private final String lastName;
+    private final AppUserDepartment appUserDepartment;
 }

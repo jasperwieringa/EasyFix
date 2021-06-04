@@ -26,21 +26,21 @@ public class AppUser implements UserDetails {
   private String email;
   private String password;
   @Enumerated(EnumType.STRING)
-  private AppUserRole appUserRole;
+  private AppUserDepartment appUserDepartment;
   private Boolean locked = false;
   private Boolean enabled = false;
 
-  public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
+  public AppUser(String firstName, String lastName, String email, String password, AppUserDepartment appUserDepartment) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
-    this.appUserRole = appUserRole;
+    this.appUserDepartment = appUserDepartment;
   }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+    SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserDepartment.name());
     return Collections.singletonList(authority);
   }
 
