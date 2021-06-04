@@ -16,8 +16,12 @@ public class RouteController {
   @GetMapping("/")
   public String index(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String currentPrincipalName = authentication.getName();
-    model.addAttribute("username", currentPrincipalName);
+    String userName = authentication.getName();
+    boolean isAdmin = authentication.getAuthorities().stream()
+      .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
+
+    model.addAttribute("username", userName);
+    model.addAttribute("is_admin", isAdmin);
     return "index";
   }
 }
