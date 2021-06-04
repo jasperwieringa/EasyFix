@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class RegistrationService {
+public class EmployeeService {
   private final AppUserService appUserService;
   private final EmailValidator emailValidator;
 
-  public String register(RegistrationRequest request) {
+  public String register(EmployeeRequest request) {
     String firstName = request.getFirstName();
     String lastName = request.getLastName();
     String email = request.getEmail();
@@ -21,7 +21,7 @@ public class RegistrationService {
     boolean isValidEmail = emailValidator.test(email);
 
     if (!isValidEmail) {
-      throw new IllegalStateException("email not valid");
+      throw new IllegalStateException("Onjuist e-mailadres");
     }
 
     return appUserService.signUpUser(

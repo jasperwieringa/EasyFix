@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService {
-  private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
+  private final static String USER_NOT_FOUND_MSG = "Werknemer met email: %s, niet gevonden";
   private final AppUserRepository appUserRepository;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -24,8 +24,7 @@ public class AppUserService implements UserDetailsService {
     boolean userExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
 
     if (userExists) {
-      // TODO check of attributes are the same and
-      throw new IllegalStateException("email already taken");
+      throw new IllegalStateException("Dit e-mailadres is al in gebruik");
     }
 
     String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
