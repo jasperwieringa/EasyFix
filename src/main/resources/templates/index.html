@@ -27,7 +27,10 @@
 					<form class="form-inline">
 						<div class="form-group mr-sm-3 mb-2">
 							<label for="action" class="sr-only">Acties</label>
-							<input type="password" class="form-control" id="action" placeholder="Password">
+							<select class="form-control" id="action">
+								<option selected>Selecteer een actie</option>
+								<option value="delete">Verwijderen</option>
+							</select>
 						</div>
 						<button type="submit" class="btn btn-primary mb-2">Toepassen</button>
 					</form>
@@ -35,7 +38,14 @@
 					<form class="form-inline">
 						<div class="form-group mx-sm-3 mb-2">
 							<label for="status" class="sr-only">Status</label>
-							<input type="password" class="form-control" id="status" placeholder="Password">
+							<select class="form-control" id="status">
+								<option selected>Zet de status</option>
+								<option value="checkup">Voor controle</option>
+								<option value="canceled">Geen reparatie</option>
+								<option value="repair">Voor reparatie</option>
+								<option value="finished">Voltooid</option>
+								<option value="success">Succes</option>
+							</select>
 						</div>
 						<button type="submit" class="btn btn-primary mb-2">Bijwerken</button>
 					</form>
