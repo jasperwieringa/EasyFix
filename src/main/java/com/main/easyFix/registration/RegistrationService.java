@@ -1,7 +1,7 @@
 package com.main.easyFix.registration;
 
 import com.main.easyFix.appuser.AppUser;
-import com.main.easyFix.appuser.AppUserRole;
+import com.main.easyFix.appuser.AppUserDepartment;
 import com.main.easyFix.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,20 +13,19 @@ public class RegistrationService {
   private final EmailValidator emailValidator;
 
   public String register(RegistrationRequest request) {
-    boolean isValidEmail = emailValidator.test(request.getEmail());
+    String firstName = request.getFirstName();
+    String lastName = request.getLastName();
+    String email = request.getEmail();
+    String password = request.getPassword();
+    AppUserDepartment appUserDepartment = request.getAppUserDepartment();
+    boolean isValidEmail = emailValidator.test(email);
 
     if (!isValidEmail) {
       throw new IllegalStateException("email not valid");
     }
 
     return appUserService.signUpUser(
-      new AppUser(
-        request.getFirstName(),
-        request.getLastName(),
-        request.getEmail(),
-        request.getPassword(),
-        AppUserRole.USER
-      )
+      new AppUser(firstName, lastName, email, password, appUserDepartment)
     );
   }
 }

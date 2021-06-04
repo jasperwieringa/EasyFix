@@ -51,13 +51,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .roles("ADMIN");
     auth.inMemoryAuthentication()
       .withUser("expert@easyfix.nl").password(bCryptPasswordEncoder.encode("EasyFixExpertLogin"))
-      .roles("USER");
+      .roles("EXPERT");
     auth.inMemoryAuthentication()
       .withUser("cashier@easyfix.nl").password(bCryptPasswordEncoder.encode("EasyFixCashierLogin"))
-      .roles("USER");
+      .roles("CASHIER");
     auth.inMemoryAuthentication()
       .withUser("backoffice@easyfix.nl").password(bCryptPasswordEncoder.encode("EasyFixBackofficeLogin"))
-      .roles("USER");
+      .roles("BACKOFFICE");
 
     auth.authenticationProvider(daoAuthenticationProvider());
   }
