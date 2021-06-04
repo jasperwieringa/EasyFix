@@ -22,74 +22,66 @@
 		<div>
 			<h3>Klanten</h3>
 
-			<form id="customerForm" class="mt-2 h-100">
-				<div class="row">
-					<div class="col form-row">
-						<label class="col-12" for="action">Acties</label>
-						<div class="col">
-							<select class="form-control" id="action">
-								<option>Verwijderen</option>
-							</select>
+			<div class="d-flex justify-content-between">
+				<div class="d-flex">
+					<form class="form-inline">
+						<div class="form-group mr-sm-3 mb-2">
+							<label for="action" class="sr-only">Acties</label>
+							<input type="password" class="form-control" id="action" placeholder="Password">
 						</div>
-						<div class="col">
-							<button type="submit" class="btn btn-primary">Toepassen</button>
-						</div>
-					</div>
+						<button type="submit" class="btn btn-primary mb-2">Toepassen</button>
+					</form>
 
-					<div class="col form-row">
-						<label class="col-12" for="status">Status</label>
-						<div class="col">
-							<select class="form-control" id="status">
-								<option>Voor controle</option>
-								<option>Geen reparatie</option>
-								<option>Voor reparatie</option>
-								<option>Voltooid</option>
-								<option>Succes</option>
-							</select>
+					<form class="form-inline">
+						<div class="form-group mx-sm-3 mb-2">
+							<label for="status" class="sr-only">Status</label>
+							<input type="password" class="form-control" id="status" placeholder="Password">
 						</div>
-						<div class="col">
-							<button type="submit" class="btn btn-primary">Toepassen</button>
-						</div>
-					</div>
+						<button type="submit" class="btn btn-primary mb-2">Bijwerken</button>
+					</form>
 				</div>
 
-				<table class="mt-2 table table-striped">
-					<thead>
-					<tr>
-						<th scope="col">
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="bulkSelect">
-								<label class="custom-control-label" for="bulkSelect"></label>
-							</div>
-						</th>
-						<th scope="col">ID</th>
-						<th scope="col">Naam</th>
-						<th scope="col">Email</th>
-						<th scope="col">Telefoon</th>
-						<th scope="col">Computer</th>
-						<th scope="col">Afspraken</th>
-						<th scope="col">Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<th>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="customerSelect">
-								<label class="custom-control-label" for="customerSelect"></label>
-							</div>
-						</th>
-						<th>1</th>
-						<td>Mark Otto</td>
-						<td>MarkOtto@gmail.com</td>
-						<td>0611223344</td>
-						<td>HP Super</td>
-						<td>1</td>
-						<td>-</td>
-					</tr>
-					</tbody>
-				</table>
-			</form>
+				<div>
+					<a class="btn btn-success" href="#" role="button">+ Nieuwe klant</a>
+				</div>
+			</div>
+
+			<table id="customerTable" class="mt-2 table table-striped">
+				<thead>
+				<tr>
+					<th scope="col">
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="bulkSelect">
+							<label class="custom-control-label" for="bulkSelect"></label>
+						</div>
+					</th>
+					<th scope="col">ID</th>
+					<th scope="col">Naam</th>
+					<th scope="col">Email</th>
+					<th scope="col">Telefoon</th>
+					<th scope="col">Computer</th>
+					<th scope="col">Afspraken</th>
+					<th scope="col">Status</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<th>
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="customerSelect">
+							<label class="custom-control-label" for="customerSelect"></label>
+						</div>
+					</th>
+					<th>1</th>
+					<td>Mark Otto</td>
+					<td>MarkOtto@gmail.com</td>
+					<td>0611223344</td>
+					<td>HP Super</td>
+					<td>1</td>
+					<td>-</td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 
@@ -98,10 +90,10 @@
 	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
 	<script>
-		const form = document.getElementById("customerForm");
+		const customerTable = document.getElementById("customerTable");
 		const bulkSelect = document.getElementById("bulkSelect");
 		bulkSelect.addEventListener("click", () => {
-			const checkBoxes = form.querySelectorAll("input[id^='customerSelect']");
+			const checkBoxes = customerTable.querySelectorAll("input[id^='customerSelect']");
 			Array.from(checkBoxes).forEach(checkbox => {
 				$(checkbox).prop("checked", bulkSelect.checked)
 			})
