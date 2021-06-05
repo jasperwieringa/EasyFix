@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -21,9 +22,13 @@ public class AppUser implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @NotEmpty(message = "The employee's name cannot be empty")
   private String firstName;
+  @NotEmpty(message = "The employee's lastname cannot be empty")
   private String lastName;
+  @NotEmpty(message = "The employee's email cannot be empty")
   private String email;
+  @NotEmpty(message = "The employee's password cannot be empty")
   private String password;
   @Enumerated(EnumType.STRING)
   private AppUserDepartment appUserDepartment;

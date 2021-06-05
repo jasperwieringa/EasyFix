@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -19,11 +21,15 @@ public class Customer {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @NotEmpty(message = "The customer's name cannot be empty")
   private String firstName;
+  @NotEmpty(message = "The customer's lastname cannot be empty")
   private String lastName;
   private String address;
   private String postalCode;
+  @NotEmpty(message = "The customer's email cannot be empty")
   private String email;
+  @NotEmpty(message = "The customer's phone number cannot be empty")
   private String phone;
   private Integer appointments;
 

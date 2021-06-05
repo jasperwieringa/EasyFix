@@ -22,35 +22,45 @@ public class AppUserService implements UserDetailsService {
       new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
   }
 
-  public String register(AppUserRequest request) {
-    String firstName = request.getFirstName();
-    String lastName = request.getLastName();
-    String email = request.getEmail();
-    String password = request.getPassword();
-    AppUserDepartment appUserDepartment = request.getAppUserDepartment();
-    boolean isValidEmail = emailValidator.test(email);
+  public Object listAllEmployees() {
+    return appUserRepository.findAll();
+  }
 
-    if (!isValidEmail) {
-      throw new IllegalStateException("Incorrect e-mail");
-    }
+  public AppUser register(AppUser appUser) {
+    String firstName = appUser.getFirstName();
+    String lastName = appUser.getLastName();
+    String email = appUser.getEmail();
+    String password = appUser.getPassword();
+    AppUserDepartment appUserDepartment = appUser.getAppUserDepartment();
 
     return signUpUser(
       new AppUser(firstName, lastName, email, password, appUserDepartment)
     );
   }
 
-  public String signUpUser(AppUser appUser) {
-    boolean userExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
-
-    if (userExists) {
-      throw new IllegalStateException("This email address is already taken");
-    }
-
+  public AppUser signUpUser(AppUser appUser) {
     String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
     appUser.setPassword(encodedPassword);
 
     appUserRepository.save(appUser);
     appUserRepository.enableAppUser(appUser.getEmail());
-    return "Success";
+    return appUser;
+  }
+
+  public String validateRegistration(AppUser appUser) {
+    String message = "";
+
+    boolean isValidEmail = emailValidator.test(appUser.getEmail());
+    boolean userExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
+
+    if (!isValidEmail) {
+      message = "Invalid email address";
+    }
+
+    if (userExists) {
+      message = "This email address is already taken";
+    }
+
+    return message;
   }
 }

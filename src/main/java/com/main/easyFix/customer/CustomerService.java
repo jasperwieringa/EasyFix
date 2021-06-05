@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CustomerService {
   private final static String CLIENT_NOT_FOUND_MSG = "Customer with %s: %s, not found";
-  private final static String CLIENT_EXISTS_MSG = "A customer with these credentials already exists";
   private final CustomerRepository customerRepository;
   private final EmailValidator emailValidator;
 
@@ -32,34 +31,36 @@ public class CustomerService {
     return customerRepository.findAll();
   }
 
-  public Customer register(CustomerRequest request) {
-    String firstName = request.getFirstName();
-    String lastName = request.getLastName();
-    String address = request.getAddress();
-    String postalCode = request.getPostalCode();
-    String email = request.getEmail();
-    String phone = request.getPhone();
-    boolean isValidEmail = emailValidator.test(email);
+  public Customer register(Customer customer) {
+    String firstName = customer.getFirstName();
+    String lastName = customer.getLastName();
+    String address = customer.getAddress();
+    String postalCode = customer.getPostalCode();
+    String email = customer.getEmail();
+    String phone = customer.getPhone();
 
-    if (!isValidEmail) {
-      throw new IllegalStateException("Incorrect e-mail");
-    }
+    Customer newCustomer = new Customer(firstName, lastName, address, postalCode, email, phone);
+    customerRepository.save(customer);
 
-    return signUpCustomer(
-      new Customer(firstName, lastName, address, postalCode, email, phone)
-    );
+    return newCustomer;
   }
 
-  public Customer signUpCustomer(Customer customer) {
+  public String validateRegistration(Customer customer) {
+    String message = "";
+
+    boolean isValidEmail = emailValidator.test(customer.getEmail());
     boolean lastNameInUse = customerRepository.findByLastName(customer.getLastName()).isPresent();
     boolean postalCodeInUse = customerRepository.findByPostalCode(customer.getPostalCode()).isPresent();
     boolean emailInUse = customerRepository.findByEmail(customer.getEmail()).isPresent();
 
-    if (lastNameInUse || postalCodeInUse || emailInUse) {
-      throw new IllegalStateException(CLIENT_EXISTS_MSG);
+    if (!isValidEmail) {
+      message = "Invalid email address";
     }
 
-    customerRepository.save(customer);
-    return customer;
+    if (lastNameInUse || postalCodeInUse || emailInUse) {
+      message = "A customer with these credentials already exists";
+    }
+
+    return message;
   }
 }
