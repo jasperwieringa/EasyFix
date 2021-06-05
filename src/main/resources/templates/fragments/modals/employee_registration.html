@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div id="employeeRegistrationModal" class="modal" tabindex="-1" th:fragment="registration_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Add employee</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form th:action="@{/api/v1/employee}" method="post">
+					<div class="form-group">
+						<label for="employeeFirstName" class="control-label">First name</label>
+						<input id="employeeFirstName" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label for="employeeLastName" class="control-label">Last name</label>
+						<input id="employeeLastName" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label for="employeeEmail" class="control-label">E-mail</label>
+						<input id="employeeEmail" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label for="employeePassword" class="control-label">Password</label>
+						<input id="employeePassword" class="form-control" type="password"/>
+					</div>
+					<div class="form-group">
+						<label for="employeeDepartment">Department</label>
+						<select id="employeeDepartment" class="form-control">
+							<option>Administration</option>
+							<option>Expert</option>
+							<option>Cashier</option>
+							<option>Backoffice</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Register</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

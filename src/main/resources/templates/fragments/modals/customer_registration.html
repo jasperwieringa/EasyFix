@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div id="customerRegistrationModal" class="modal" tabindex="-1" th:fragment="registration_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Add customer</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form th:action="@{/api/v1/client}" method="post">
+					<div class="form-group">
+						<label for="customerFirstName" class="control-label">First name</label>
+						<input id="customerFirstName" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label for="customerLastName" class="control-label">Last name</label>
+						<input id="customerLastName" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label for="customerAddress" class="control-label">Address</label>
+						<input id="customerAddress" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label for="customerZip" class="control-label">ZipCode</label>
+						<input id="customerZip" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label for="customerEmail" class="control-label">E-mail</label>
+						<input id="customerEmail" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label for="customerPhone" class="control-label">Phone</label>
+						<input id="customerPhone" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Register</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

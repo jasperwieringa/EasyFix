@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 @Configuration
 @AllArgsConstructor
@@ -68,5 +69,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     provider.setPasswordEncoder(bCryptPasswordEncoder);
     provider.setUserDetailsService(appUserService);
     return provider;
+  }
+
+  @Bean
+  public SpringSecurityDialect springSecurityDialect(){
+    return new SpringSecurityDialect();
   }
 }

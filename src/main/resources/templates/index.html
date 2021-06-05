@@ -8,134 +8,28 @@
 	<link th:rel="stylesheet" th:href="@{/css/index.css}"/>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light">
-		<a class="navbar-brand" th:href="@{/}">EasyFix</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
 
-		<div class="ml-auto dropdown">
-			<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${username}">
-				Username
-			</button>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item" th:href="@{/logout}" href="">Logout</a>
+<div class="h-100 d-flex flex-column">
+	<div th:insert="fragments/frame/navbar :: navbar">...</div>
+	<div class="h-100 container-md d-flex flex-wrap align-items-center justify-content-center">
+		<a class="card m-3 text-dark" style="width: 40rem;" href="" th:href="@{/customers}">
+			<img th:src="@{/images/customers.png}" src="" class="card-img-top" alt="..." style="max-height: 25rem;">
+			<div class="card-body">
+				<h3 class="card-title">Customers</h3>
 			</div>
-		</div>
-	</nav>
-
-	<ul class="nav nav-tabs" id="myTab" role="tablist">
-		<li class="nav-item" role="presentation">
-			<a class="nav-link active" id="customer-tab" data-toggle="tab" href="#customer" role="tab" aria-controls="customer" aria-selected="true">Customers</a>
-		</li>
-		<li class="nav-item" role="presentation">
-			<a class="nav-link" id="employee-tab" data-toggle="tab" href="#employee" role="tab" aria-controls="employee" aria-selected="false">Employees</a>
-		</li>
-	</ul>
-	<div class="tab-content" id="myTabContent">
-		<div class="tab-pane fade" id="customer" role="tabpanel" aria-labelledby="profile-tab">
-
-		</div>
-		<div class="tab-pane fade" id="employee" role="tabpanel" aria-labelledby="contact-tab">
-
-		</div>
-	</div>
-
-	<div class="h-100 mt-5 container d-flex flex-column">
-		<div>
-			<h3>Klanten</h3>
-
-			<div class="d-flex justify-content-between" th:if="${is_admin}">
-				<div class="d-flex">
-					<form class="form-inline">
-						<div class="form-group mr-sm-3 mb-2">
-							<label for="action" class="sr-only">Acties</label>
-							<select class="form-control" id="action">
-								<option selected>Selecteer een actie</option>
-								<option value="delete">Verwijderen</option>
-							</select>
-						</div>
-						<button type="submit" class="btn btn-primary mb-2">Toepassen</button>
-					</form>
-				</div>
-				<div>
-					<a class="btn btn-success" th:href="@{/api/v1/client}" href="" role="button">+ Nieuwe klant</a>
-				</div>
+		</a>
+		<a class="card m-3 text-dark" style="width: 40rem;" href="" th:href="@{/employees}">
+			<img th:src="@{/images/employees.png}" src="" class="card-img-top" alt="..." style="max-height: 25rem;">
+			<div class="card-body">
+				<h3 class="card-title">Employees</h3>
 			</div>
-
-			<table id="customerTable" class="mt-2 table table-striped">
-				<thead>
-				<tr>
-					<th scope="col" th:if="${is_admin}">
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input" id="bulkSelect">
-							<label class="custom-control-label" for="bulkSelect"></label>
-						</div>
-					</th>
-					<th scope="col">ID</th>
-					<th scope="col">Naam</th>
-					<th scope="col">Email</th>
-					<th scope="col">Telefoon</th>
-					<th scope="col">Afspraken</th>
-					<th scope="col">Status</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<th th:if="${is_admin}">
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input" id="customerSelect">
-							<label class="custom-control-label" for="customerSelect"></label>
-						</div>
-					</th>
-					<th>1</th>
-					<td>Mark Otto</td>
-					<td>MarkOtto@gmail.com</td>
-					<td>0611223344</td>
-					<td>1</td>
-					<td class="pt-2">
-						<form class="form-inline">
-							<label for="status" class="sr-only">Status</label>
-							<select class="form-control" id="status">
-								<option selected>Zet de status</option>
-								<option value="checkup">Voor controle</option>
-								<option value="canceled">Geen reparatie</option>
-								<option value="repair">Voor reparatie</option>
-								<option value="finished">Voltooid</option>
-								<option value="success">Succes</option>
-							</select>
-						</form>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
+		</a>
 	</div>
+</div>
 
-	<!-- Customer registration modal	-->
-	<section th:if="${is_admin}" th:insert="fragments/modals :: customer_registration">...</section>
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
-	<!-- Employee registration modal	-->
-	<section th:if="${is_admin}" th:insert="fragments/modals :: employee_registration">...</section>
-
-	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-
-	<script th:if="${is_admin}">
-		// Customer table
-		const customerTable = document.getElementById("customerTable");
-		const bulkSelect = customerTable.querySelector("#bulkSelect");
-		bulkSelect.addEventListener("click", () => {
-			const checkBoxes = customerTable.querySelectorAll("input[id^='customerSelect']");
-			Array.from(checkBoxes).forEach(checkbox => {
-				$(checkbox).prop("checked", bulkSelect.checked)
-			})
-		})
-
-		// Registration
-		const customerRegModal = document.getElementById("customerRegistration");
-		const employeeRegistration = document.getElementById("employeeRegistration");
-	</script>
 </body>
 </html>

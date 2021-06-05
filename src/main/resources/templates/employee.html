@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Customers</title>
+
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+	<link th:rel="stylesheet" th:href="@{/css/index.css}"/>
+</head>
+<body>
+
+<div th:insert="fragments/frame/navbar :: navbar">...</div>
+
+<div class="h-100 mt-5 container d-flex flex-column">
+	<div>
+		<h3>Employees</h3>
+
+		Hello Employees
+	</div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
