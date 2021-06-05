@@ -15,6 +15,7 @@
 	<div>
 		<h3>Customers</h3>
 
+		<!-- Admin functions	-->
 		<div class="d-flex justify-content-between" sec:authorize="hasRole('ROLE_ADMIN')">
 			<div class="d-flex">
 				<form class="form-inline">
@@ -35,50 +36,53 @@
 			</div>
 		</div>
 
-		<table id="customerTable" class="mt-2 table table-striped">
+		<!-- Customer table -->
+		<div th:if="${#lists.isEmpty(customers)}">No customers</div>
+
+		<table id="customerTable" class="mt-2 table table-striped" th:if="${not #lists.isEmpty(customers)}">
 			<thead>
-			<tr>
-				<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="bulkSelect">
-						<label class="custom-control-label" for="bulkSelect"></label>
-					</div>
-				</th>
-				<th scope="col">ID</th>
-				<th scope="col">Name</th>
-				<th scope="col">Email</th>
-				<th scope="col">Phone</th>
-				<th scope="col">Appointments</th>
-				<th scope="col">Status</th>
-			</tr>
+				<tr>
+					<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="bulkSelect">
+							<label class="custom-control-label" for="bulkSelect"></label>
+						</div>
+					</th>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Phone</th>
+					<th scope="col">Appointments</th>
+					<th scope="col">Status</th>
+				</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<th sec:authorize="hasRole('ROLE_ADMIN')">
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="customerSelect">
-						<label class="custom-control-label" for="customerSelect"></label>
-					</div>
-				</th>
-				<th>1</th>
-				<td>Mark Otto</td>
-				<td>MarkOtto@gmail.com</td>
-				<td>0611223344</td>
-				<td>1</td>
-				<td class="pt-2">
-					<form class="form-inline">
-						<label for="status" class="sr-only">Status</label>
-						<select class="form-control" id="status">
-							<option selected>Set status</option>
-							<option value="checkup">For check</option>
-							<option value="canceled">Canceled</option>
-							<option value="repair">For repair</option>
-							<option value="finished">Finished</option>
-							<option value="success">Success</option>
-						</select>
-					</form>
-				</td>
-			</tr>
+				<tr th:each="customer : ${customers}">
+					<td sec:authorize="hasRole('ROLE_ADMIN')">
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="customerSelect">
+							<label class="custom-control-label" for="customerSelect"></label>
+						</div>
+					</td>
+					<td th:text="${customer.id}">id</td>
+					<td th:text="${customer.firstName} ${customer.lastName}">id</td>
+					<td th:text="${customer.email}">id</td>
+					<td th:text="${customer.phone}">id</td>
+					<td>-</td>
+					<td class="pt-2">
+						<form class="form-inline">
+							<label for="status" class="sr-only">Status</label>
+							<select class="form-control" id="status">
+								<option selected>Set status</option>
+								<option value="checkup">For check</option>
+								<option value="canceled">Canceled</option>
+								<option value="repair">For repair</option>
+								<option value="finished">Finished</option>
+								<option value="success">Success</option>
+							</select>
+						</form>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>

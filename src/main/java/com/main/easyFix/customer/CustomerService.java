@@ -28,6 +28,10 @@ public class CustomerService {
       new UsernameNotFoundException(String.format(CLIENT_NOT_FOUND_MSG, "email", email)));
   }
 
+  public Object listAllCustomers() {
+    return customerRepository.findAll();
+  }
+
   public String register(CustomerRequest request) {
     String firstName = request.getFirstName();
     String lastName = request.getLastName();
