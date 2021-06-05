@@ -25,6 +25,7 @@ public class Customer {
   private String postalCode;
   private String email;
   private String phone;
+  private Integer appointments;
 
   public Customer(String firstName, String lastName, String address, String postalCode, String email, String phone) {
     this.firstName = firstName;

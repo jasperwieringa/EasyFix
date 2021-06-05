@@ -1,5 +1,6 @@
 package com.main.easyFix.webapp;
 
+import com.main.easyFix.customer.Customer;
 import com.main.easyFix.customer.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,12 +20,6 @@ public class RouteController {
   @GetMapping("/")
   public String index() {
     return "index";
-  }
-
-  @GetMapping("/customers")
-  public String customers(Model model) {
-    model.addAttribute("customers", customerService.listAllCustomers());
-    return "customer";
   }
 
   @GetMapping("/employees")

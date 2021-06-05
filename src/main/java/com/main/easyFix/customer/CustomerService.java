@@ -32,7 +32,7 @@ public class CustomerService {
     return customerRepository.findAll();
   }
 
-  public String register(CustomerRequest request) {
+  public Customer register(CustomerRequest request) {
     String firstName = request.getFirstName();
     String lastName = request.getLastName();
     String address = request.getAddress();
@@ -50,7 +50,7 @@ public class CustomerService {
     );
   }
 
-  public String signUpCustomer(Customer customer) {
+  public Customer signUpCustomer(Customer customer) {
     boolean lastNameInUse = customerRepository.findByLastName(customer.getLastName()).isPresent();
     boolean postalCodeInUse = customerRepository.findByPostalCode(customer.getPostalCode()).isPresent();
     boolean emailInUse = customerRepository.findByEmail(customer.getEmail()).isPresent();
@@ -60,6 +60,6 @@ public class CustomerService {
     }
 
     customerRepository.save(customer);
-    return "Success";
+    return customer;
   }
 }

@@ -2,9 +2,10 @@ package com.main.easyFix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class EasyFixApplication {
+public class EasyFixApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(EasyFixApplication.class, args);
 	}
