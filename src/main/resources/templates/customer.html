@@ -132,11 +132,17 @@
 	// Customer table
 	const customerTable = document.getElementById("customerTable");
 	const bulkSelect = customerTable.querySelector("#bulkSelect");
+
 	bulkSelect.addEventListener("click", () => {
 		const checkBoxes = customerTable.querySelectorAll(".customer-select");
 		Array.from(checkBoxes).forEach(checkbox => {
 			$(checkbox).prop("checked", bulkSelect.checked)
 		})
+	})
+
+	// Clear the customer dialog on open
+	$("#newCustomerModal").on("shown.bs.modal", () => {
+		$("input").val("");
 	})
 </script>
 </body>
