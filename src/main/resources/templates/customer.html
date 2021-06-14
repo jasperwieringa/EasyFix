@@ -115,7 +115,6 @@
 <script sec:authorize="hasRole('ROLE_ADMIN')">
 	// Clear the customer dialog on open
 	$("#newCustomerModal").on("shown.bs.modal", () => {
-		console.log($("input"));
 		$("input").val("");
 	})
 </script>
