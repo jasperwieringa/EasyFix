@@ -10,7 +10,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form th:action="@{/employees/add}" th:object="${appUser}" method="post">
+				<form th:action="@{/employees/add}" th:object="${appUser}" action="" method="post">
 					<div class="form-group">
 						<label for="firstName" class="control-label">First name</label>
 						<input id="firstName" class="form-control" th:field="*{firstName}"/>

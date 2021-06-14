@@ -15,27 +15,6 @@
 	<div>
 		<h3>Employees</h3>
 
-		<!-- Admin functions	-->
-		<div class="d-flex justify-content-between" sec:authorize="hasRole('ROLE_ADMIN')">
-			<div class="d-flex">
-				<form class="form-inline">
-					<div class="form-group mr-sm-3 mb-2">
-						<label for="action" class="sr-only">Actions</label>
-						<select class="form-control" id="action">
-							<option selected>Select an action</option>
-							<option value="delete">Delete</option>
-						</select>
-					</div>
-					<button type="submit" class="btn btn-primary mb-2">Apply</button>
-				</form>
-			</div>
-			<div>
-				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newEmployeeModal">
-					+ New employee
-				</button>
-			</div>
-		</div>
-
 		<!-- Customer table -->
 		<table id="employeeTable" class="mt-2 table table-striped">
 			<thead>
@@ -64,7 +43,7 @@
 						</div>
 					</td>
 					<td th:text="${employee.id}">id</td>
-					<td th:text="${employee.firstName + employee.lastName}">name</td>
+					<td th:text="${employee.firstName + ' ' + employee.lastName}">name</td>
 					<td th:text="${employee.email}">email</td>
 					<td th:text="${employee.appUserDepartment}">department</td>
 				</tr>
@@ -89,8 +68,12 @@
 			</div>
 		</div>
 
-
-
+		<!-- Admin functions	-->
+		<div class="d-flex justify-content-end" sec:authorize="hasRole('ROLE_ADMIN')">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newEmployeeModal">
+				+ New employee
+			</button>
+		</div>
 	</div>
 </div>
 
@@ -101,14 +84,9 @@
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
 <script sec:authorize="hasRole('ROLE_ADMIN')">
-	// Employee table
-	const customerTable = document.getElementById("employeeTable");
-	const bulkSelect = customerTable.querySelector("#bulkSelect");
-	bulkSelect.addEventListener("click", () => {
-		const checkBoxes = customerTable.querySelectorAll(".employee-select");
-		Array.from(checkBoxes).forEach(checkbox => {
-			$(checkbox).prop("checked", bulkSelect.checked)
-		})
+	// Clear the customer dialog on open
+	$("#newEmployeeModal").on("shown.bs.modal", () => {
+		$("input").val("");
 	})
 </script>
 </body>
