@@ -71,57 +71,30 @@
 			</tbody>
 		</table>
 
-		<!-- Customer errors -->
+		<!-- Alerts -->
 		<div class="d-flex flex-column" th:each="err : ${#fields.errors('appUser.*')}">
-			<div class="alert alert-danger" role="alert" th:text="${err}">Error</div>
-		</div>
-	</div>
-</div>
-
-<div id="newEmployeeModal" class="modal" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Add employee</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<span th:text="${err}">Err</span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
-				<form th:action="@{/employees/add}" th:object="${appUser}" method="post">
-					<div class="form-group">
-						<label for="firstName" class="control-label">First name</label>
-						<input id="firstName" class="form-control" th:field="*{firstName}"/>
-					</div>
-					<div class="form-group">
-						<label for="lastName" class="control-label">Last name</label>
-						<input id="lastName" class="form-control" th:field="*{lastName}"/>
-					</div>
-					<div class="form-group">
-						<label for="email" class="control-label">E-mail</label>
-						<input id="email" class="form-control" th:field="*{email}"/>
-					</div>
-					<div class="form-group">
-						<label for="password" class="control-label">Password</label>
-						<input id="password" class="form-control" type="password" th:field="*{password}"/>
-					</div>
-					<div class="form-group">
-						<label for="department">Department</label>
-						<select id="department" class="form-control" th:field="*{appUserDepartment}">
-							<option value="ADMIN">Administration</option>
-							<option value="EXPERT">Expert</option>
-							<option value="CASHIER">Cashier</option>
-							<option value="BACKOFFICE">Backoffice</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<button type="submit" class="btn btn-success">Register</button>
-					</div>
-				</form>
+		</div>
+		<div class="d-flex flex-column" th:if="${success_message}">
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<span th:text="${success_message}">Success</span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 		</div>
+
+
+
 	</div>
 </div>
+
+<div th:insert="fragments/dialogs/new_employee :: dialog">...</div>
 
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
