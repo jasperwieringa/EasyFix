@@ -15,42 +15,16 @@
 	<div>
 		<h3>Customers</h3>
 
-		<!-- Admin functions	-->
-		<div class="d-flex justify-content-between" sec:authorize="hasRole('ROLE_ADMIN')">
-			<div class="d-flex">
-				<form class="form-inline">
-					<div class="form-group mr-sm-3 mb-2">
-						<label for="action" class="sr-only">Actions</label>
-						<select class="form-control" id="action">
-							<option selected>Select an action</option>
-							<option value="delete">Delete</option>
-						</select>
-					</div>
-					<button type="submit" class="btn btn-primary mb-2">Apply</button>
-				</form>
-			</div>
-			<div>
-				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCustomerModal">
-					+ New customer
-				</button>
-			</div>
-		</div>
-
 		<!-- Customer table -->
 		<table id="customerTable" class="mt-2 table table-striped">
 			<thead>
 				<tr>
-					<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input" id="bulkSelect">
-							<label class="custom-control-label" for="bulkSelect"></label>
-						</div>
-					</th>
-					<th scope="col">ID</th>
+					<th scope="col">Id</th>
 					<th scope="col">Name</th>
 					<th scope="col">Email</th>
 					<th scope="col">Phone</th>
 					<th scope="col">Appointments</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -58,28 +32,38 @@
 					<td colspan="7">No customers to display</td>
 				</tr>
 				<tr th:if="${not #lists.isEmpty(customers)}" th:each="customer : ${customers}">
-					<td sec:authorize="hasRole('ROLE_ADMIN')">
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input customer-select" th:id="${customer.id}">
-							<label class="custom-control-label" th:for="${customer.id}"></label>
-						</div>
-					</td>
 					<td th:text="${customer.id}">id</td>
-					<td th:text="${customer.firstName + customer.lastName}">name</td>
+					<td th:text="${customer.firstName + ' ' + customer.lastName}">name</td>
 					<td th:text="${customer.email}">email</td>
 					<td th:text="${customer.phone}">phone</td>
 					<td th:text="${customer.appointments}">appointments</td>
+					<td>
+						<form action="#" th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 
-		<!-- Customer errors -->
+		<!-- Alerts -->
 		<div class="d-flex flex-column" th:each="err : ${#fields.errors('customer.*')}">
 			<div class="alert alert-danger" role="alert" th:text="${err}">Error</div>
+		</div>
+		<div class="d-flex flex-column" th:if="${success_message}">
+			<div class="alert alert-success" role="alert" th:text="${success_message}">Success</div>
+		</div>
+
+		<!-- Admin functions	-->
+		<div class="d-flex justify-content-end" sec:authorize="hasRole('ROLE_ADMIN')">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCustomerModal">
+				+ New customer
+			</button>
 		</div>
 	</div>
 </div>
 
+<!-- Customer dialog -->
 <div id="newCustomerModal" class="modal" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -129,19 +113,9 @@
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
 <script sec:authorize="hasRole('ROLE_ADMIN')">
-	// Customer table
-	const customerTable = document.getElementById("customerTable");
-	const bulkSelect = customerTable.querySelector("#bulkSelect");
-
-	bulkSelect.addEventListener("click", () => {
-		const checkBoxes = customerTable.querySelectorAll(".customer-select");
-		Array.from(checkBoxes).forEach(checkbox => {
-			$(checkbox).prop("checked", bulkSelect.checked)
-		})
-	})
-
 	// Clear the customer dialog on open
 	$("#newCustomerModal").on("shown.bs.modal", () => {
+		console.log($("input"));
 		$("input").val("");
 	})
 </script>

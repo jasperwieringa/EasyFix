@@ -10,8 +10,7 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-  Optional<Customer> findByLastName(String lastName);
-  Optional<Customer> findByPostalCode(String postalCode);
+  Optional<Customer> findById(Long id);
   Optional<Customer> findByEmail(String email);
   List<Customer> findAll();
 }
