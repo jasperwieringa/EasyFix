@@ -48,25 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    // Setup default employee accounts
-    auth.inMemoryAuthentication()
-      .withUser("admin@easyfix.nl").password(bCryptPasswordEncoder.encode("EasyFixAdminLogin"))
-      .roles("ADMIN");
-    auth.inMemoryAuthentication()
-      .withUser("expert@easyfix.nl").password(bCryptPasswordEncoder.encode("EasyFixExpertLogin"))
-      .roles("EXPERT");
-    auth.inMemoryAuthentication()
-      .withUser("cashier@easyfix.nl").password(bCryptPasswordEncoder.encode("EasyFixCashierLogin"))
-      .roles("CASHIER");
-    auth.inMemoryAuthentication()
-      .withUser("backoffice@easyfix.nl").password(bCryptPasswordEncoder.encode("EasyFixBackofficeLogin"))
-      .roles("BACKOFFICE");
-
-    auth.authenticationProvider(daoAuthenticationProvider());
-  }
-
-  @Override
   public void configure(WebSecurity web) throws Exception {
     web
       .ignoring()
