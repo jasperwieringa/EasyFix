@@ -19,16 +19,11 @@
 		<table id="employeeTable" class="mt-2 table table-striped">
 			<thead>
 				<tr>
-					<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input" id="bulkSelect">
-							<label class="custom-control-label" for="bulkSelect"></label>
-						</div>
-					</th>
 					<th scope="col">ID</th>
 					<th scope="col">Name</th>
 					<th scope="col">Email</th>
 					<th scope="col">Department</th>
+					<th sec:authorize="hasAuthority('ADMIN')"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,16 +31,15 @@
 					<td colspan="7">No employees to display</td>
 				</tr>
 				<tr th:if="${not #lists.isEmpty(employees)}" th:each="employee : ${employees}">
-					<td sec:authorize="hasRole('ROLE_ADMIN')">
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input employee-select" th:id="${employee.id}">
-							<label class="custom-control-label" th:for="${employee.id}"></label>
-						</div>
-					</td>
 					<td th:text="${employee.id}">id</td>
 					<td th:text="${employee.firstName + ' ' + employee.lastName}">name</td>
 					<td th:text="${employee.email}">email</td>
 					<td th:text="${employee.appUserDepartment}">department</td>
+					<td sec:authorize="hasAuthority('ADMIN')">
+						<form action="#" th:action="@{'/employees/remove/{id}'(id=${employee.id})}" th:method="delete">
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -69,7 +63,7 @@
 		</div>
 
 		<!-- Admin functions	-->
-		<div class="d-flex justify-content-end" sec:authorize="hasRole('ROLE_ADMIN')">
+		<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newEmployeeModal">
 				+ New employee
 			</button>
@@ -83,8 +77,8 @@
 <script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
-<script sec:authorize="hasRole('ROLE_ADMIN')">
-	// Clear the customer dialog on open
+<script sec:authorize="hasAuthority('ADMIN')">
+	// Clear the employee dialog on open
 	$("#newEmployeeModal").on("shown.bs.modal", () => {
 		$("input").val("");
 	})

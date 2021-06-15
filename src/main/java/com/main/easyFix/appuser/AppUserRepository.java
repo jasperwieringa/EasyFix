@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
+  Optional<AppUser> findById(Long id);
   Optional<AppUser> findByEmail(String email);
   List<AppUser> findAll();
 

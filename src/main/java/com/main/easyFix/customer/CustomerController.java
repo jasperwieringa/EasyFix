@@ -23,7 +23,7 @@ public class CustomerController {
 
   @PostMapping("/customers/add")
   public String register(Authentication authentication, @Valid Customer customer, BindingResult result, Model model) {
-    String err = customerService.registerCustomer(authentication, customer);
+    String err = customerService.validateRegistration(authentication, customer);
 
     if (!err.isEmpty()) {
       ObjectError error = new ObjectError("globalError", err);
@@ -34,13 +34,14 @@ public class CustomerController {
       model.addAttribute("success_message", "Successfully added a new customer");
     }
 
+    customerService.register(customer);
     model.addAttribute("customers", customerService.listAllCustomers());
     return "customer";
   }
 
   @RequestMapping(value="/customers/remove/{id}", method = RequestMethod.DELETE)
   public String remove(Authentication authentication, Customer customer, @PathVariable Long id, BindingResult result, Model model) {
-    String err = customerService.removeCustomer(authentication, id);
+    String err = customerService.validateRemoval(authentication);
 
     if (!err.isEmpty()) {
       ObjectError error = new ObjectError("globalError", err);
@@ -51,6 +52,7 @@ public class CustomerController {
       model.addAttribute("success_message", "Customer successfully removed");
     }
 
+    customerService.remove(id);
     model.addAttribute("customers", customerService.listAllCustomers());
     return "customer";
   }

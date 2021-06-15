@@ -1,6 +1,7 @@
 package com.main.easyFix.customer;
 
 import com.main.easyFix.utils.EmailValidator;
+import com.main.easyFix.utils.permissionValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +13,7 @@ public class CustomerService {
   private final static String CLIENT_NOT_FOUND_MSG = "Customer with %s: %s, not found";
   private final CustomerRepository customerRepository;
   private final EmailValidator emailValidator;
+  private final permissionValidator permissionValidator;
 
   public Customer loadCustomerById(Long id) throws UsernameNotFoundException {
     return customerRepository.findById(id).orElseThrow(() ->
@@ -22,14 +24,20 @@ public class CustomerService {
     return customerRepository.findAll();
   }
 
-  public String registerCustomer(Authentication authentication, Customer customer) {
-    boolean isAdmin = authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
-    if (!isAdmin) {
+  public void register(Customer customer) {
+    customerRepository.save(customer);
+  }
+
+  public void remove(Long id) {
+    customerRepository.delete(loadCustomerById(id));
+  }
+
+  public String validateRegistration(Authentication authentication, Customer customer) {
+    if (!permissionValidator.test(authentication)) {
       return "Permission denied";
     }
 
-    boolean isValidEmail = emailValidator.test(customer.getEmail());
-    if (!isValidEmail) {
+    if (!emailValidator.test(customer.getEmail())) {
       return "Invalid email address";
     }
 
@@ -38,17 +46,14 @@ public class CustomerService {
       return "A customer with this email already exists";
     }
 
-    customerRepository.save(customer);
     return "";
   }
 
-  public String removeCustomer(Authentication authentication, Long id) {
-    boolean isAdmin = authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
-    if (!isAdmin) {
+  public String validateRemoval(Authentication authentication) {
+    if (!permissionValidator.test(authentication)) {
       return "Permission denied";
     }
 
-    customerRepository.delete(loadCustomerById(id));
     return "";
   }
 }

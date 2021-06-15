@@ -25,7 +25,7 @@
 					<th scope="col">Email</th>
 					<th scope="col">Phone</th>
 					<th scope="col">Appointments</th>
-					<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+					<th sec:authorize="hasAuthority('ADMIN')"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,7 +39,7 @@
 					<td th:text="${customer.email}">email</td>
 					<td th:text="${customer.phone}">phone</td>
 					<td th:text="${customer.appointments}">appointments</td>
-					<td sec:authorize="hasRole('ROLE_ADMIN')">
+					<td sec:authorize="hasAuthority('ADMIN')">
 						<form action="#" th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
 							<button type="submit" class="btn btn-danger">Delete</button>
 						</form>
@@ -67,7 +67,7 @@
 		</div>
 
 		<!-- Admin functions	-->
-		<div class="d-flex justify-content-end" sec:authorize="hasRole('ROLE_ADMIN')">
+		<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCustomerModal">
 				+ New customer
 			</button>
@@ -81,7 +81,7 @@
 <script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
-<script sec:authorize="hasRole('ROLE_ADMIN')">
+<script sec:authorize="hasAuthority('ADMIN')">
 	// Clear the customer dialog on open
 	$("#newCustomerModal").on("shown.bs.modal", () => {
 		$("input").val("");
