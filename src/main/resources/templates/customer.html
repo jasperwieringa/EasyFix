@@ -21,6 +21,7 @@
 				<tr>
 					<th scope="col">Id</th>
 					<th scope="col">Name</th>
+					<th scope="col">Address</th>
 					<th scope="col">Email</th>
 					<th scope="col">Phone</th>
 					<th scope="col">Appointments</th>
@@ -34,6 +35,7 @@
 				<tr th:if="${not #lists.isEmpty(customers)}" th:each="customer : ${customers}">
 					<td th:text="${customer.id}">id</td>
 					<td th:text="${customer.firstName + ' ' + customer.lastName}">name</td>
+					<td th:text="${customer.address + ' ' + customer.town}">address</td>
 					<td th:text="${customer.email}">email</td>
 					<td th:text="${customer.phone}">phone</td>
 					<td th:text="${customer.appointments}">appointments</td>

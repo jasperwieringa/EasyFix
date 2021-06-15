@@ -24,19 +24,23 @@ public class Customer {
   private String firstName;
   @NotEmpty(message = "The customer's lastname cannot be empty")
   private String lastName;
+  @NotEmpty(message = "The customer's address cannot be empty")
   private String address;
   private String postalCode;
+  @NotEmpty(message = "The customer's town cannot be empty")
+  private String town;
   @NotEmpty(message = "The customer's email cannot be empty")
   private String email;
   @NotEmpty(message = "The customer's phone number cannot be empty")
   private String phone;
   private Integer appointments;
 
-  public Customer(String firstName, String lastName, String address, String postalCode, String email, String phone) {
+  public Customer(String firstName, String lastName, String address, String postalCode, String town, String email, String phone) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.postalCode = postalCode;
+    this.town = town;
     this.email = email;
     this.phone = phone;
   }
