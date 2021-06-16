@@ -1,6 +1,5 @@
 package com.main.easyFix.appuser;
 
-import com.main.easyFix.customer.Customer;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ public class AppUserController {
   @GetMapping("/employees")
   public String customers(AppUser appUser, Model model) {
     model.addAttribute("employees", appUserService.listAllEmployees());
-    return "employee";
+    return "employees";
   }
 
   @PostMapping("/employees/add")
@@ -37,7 +36,7 @@ public class AppUserController {
 
     appUserService.register(appUser);
     model.addAttribute("employees", appUserService.listAllEmployees());
-    return "employee";
+    return "employees";
   }
 
   @RequestMapping(value="/employees/remove/{id}", method = RequestMethod.DELETE)
@@ -55,6 +54,6 @@ public class AppUserController {
 
     appUserService.remove(id);
     model.addAttribute("employees", appUserService.listAllEmployees());
-    return "employee";
+    return "employees";
   }
 }

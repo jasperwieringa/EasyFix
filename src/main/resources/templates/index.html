@@ -1,35 +1,27 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8"/>
-	<title>EasyFix</title>
+	<!--	Header	-->
+	<section th:insert="fragments/frame/head :: head">...</section>
 
-	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
-	<link th:rel="stylesheet" th:href="@{/css/index.css}"/>
-</head>
-<body>
+	<body>
+		<!--	Navbar	-->
+		<div th:insert="fragments/frame/navbar :: navbar">...</div>
 
-<div class="h-100 d-flex flex-column">
-	<div th:insert="fragments/frame/navbar :: navbar">...</div>
-	<div class="h-100 container-md d-flex flex-wrap align-items-center justify-content-center">
-		<a class="card m-3 text-dark" style="width: 40rem;" href="" th:href="@{/customers}">
-			<img th:src="@{/images/customers.png}" src="" class="card-img-top" alt="..." style="max-height: 25rem;">
-			<div class="card-body">
-				<h3 class="card-title">Customers</h3>
+		<div class="h-100 d-flex flex-column">
+			<div class="h-100 container-md d-flex flex-wrap align-items-center justify-content-center">
+				<a class="card m-3 text-dark" style="width: 40rem;" href="" th:href="@{/customers}">
+					<img th:src="@{/images/customers.png}" src="" class="card-img-top" alt="..." style="max-height: 25rem;">
+					<div class="card-body">
+						<h3 class="card-title">Customers</h3>
+					</div>
+				</a>
+				<a class="card m-3 text-dark" style="width: 40rem;" href="" th:href="@{/employees}">
+					<img th:src="@{/images/employees.png}" src="" class="card-img-top" alt="..." style="max-height: 25rem;">
+					<div class="card-body">
+						<h3 class="card-title">Employees</h3>
+					</div>
+				</a>
 			</div>
-		</a>
-		<a class="card m-3 text-dark" style="width: 40rem;" href="" th:href="@{/employees}">
-			<img th:src="@{/images/employees.png}" src="" class="card-img-top" alt="..." style="max-height: 25rem;">
-			<div class="card-body">
-				<h3 class="card-title">Employees</h3>
-			</div>
-		</a>
-	</div>
-</div>
-
-<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-
-</body>
+		</div>
+	</body>
 </html>

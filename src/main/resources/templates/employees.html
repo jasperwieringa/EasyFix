@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+	<!--	Header	-->
+	<section th:insert="fragments/frame/head :: head">...</section>
+
+	<body>
+		<!--	Navbar	-->
+		<div th:insert="fragments/frame/navbar :: navbar">...</div>
+
+		<div class="h-100 mt-5 container d-flex flex-column">
+			<div>
+				<h3>Employees</h3>
+
+				<!-- Customer table -->
+				<table id="employeeTable" class="mt-2 table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Department</th>
+							<th sec:authorize="hasAuthority('ADMIN')"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${#lists.isEmpty(employees)}">
+							<td colspan="7">No employees to display</td>
+						</tr>
+						<tr th:if="${not #lists.isEmpty(employees)}" th:each="employee : ${employees}">
+							<td th:text="${employee.id}">id</td>
+							<td th:text="${employee.firstName + ' ' + employee.lastName}">name</td>
+							<td th:text="${employee.email}">email</td>
+							<td th:text="${employee.appUserDepartment}">department</td>
+							<td sec:authorize="hasAuthority('ADMIN')">
+								<form action="#" th:action="@{'/employees/remove/{id}'(id=${employee.id})}" th:method="delete">
+									<button type="submit" class="btn btn-danger">Delete</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- Alerts -->
+				<div class="d-flex flex-column" th:each="err : ${#fields.errors('appUser.*')}">
+					<div th:insert="fragments/alerts/form_alerts :: errors">...</div>
+				</div>
+				<div class="d-flex flex-column" th:if="${success_message}">
+					<div th:insert="fragments/alerts/form_alerts :: success">...</div>
+				</div>
+
+				<!-- Admin functions	-->
+				<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newEmployeeModal">
+						+ New employee
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div th:insert="fragments/dialogs/new_employee :: dialog">...</div>
+
+		<script sec:authorize="hasAuthority('ADMIN')">
+			// Clear the employee dialog on open
+			$("#newEmployeeModal").on("shown.bs.modal", () => {
+				$("input").val("");
+			})
+		</script>
+	</body>
+</html>

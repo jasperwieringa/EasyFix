@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+	<!--	Header	-->
+	<section th:insert="fragments/frame/head :: head">...</section>
+
+	<body>
+		<!--	Navbar	-->
+		<div th:insert="fragments/frame/navbar :: navbar">...</div>
+
+		<div class="h-100 mt-5 container d-flex flex-column">
+			<div>
+				<h3>Customers</h3>
+
+				<!-- Customer table -->
+				<table id="customerTable" class="mt-2 table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Name</th>
+							<th scope="col">Address</th>
+							<th scope="col">Email</th>
+							<th scope="col">Phone</th>
+							<th scope="col">Appointments</th>
+							<th sec:authorize="hasAuthority('ADMIN')"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${#lists.isEmpty(customers)}">
+							<td colspan="7">No customers to display</td>
+						</tr>
+						<tr th:if="${not #lists.isEmpty(customers)}" th:each="customer : ${customers}">
+							<td th:text="${customer.id}">id</td>
+							<td th:text="${customer.firstName + ' ' + customer.lastName}">name</td>
+							<td th:text="${customer.address + ' ' + customer.town}">address</td>
+							<td th:text="${customer.email}">email</td>
+							<td th:text="${customer.phone}">phone</td>
+							<td th:text="${customer.appointments}">appointments</td>
+							<td sec:authorize="hasAuthority('ADMIN')">
+								<form action="#" th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
+									<button type="submit" class="btn btn-danger">Delete</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- Alerts -->
+				<div class="d-flex flex-column" th:each="err : ${#fields.errors('customer.*')}">
+					<div th:insert="fragments/alerts/form_alerts :: errors">...</div>
+				</div>
+				<div class="d-flex flex-column" th:if="${success_message}">
+					<div th:insert="fragments/alerts/form_alerts :: success">...</div>
+				</div>
+
+				<!-- Admin functions -->
+				<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCustomerModal">
+						+ New customer
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div th:insert="fragments/dialogs/new_customer :: dialog">...</div>
+
+		<script sec:authorize="hasAuthority('ADMIN')">
+			// Clear the customer dialog on open
+			$("#newCustomerModal").on("shown.bs.modal", () => {
+				$("input").val("");
+			})
+		</script>
+	</body>
+</html>

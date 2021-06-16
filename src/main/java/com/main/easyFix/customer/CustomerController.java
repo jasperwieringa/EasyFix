@@ -18,8 +18,14 @@ public class CustomerController {
   @GetMapping("/customers")
   public String customers(Customer customer, Model model) {
     model.addAttribute("customers", customerService.listAllCustomers());
-    return "customer";
+    return "customers";
   }
+
+//  @GetMapping("/customers/{id}")
+//  public String customers(@PathVariable Long id, Model model) {
+//    model.addAttribute("customer", customerService.loadCustomerById(id));
+//    return "customer";
+//  }
 
   @PostMapping("/customers/add")
   public String register(Authentication authentication, @Valid Customer customer, BindingResult result, Model model) {
@@ -36,7 +42,7 @@ public class CustomerController {
 
     customerService.register(customer);
     model.addAttribute("customers", customerService.listAllCustomers());
-    return "customer";
+    return "customers";
   }
 
   @RequestMapping(value="/customers/remove/{id}", method = RequestMethod.DELETE)
@@ -54,6 +60,6 @@ public class CustomerController {
 
     customerService.remove(id);
     model.addAttribute("customers", customerService.listAllCustomers());
-    return "customer";
+    return "customers";
   }
 }
