@@ -47,7 +47,7 @@ public class AppUserService implements UserDetailsService {
   }
 
   public String validateRegistration(Authentication authentication, AppUser appUser) {
-    if (!permissionValidator.test(authentication)) {
+    if (!permissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
 
@@ -64,7 +64,7 @@ public class AppUserService implements UserDetailsService {
   }
 
   public String validateRemoval(Authentication authentication) {
-    if (!permissionValidator.test(authentication)) {
+    if (!permissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
 

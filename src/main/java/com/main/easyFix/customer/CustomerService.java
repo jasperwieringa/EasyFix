@@ -33,7 +33,7 @@ public class CustomerService {
   }
 
   public String validateRegistration(Authentication authentication, Customer customer) {
-    if (!permissionValidator.test(authentication)) {
+    if (!permissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
 
@@ -50,7 +50,7 @@ public class CustomerService {
   }
 
   public String validateRemoval(Authentication authentication) {
-    if (!permissionValidator.test(authentication)) {
+    if (!permissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
 

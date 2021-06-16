@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class permissionValidator {
-  public boolean test(Authentication authentication) {
+  public boolean isAdmin(Authentication authentication) {
     return authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ADMIN"));
   }
 }
