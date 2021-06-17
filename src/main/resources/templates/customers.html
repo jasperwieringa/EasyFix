@@ -34,11 +34,11 @@
 					<td th:text="${customer.appointments}">appointments</td>
 					<td sec:authorize="hasAuthority('ADMIN')" class="d-flex justify-content-between">
 						<form action="#" th:action="@{'/customers/{id}'(id=${customer.id})}" th:method="get">
-							<button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Edit">
+							<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
 								<i class="bi bi-pencil"></i>
 							</button>
 						</form>
-						<form action="#" th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
+						<form class="ml-2" action="#" th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
 							<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
 								<i class="bi bi-trash"></i>
 							</button>

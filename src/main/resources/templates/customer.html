@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
-<section layout:fragment="content">
-	<div th:insert="fragments/frame/navbar :: navbar">...</div>
-
-	<div class="h-100 mt-5 container d-flex flex-column">
-		<h1 class="display-4">Customer info</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+<section id="hero" class="d-flex mt-5" layout:fragment="content">
+	<div class="container">
+		<div class="section-title" data-aos="fade-up">
+			<h2>Customer</h2>
+			<p>Here you can add and manage appointments.</p>
+		</div>
 
 		<ul class="mt-2 list-group list-group-horizontal">
 			<li class="list-group-item w-25">Name</li>
