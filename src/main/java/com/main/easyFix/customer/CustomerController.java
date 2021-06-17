@@ -21,11 +21,11 @@ public class CustomerController {
     return "customers";
   }
 
-//  @GetMapping("/customers/{id}")
-//  public String customers(@PathVariable Long id, Model model) {
-//    model.addAttribute("customer", customerService.loadCustomerById(id));
-//    return "customer";
-//  }
+  @GetMapping("/customers/{id}")
+  public String customers(@PathVariable Long id, Model model) {
+    model.addAttribute("customer", customerService.loadCustomerById(id));
+    return "customer";
+  }
 
   @PostMapping("/customers/add")
   public String register(Authentication authentication, @Valid Customer customer, BindingResult result, Model model) {

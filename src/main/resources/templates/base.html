@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.w3.org/1999/xhtml"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>EasyFix</title>
+
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+		<link th:rel="stylesheet" th:href="@{/css/index.css}"/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+		<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+		<script th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	</head>
+	<body>
+		<div class="h-100 d-flex flex-column">
+			<!-- Navbar -->
+			<header id="header" class="d-flex align-items-center">
+				<div class="container d-flex align-items-center">
+					<div class="logo mr-auto">
+						<h1 class="text-light"><a th:href="@{/}" href=""><span>EasyFix</span></a></h1>
+					</div>
+					<nav class="nav-menu d-none d-lg-block" sec:authorize="isAuthenticated()">
+						<ul>
+							<li class="nav-item"><a class="nav-link" th:href="@{/}" href="">Home</a></li>
+							<li class="nav-item"><a class="nav-link" th:href="@{/customers}" href="">Customers</a></li>
+							<li class="nav-item"><a class="nav-link" th:href="@{/employees}" href="">Employees</a></li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" sec:authentication="name">
+									User
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" th:href="@{/h2-console}" href="" sec:authorize="hasAuthority('ADMIN')">Manage DB</a>
+									<a class="dropdown-item" th:href="@{/logout}" href="">Logout</a>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+
+			<!-- Content -->
+			<section layout:fragment="content">Content goes here</section>
+		</div>
+
+		<script th:src="@{/js/index.js}"></script>
+	</body>
+</html>

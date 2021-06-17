@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+<section layout:fragment="content">
+	<div th:insert="fragments/frame/navbar :: navbar">...</div>
+
+	<div class="h-100 mt-5 container d-flex flex-column">
+		<h1 class="display-4">Customer info</h1>
+
+		<ul class="mt-2 list-group list-group-horizontal">
+			<li class="list-group-item w-25">Name</li>
+			<li class="list-group-item flex-fill" th:text="${customer.firstName + ' ' + customer.lastName}">name</li>
+		</ul>
+		<ul class="mt-2 list-group list-group-horizontal">
+			<li class="list-group-item w-25">Address</li>
+			<li class="list-group-item flex-fill" th:text="${customer.address}">address</li>
+		</ul>
+		<ul class="mt-2 list-group list-group-horizontal">
+			<li class="list-group-item w-25">Postal code</li>
+			<li class="list-group-item flex-fill" th:text="${customer.postalCode}">postalCode</li>
+		</ul>
+		<ul class="mt-2 list-group list-group-horizontal">
+			<li class="list-group-item w-25">Town</li>
+			<li class="list-group-item flex-fill" th:text="${customer.town}">town</li>
+		</ul>
+		<ul class="mt-2 list-group list-group-horizontal">
+			<li class="list-group-item w-25">Email</li>
+			<li class="list-group-item flex-fill" th:text="${customer.email}">email</li>
+		</ul>
+		<ul class="mt-2 list-group list-group-horizontal">
+			<li class="list-group-item w-25">Phone</li>
+			<li class="list-group-item flex-fill" th:text="${customer.phone}">phone</li>
+		</ul>
+	</div>
+</section>
+</html>

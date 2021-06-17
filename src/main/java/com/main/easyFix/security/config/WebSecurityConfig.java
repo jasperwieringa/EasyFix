@@ -2,6 +2,7 @@ package com.main.easyFix.security.config;
 
 import com.main.easyFix.appuser.AppUserService;
 import lombok.AllArgsConstructor;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -59,6 +60,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     provider.setPasswordEncoder(bCryptPasswordEncoder);
     provider.setUserDetailsService(appUserService);
     return provider;
+  }
+
+  @Bean
+  public LayoutDialect layoutDialect() {
+    return new LayoutDialect();
   }
 
   @Bean
