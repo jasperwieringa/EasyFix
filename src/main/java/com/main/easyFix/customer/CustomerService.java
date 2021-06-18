@@ -1,8 +1,7 @@
 package com.main.easyFix.customer;
 
 import com.main.easyFix.utils.EmailValidator;
-import com.main.easyFix.utils.permissionValidator;
-import javassist.NotFoundException;
+import com.main.easyFix.utils.PermissionValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +13,6 @@ public class CustomerService {
   private final static String CLIENT_NOT_FOUND_MSG = "Customer with %s: %s, not found";
   private final CustomerRepository customerRepository;
   private final EmailValidator emailValidator;
-  private final permissionValidator permissionValidator;
 
   public Customer loadCustomerById(Long id) throws UsernameNotFoundException {
     return customerRepository.findById(id).orElseThrow(() ->
@@ -34,7 +32,7 @@ public class CustomerService {
   }
 
   public String validateRegistration(Authentication authentication, Customer customer) {
-    if (!permissionValidator.isAdmin(authentication)) {
+    if (!PermissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
 
@@ -46,15 +44,13 @@ public class CustomerService {
     if (emailInUse) {
       return "A customer with this email already exists";
     }
-
     return "";
   }
 
   public String validateRemoval(Authentication authentication) {
-    if (!permissionValidator.isAdmin(authentication)) {
+    if (!PermissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
-
     return "";
   }
 }

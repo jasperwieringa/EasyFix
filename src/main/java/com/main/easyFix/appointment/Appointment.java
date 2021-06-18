@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,21 +23,18 @@ public class Appointment {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
-  @OneToOne(mappedBy = "appointment")
-  private Customer customer;
   private String computer;
   private String description;
-  private String issues;
   private String status;
-//  @OneToMany(mappedBy="order")
-//  private Set<Activity> activities;
-//  @OneToMany(mappedBy="order")
-//  private Set<Part> usedParts;
-//  @OneToOne(cascade = CascadeType.ALL)
-//  @JoinColumn(name = "appointment_id", referencedColumnName = "id")
-//  private Appointment appointment;
-//  @OneToOne(cascade = CascadeType.ALL)
-//  @JoinColumn(name = "receipt_id", referencedColumnName = "id")
-//  private Receipt receipt;
+  private Date date;
+  private String issues;
+  private String activities;
+
+  @OneToOne(mappedBy = "appointment")
+  private Customer customer;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "receipt_id", referencedColumnName = "id")
+  private Receipt receipt;
 }
 

@@ -17,7 +17,7 @@
 					<th scope="col">Address</th>
 					<th scope="col">Email</th>
 					<th scope="col">Phone</th>
-					<th scope="col">Appointments</th>
+					<th scope="col">Appointment</th>
 					<th sec:authorize="hasAuthority('ADMIN')">Actions</th>
 				</tr>
 				</thead>
@@ -31,7 +31,10 @@
 					<td th:text="${customer.address + ' ' + customer.town}">address</td>
 					<td th:text="${customer.email}">email</td>
 					<td th:text="${customer.phone}">phone</td>
-					<td th:text="${customer.appointments}">appointments</td>
+					<td>
+						<span th:if="${customer.appointment}" th:text="${#dates.format(customer.appointment.date, 'dd-MMM-yyyy')}">appointment</span>
+						<span th:if="${customer.appointment == null}">-</span>
+					</td>
 					<td sec:authorize="hasAuthority('ADMIN')" class="d-flex justify-content-between">
 						<form action="#" th:action="@{'/customers/{id}'(id=${customer.id})}" th:method="get">
 							<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">

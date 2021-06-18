@@ -1,6 +1,5 @@
 package com.main.easyFix.customer;
 
-import com.main.easyFix.appointment.AppointmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,10 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class CustomerController {
   private final CustomerService customerService;
-  private final AppointmentService appointmentRepository;
 
   @GetMapping("/customers")
   public String customers(Customer customer, Model model) {
+    Object customers = customerService.listAllCustomers();
     model.addAttribute("customers", customerService.listAllCustomers());
     return "customers";
   }

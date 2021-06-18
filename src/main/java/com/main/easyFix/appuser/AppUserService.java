@@ -1,7 +1,7 @@
 package com.main.easyFix.appuser;
 
 import com.main.easyFix.utils.EmailValidator;
-import com.main.easyFix.utils.permissionValidator;
+import com.main.easyFix.utils.PermissionValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +16,6 @@ public class AppUserService implements UserDetailsService {
   private final static String USER_NOT_FOUND_MSG = "Employee with %s: %s, not found";
   private final AppUserRepository appUserRepository;
   private final EmailValidator emailValidator;
-  private final permissionValidator permissionValidator;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
@@ -47,7 +46,7 @@ public class AppUserService implements UserDetailsService {
   }
 
   public String validateRegistration(Authentication authentication, AppUser appUser) {
-    if (!permissionValidator.isAdmin(authentication)) {
+    if (!PermissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
 
@@ -59,15 +58,13 @@ public class AppUserService implements UserDetailsService {
     if (userExists) {
       return "This email address is already taken";
     }
-
     return "";
   }
 
   public String validateRemoval(Authentication authentication) {
-    if (!permissionValidator.isAdmin(authentication)) {
+    if (!PermissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
-
     return "";
   }
 }

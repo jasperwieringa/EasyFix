@@ -36,14 +36,4 @@ public class Customer {
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "appointment_id", referencedColumnName = "id")
   private Appointment appointment;
-
-  public Customer(String firstName, String lastName, String address, String postalCode, String town, String email, String phone) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.address = address;
-    this.postalCode = postalCode;
-    this.town = town;
-    this.email = email;
-    this.phone = phone;
-  }
 }

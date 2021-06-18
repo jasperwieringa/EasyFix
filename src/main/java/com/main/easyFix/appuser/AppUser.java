@@ -36,14 +36,6 @@ public class AppUser implements UserDetails {
   private Boolean locked = false;
   private Boolean enabled = false;
 
-  public AppUser(String firstName, String lastName, String email, String password, AppUserDepartment appUserDepartment) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-    this.appUserDepartment = appUserDepartment;
-  }
-
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserDepartment.name());
