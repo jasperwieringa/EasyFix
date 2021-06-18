@@ -14,10 +14,10 @@
 				<tr>
 					<th scope="col">Id</th>
 					<th scope="col">Name</th>
-					<th scope="col">Address</th>
 					<th scope="col">Email</th>
 					<th scope="col">Phone</th>
 					<th scope="col">Appointment</th>
+					<th scope="col">Status</th>
 					<th sec:authorize="hasAuthority('ADMIN')">Actions</th>
 				</tr>
 				</thead>
@@ -28,12 +28,21 @@
 				<tr th:if="${not #lists.isEmpty(customers)}" th:each="customer : ${customers}">
 					<td th:text="${customer.id}">id</td>
 					<td th:text="${customer.firstName + ' ' + customer.lastName}">name</td>
-					<td th:text="${customer.address + ' ' + customer.town}">address</td>
 					<td th:text="${customer.email}">email</td>
 					<td th:text="${customer.phone}">phone</td>
-					<td>
-						<span th:if="${customer.appointment}" th:text="${#dates.format(customer.appointment.date, 'dd-MMM-yyyy')}">appointment</span>
-						<span th:if="${customer.appointment == null}">-</span>
+					<td th:switch="${customer.appointment}">
+						<span th:case="null">-</span>
+						<span th:case="*" th:text="${#dates.format(customer.appointment.date, 'dd-MMM-yyyy')}">date</span>
+					</td>
+					<td th:switch="${customer.appointment}">
+						<span th:case="null">-</span>
+						<div th:case="*">
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPORTED}" class="badge badge-info">Reported</span>
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPAIRING}" class="badge badge-warning">Repairing</span>
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).COMPLETE}" class="badge badge-primary">Complete</span>
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).PAID}" class="badge badge-success">Paid</span>
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}" class="badge badge-danger">Canceled</span>
+						</div>
 					</td>
 					<td sec:authorize="hasAuthority('ADMIN')" class="d-flex justify-content-between">
 						<form action="#" th:action="@{'/customers/{id}'(id=${customer.id})}" th:method="get">
