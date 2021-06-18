@@ -1,31 +1,31 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
-	<section id="hero" class="d-flex align-items-center" layout:fragment="content">
-		<div class="h-100 container-fluid d-flex justify-content-center align-items-center">
-			<div class="d-flex flex-column justify-content-center">
-					<h1 data-aos="fade-up" class="d-flex">Hey there!</span>
-					</h1>
-					<h2 data-aos="fade-up" data-aos-delay="400">Please login to continue</h2>
-					<div data-aos="fade-up" data-aos-delay="800">
-						<form th:action="@{/login}" method="post">
-							<div class="form-group">
-								<label for="username" class="sr-only">Username</label>
-								<input id="username" type="text" class="form-control" name="username" placeholder="Your Email *" value="" />
+<section id="login" class="w-100 h-100 d-flex align-items-center" layout:fragment="content">
+	<div class="h-100 container-fluid d-flex justify-content-center align-items-center">
+		<div class="d-flex flex-column justify-content-center">
+				<h1 data-aos="fade-up" class="d-flex">Hey there!</span>
+				</h1>
+				<h2 data-aos="fade-up" data-aos-delay="400">Please login to continue</h2>
+				<div data-aos="fade-up" data-aos-delay="800">
+					<form th:action="@{/login}" method="post">
+						<div class="form-group">
+							<label for="username" class="sr-only">Username</label>
+							<input id="username" type="text" class="form-control" name="username" placeholder="Your Email *" value="" />
+						</div>
+						<div class="form-group">
+							<label for="password" class="sr-only">Password</label>
+							<input id="password" type="password" class="form-control" name="password" placeholder="Your Password *" value="" />
+						</div>
+						<div th:if="${param.error}">
+							<div class="alert alert-danger">Invalid username or password.
 							</div>
-							<div class="form-group">
-								<label for="password" class="sr-only">Password</label>
-								<input id="password" type="password" class="form-control" name="password" placeholder="Your Password *" value="" />
-							</div>
-							<div th:if="${param.error}">
-								<div class="alert alert-danger">Invalid username or password.
-								</div>
-							</div>
-							<div class="form-group">
-								<input type="submit" class="btn-get-started scrollto" value="Login" />
-							</div>
-						</form>
-					</div>
+						</div>
+						<div class="form-group">
+							<input type="submit" class="easy-btn" value="Login" />
+						</div>
+					</form>
 				</div>
-		</div>
-	</section>
+			</div>
+	</div>
+</section>
 </html>

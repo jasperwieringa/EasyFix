@@ -10,6 +10,37 @@ body {
   color: #444444;
 }
 
+h1 {
+  margin: 0 0 10px 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  color: black;
+}
+
+h2 {
+  color: #484848;
+  font-size: 24px;
+}
+
+.easy-btn {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: #3498db;
+  border: 2px solid #3498db;
+}
+
+.easy-btn:hover {
+  background: #3498db;
+  color: #fff;
+}
+
 a {
   color: #3498db;
 }
@@ -59,12 +90,6 @@ h1, h2, h3, h4, h5, h6 {
 #header .logo h1 a, #header .logo h1 a:hover {
   color: #222222;
   text-decoration: none;
-}
-
-#header .logo img {
-  padding: 0;
-  margin: 0;
-  max-height: 40px;
 }
 
 @media (max-width: 768px) {
@@ -226,42 +251,6 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
-#hero {
-  width: 100%;
-  height: 100%;
-}
-
-#hero h1 {
-  margin: 0 0 10px 0;
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 56px;
-  color: black;
-}
-
-#hero h2 {
-  color: #484848;
-  font-size: 24px;
-}
-
-#hero .btn-get-started {
-  font-family: "Raleway", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 10px 30px;
-  border-radius: 50px;
-  transition: 0.5s;
-  color: #3498db;
-  border: 2px solid #3498db;
-}
-
-#hero .btn-get-started:hover {
-  background: #3498db;
-  color: #fff;
-}
-
 #hero .animated {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
@@ -372,4 +361,86 @@ section {
 
 .section-title p {
   margin: 15px 0 0 0;
+}
+
+/*--------------------------------------------------------------
+# Appointments
+--------------------------------------------------------------*/
+.appointments .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.appointments .icon-box::before {
+  content: '';
+  position: absolute;
+  background: #e1f0fa;
+  right: -60px;
+  top: -40px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+.appointments .icon-box:hover::before {
+  background: #3498db;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+}
+
+.appointments .icon {
+  margin: 0 auto 20px auto;
+  padding-top: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background: #3498db;
+  transition: all 0.3s ease-in-out;
+}
+
+.appointments .icon i {
+  font-size: 36px;
+  line-height: 1;
+  color: #fff;
+}
+
+.appointments .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.appointments .title a {
+  color: #111;
+}
+
+.appointments .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+
+.appointments .icon-box:hover .title a, .appointments .icon-box:hover .description {
+  color: #fff;
+}
+
+.appointments .icon-box:hover .icon {
+  background: #fff;
+}
+
+.appointments .icon-box:hover .icon i {
+  color: #3498db;
 }

@@ -1,15 +1,14 @@
 package com.main.easyFix.customer;
 
+import com.main.easyFix.order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -33,7 +32,8 @@ public class Customer {
   private String email;
   @NotEmpty(message = "The customer's phone number cannot be empty")
   private String phone;
-  private Integer appointments;
+  @OneToMany(mappedBy="customer")
+  private Set<Order> orders;
 
   public Customer(String firstName, String lastName, String address, String postalCode, String town, String email, String phone) {
     this.firstName = firstName;
