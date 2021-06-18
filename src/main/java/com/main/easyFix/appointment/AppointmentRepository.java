@@ -1,4 +1,4 @@
-package com.main.easyFix.order;
+package com.main.easyFix.appointment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface OrderRepository extends JpaRepository<Order, Long> {
-  Optional<Order> findById(Long id);
-  Optional<Order> findByCustomerId(Long id);
-  List<Order> findAll();
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+  Optional<Appointment> findById(Long id);
+  Optional<Appointment> findByCustomerId(Long id);
+  List<Appointment> findAll();
 }

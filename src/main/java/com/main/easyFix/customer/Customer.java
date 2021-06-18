@@ -1,6 +1,6 @@
 package com.main.easyFix.customer;
 
-import com.main.easyFix.order.Order;
+import com.main.easyFix.appointment.Appointment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,16 +8,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "customer")
 public class Customer {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Long id;
   @NotEmpty(message = "The customer's name cannot be empty")
   private String firstName;
@@ -32,8 +33,9 @@ public class Customer {
   private String email;
   @NotEmpty(message = "The customer's phone number cannot be empty")
   private String phone;
-  @OneToMany(mappedBy="customer")
-  private Set<Order> orders;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "appointment_id", referencedColumnName = "id")
+  private Appointment appointment;
 
   public Customer(String firstName, String lastName, String address, String postalCode, String town, String email, String phone) {
     this.firstName = firstName;

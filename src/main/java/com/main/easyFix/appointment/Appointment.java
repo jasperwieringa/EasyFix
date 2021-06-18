@@ -1,4 +1,4 @@
-package com.main.easyFix.order;
+package com.main.easyFix.appointment;
 
 import com.main.easyFix.customer.Customer;
 import lombok.AllArgsConstructor;
@@ -13,14 +13,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Order {
+@Table(name = "appointment")
+public class Appointment {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Long id;
-  @ManyToOne
-  @JoinColumn(name="customer_id", referencedColumnName = "id", nullable=false)
+  @OneToOne(mappedBy = "appointment")
   private Customer customer;
   private String computer;
+  private String description;
+  private String issues;
+  private String status;
 //  @OneToMany(mappedBy="order")
 //  private Set<Activity> activities;
 //  @OneToMany(mappedBy="order")
@@ -31,8 +35,5 @@ public class Order {
 //  @OneToOne(cascade = CascadeType.ALL)
 //  @JoinColumn(name = "receipt_id", referencedColumnName = "id")
 //  private Receipt receipt;
-  private String description;
-  private String issues;
-  private String status;
 }
 
