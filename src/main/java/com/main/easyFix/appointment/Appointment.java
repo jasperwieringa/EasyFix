@@ -25,7 +25,8 @@ public class Appointment {
   private Long id;
   private String computer;
   private String description;
-  private String status;
+  @Enumerated(EnumType.STRING)
+  private AppointmentStatus status;
   private Date date;
   private String issues;
   private String activities;
