@@ -29,11 +29,10 @@
 					</div>
 					<div class="form-group">
 						<label for="department">Department</label>
-						<select id="department" class="form-control" th:field="*{appUserDepartment}">
-							<option value="ADMIN">Administration</option>
-							<option value="EXPERT">Expert</option>
-							<option value="CASHIER">Cashier</option>
-							<option value="BACKOFFICE">Backoffice</option>
+
+						<select id="department" name="color" class="form-control" th:field="*{appUserDepartment}">
+							<option th:each="department : ${T(com.main.easyFix.appuser.AppUserDepartment).values()}"
+											th:value="${department}" th:text="${department.displayValue}"></option>
 						</select>
 					</div>
 					<div class="form-group float-right">
