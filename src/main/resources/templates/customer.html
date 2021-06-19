@@ -40,40 +40,62 @@
 				<h2>Appointments</h2>
 			</div>
 
-			<div class="row">
-				<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-					<div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-						<div class="icon"><i class="bx bxl-dribbble"></i></div>
-						<h4 class="title"><a href="">Lorem Ipsum</a></h4>
-						<p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+			<div th:switch="${customer.appointment}">
+				<div th:case="null">
+					<ul class="mt-2 list-group list-group-horizontal">
+						<li class="list-group-item flex-fill">No appointments to display</li>
+					</ul>
+
+					<div class="d-flex flex-column" th:each="err : ${#fields.errors('customer.*')}">
+						<div th:insert="fragments/alerts/form_alerts :: errors">...</div>
+					</div>
+					<div class="d-flex flex-column" th:if="${success_message}">
+						<div th:insert="fragments/alerts/form_alerts :: success">...</div>
+					</div>
+
+					<!-- Admin functions -->
+					<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
+						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newAppointmentModal">
+							+ New appointment
+						</button>
 					</div>
 				</div>
-
-				<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-					<div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-						<div class="icon"><i class="bx bx-file"></i></div>
-						<h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-						<p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-					<div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-						<div class="icon"><i class="bx bx-tachometer"></i></div>
-						<h4 class="title"><a href="">Magni Dolores</a></h4>
-						<p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-					<div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-						<div class="icon"><i class="bx bx-world"></i></div>
-						<h4 class="title"><a href="">Nemo Enim</a></h4>
-						<p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-					</div>
+				<div th:case="*">
+					<ul class="mt-2 list-group list-group-horizontal">
+						<li class="list-group-item w-25">Computer</li>
+						<li class="list-group-item flex-fill" th:text="${customer.appointment.computer}">computer</li>
+					</ul>
+					<ul class="mt-2 list-group list-group-horizontal">
+						<li class="list-group-item w-25">Description</li>
+						<li class="list-group-item flex-fill" th:text="${customer.appointment.description}">description</li>
+					</ul>
+					<ul class="mt-2 list-group list-group-horizontal">
+						<li class="list-group-item w-25">Status</li>
+						<li class="list-group-item flex-fill">
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPORTED}" class="badge badge-info">Reported</span>
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPAIRING}" class="badge badge-warning">Repairing</span>
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).COMPLETE}" class="badge badge-primary">Complete</span>
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).PAID}" class="badge badge-success">Paid</span>
+							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}" class="badge badge-danger">Canceled</span>
+						</li>
+					</ul>
+					<ul class="mt-2 list-group list-group-horizontal">
+						<li class="list-group-item w-25">Date</li>
+						<li class="list-group-item flex-fill" th:text="${customer.appointment.date}">date</li>
+					</ul>
+					<ul class="mt-2 list-group list-group-horizontal">
+						<li class="list-group-item w-25">Issues</li>
+						<li class="list-group-item flex-fill" th:text="${customer.appointment.issues}">issues</li>
+					</ul>
+					<ul class="mt-2 list-group list-group-horizontal">
+						<li class="list-group-item w-25">Executed activities</li>
+						<li class="list-group-item flex-fill" th:text="${customer.appointment.activities}">activities</li>
+					</ul>
 				</div>
 			</div>
 		</div>
+
+		<div th:insert="fragments/dialogs/new_appointment :: dialog">...</div>
 	</section>
 </div>
 </html>
