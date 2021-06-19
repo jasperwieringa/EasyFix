@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
-<section id="customers" class="d-flex mt-5" layout:fragment="content">
+<div class="h-100 p-3 overflow-auto" layout:fragment="content">
+	<section id="customers" class="d-flex mt-5">
 	<div class="container">
 		<div class="section-title" data-aos="fade-up">
 			<h2>Customers</h2>
-			<p>Here you can add and manage customers.</p>
 		</div>
 
 		<!-- Customer table -->
@@ -44,13 +44,13 @@
 							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}" class="badge badge-danger">Canceled</span>
 						</div>
 					</td>
-					<td sec:authorize="hasAuthority('ADMIN')" class="d-flex justify-content-between">
-						<form action="#" th:action="@{'/customers/{id}'(id=${customer.id})}" th:method="get">
+					<td sec:authorize="hasAuthority('ADMIN')" class="d-flex">
+						<form class="mr-2" action="" th:action="@{'/customers/{id}'(id=${customer.id})}" th:method="get">
 							<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
 								<i class="bi bi-pencil"></i>
 							</button>
 						</form>
-						<form class="ml-2" action="#" th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
+						<form action="" th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
 							<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
 								<i class="bi bi-trash"></i>
 							</button>
@@ -78,4 +78,5 @@
 
 	<div th:insert="fragments/dialogs/new_customer :: dialog">...</div>
 </section>
+</div>
 </html>
