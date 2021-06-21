@@ -81,7 +81,7 @@
 					</ul>
 					<ul class="mt-2 list-group list-group-horizontal">
 						<li class="list-group-item w-25">Date</li>
-						<li class="list-group-item flex-fill" th:text="${customer.appointment.date}">date</li>
+						<li class="list-group-item flex-fill" th:text="${#dates.format(customer.appointment.date, 'dd-MMM-yyyy')}">date</li>
 					</ul>
 					<ul class="mt-2 list-group list-group-horizontal">
 						<li class="list-group-item w-25">Issues</li>

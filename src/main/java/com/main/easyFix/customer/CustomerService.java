@@ -1,11 +1,11 @@
 package com.main.easyFix.customer;
 
 import com.main.easyFix.appointment.Appointment;
+import com.main.easyFix.appointment.AppointmentRequest;
 import com.main.easyFix.appointment.AppointmentService;
 import com.main.easyFix.appointment.AppointmentStatus;
 import com.main.easyFix.utils.EmailValidator;
 import com.main.easyFix.utils.PermissionValidator;
-import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,46 +28,45 @@ public class CustomerService {
     return customerRepository.findAll();
   }
 
-  public String register(Authentication authentication, Customer customer) {
+  public void add(Authentication authentication, Customer customer) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
-      return "Permission denied";
+      throw new IllegalAccessException("Permission denied");
     }
 
     if (!emailValidator.test(customer.getEmail())) {
-      return "Invalid email address";
+      throw new IllegalStateException("Invalid email address");
     }
 
     boolean emailInUse = customerRepository.findByEmail(customer.getEmail()).isPresent();
     if (emailInUse) {
-      return "A customer with this email already exists";
+      throw new IllegalStateException("A customer with this email already exists");
     }
 
     customerRepository.save(customer);
-    return "OK";
   }
 
-  public String remove(Authentication authentication, Long id) {
+  public void remove(Authentication authentication, Long id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
-      return "Permission denied";
+      throw new IllegalAccessException("Permission denied");
     }
 
     customerRepository.delete(loadCustomerById(id));
-    return "OK";
   }
 
-  public String addAppointment(Authentication authentication, Appointment appointment, Long id) {
+  public void addAppointment(Authentication authentication, AppointmentRequest request, Long id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
-      return "Permission denied";
+      throw new IllegalAccessException("Permission denied");
     }
 
-    Appointment appointmentWithStatus = appointmentService.add(new Appointment(
-      appointment.getComputer(),
-      appointment.getDescription(),
-      AppointmentStatus.REPORTED
+    Appointment newAppointment = appointmentService.add(new Appointment(
+      request.getComputer(),
+      request.getDescription(),
+      AppointmentStatus.REPORTED,
+      request.getDate()
     ));
 
     Customer customer = loadCustomerById(id);
-    customer.setAppointment(appointmentWithStatus);
-    return "OK";
+    customer.setAppointment(newAppointment);
+    customerRepository.save(customer);
   }
 }

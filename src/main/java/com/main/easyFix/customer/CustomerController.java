@@ -1,13 +1,12 @@
 package com.main.easyFix.customer;
 
 import com.main.easyFix.appointment.Appointment;
+import com.main.easyFix.appointment.AppointmentRequest;
 import com.main.easyFix.appointment.AppointmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,55 +39,22 @@ public class CustomerController {
   }
 
   @PostMapping("/customers/add")
-  public String addCustomer(Authentication authentication, @Valid Customer customer, BindingResult result, Model model) {
-    String response = customerService.register(authentication, customer);
-
-    if (!response.equals("OK")) {
-      ObjectError error = new ObjectError("globalError", response);
-      result.addError(error);
-    }
-
-    if (!result.hasErrors()) {
-      model.addAttribute("success_message", "Successfully added a new customer");
-    }
-
+  public String addCustomer(Authentication authentication, @Valid Customer customer, Model model) throws IllegalAccessException {
+    customerService.add(authentication, customer);
     model.addAttribute("customers", customerService.listAllCustomers());
     return "customers";
   }
 
   @RequestMapping(value="/customers/remove/{id}", method = RequestMethod.DELETE)
-  public String removeCustomer(Authentication authentication, Customer customer, @PathVariable Long id, BindingResult result, Model model) {
-    String response = customerService.remove(authentication, id);
-
-    if (!response.equals("OK")) {
-      ObjectError error = new ObjectError("globalError", response);
-      result.addError(error);
-    }
-
-    if (!result.hasErrors()) {
-      model.addAttribute("success_message", "Customer successfully removed");
-    }
-
+  public String removeCustomer(Authentication authentication, Customer customer, @PathVariable Long id, Model model) throws IllegalAccessException {
+    customerService.remove(authentication, id);
     model.addAttribute("customers", customerService.listAllCustomers());
     return "customers";
   }
 
   @PostMapping("/customer/{id}/appointment/add")
-  public String addAppointment(Authentication authentication, @PathVariable Long id, Appointment appointment, BindingResult result, Model model) {
-    String response = customerService.addAppointment(authentication, appointment, id);
-
-    if (!response.equals("OK")) {
-      ObjectError error = new ObjectError("globalError", response);
-      result.addError(error);
-    }
-
-    if (!result.hasErrors()) {
-      model.addAttribute("success_message", "Successfully added a new appointment");
-    }
-
-    model.addAttribute("customer", customerService.loadCustomerById(id));
-    return "customer";
+  public String addAppointment(Authentication authentication, @PathVariable Long id, AppointmentRequest request) throws IllegalAccessException {
+    customerService.addAppointment(authentication, request, id);
+    return "redirect:/customer/" + id;
   }
-
-//  public String updateAppointment() {}
 }

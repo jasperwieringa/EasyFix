@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -27,6 +28,7 @@ public class Appointment {
   private String description;
   @Enumerated(EnumType.STRING)
   private AppointmentStatus status;
+  @DateTimeFormat(pattern = "dd/MM/yyyy")
   private Date date;
   private String issues;
   private String activities;
@@ -38,10 +40,11 @@ public class Appointment {
   @JoinColumn(name = "receipt_id", referencedColumnName = "id")
   private Receipt receipt;
 
-  public Appointment(String computer, String description, AppointmentStatus status) {
+  public Appointment(String computer, String description, AppointmentStatus status, Date date) {
     this.computer = computer;
     this.description = description;
     this.status = status;
+    this.date = date;
   }
 }
 

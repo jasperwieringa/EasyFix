@@ -1,6 +1,5 @@
 package com.main.easyFix.appointment;
 
-import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

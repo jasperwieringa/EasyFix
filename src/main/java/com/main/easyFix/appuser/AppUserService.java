@@ -33,18 +33,18 @@ public class AppUserService implements UserDetailsService {
     return appUserRepository.findAll();
   }
 
-  public String register(Authentication authentication, AppUser appUser) {
+  public void register(Authentication authentication, AppUser appUser) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
-      return "Permission denied";
+      throw new IllegalAccessException("Permission denied");
     }
 
     if (!emailValidator.test(appUser.getEmail())) {
-      return "Invalid email address";
+      throw new IllegalStateException("Invalid email address");
     }
 
     boolean emailInUse = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
     if (emailInUse) {
-      return "This email address is already taken";
+      throw new IllegalStateException("A customer with this email already exists");
     }
 
     String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
@@ -52,15 +52,12 @@ public class AppUserService implements UserDetailsService {
 
     appUserRepository.save(appUser);
     appUserRepository.enableAppUser(appUser.getEmail());
-    return "OK";
   }
 
-  public String remove(Authentication authentication, Long id) {
+  public void remove(Authentication authentication, Long id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
-      return "Permission denied";
+      throw new IllegalAccessException("Permission denied");
     }
-
     appUserRepository.delete(loadUserById(id));
-    return "OK";
   }
 }
