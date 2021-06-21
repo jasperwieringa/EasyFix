@@ -38,10 +38,10 @@ public class CustomerController {
     }
 
     if (!result.hasErrors()) {
+      customerService.register(customer);
       model.addAttribute("success_message", "Successfully added a new customer");
     }
 
-    customerService.register(customer);
     model.addAttribute("customers", customerService.listAllCustomers());
     return "customers";
   }

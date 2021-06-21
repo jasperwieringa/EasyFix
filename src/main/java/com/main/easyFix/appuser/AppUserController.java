@@ -31,10 +31,10 @@ public class AppUserController {
     }
 
     if (!result.hasErrors()) {
+      appUserService.register(appUser);
       model.addAttribute("success_message", "Successfully added a new employee");
     }
 
-    appUserService.register(appUser);
     model.addAttribute("employees", appUserService.listAllEmployees());
     return "employees";
   }
