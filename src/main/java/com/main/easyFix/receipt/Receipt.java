@@ -1,5 +1,6 @@
-package com.main.easyFix.appointment;
+package com.main.easyFix.receipt;
 
+import com.main.easyFix.appointment.Appointment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,11 @@
 package com.main.easyFix.customer;
 
+import com.main.easyFix.appointment.Appointment;
+import com.main.easyFix.appointment.AppointmentService;
+import com.main.easyFix.appointment.AppointmentStatus;
 import com.main.easyFix.utils.EmailValidator;
 import com.main.easyFix.utils.PermissionValidator;
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
   private final static String CLIENT_NOT_FOUND_MSG = "Customer with %s: %s, not found";
   private final CustomerRepository customerRepository;
+  private final AppointmentService appointmentService;
   private final EmailValidator emailValidator;
 
   public Customer loadCustomerById(Long id) throws UsernameNotFoundException {
@@ -23,15 +28,7 @@ public class CustomerService {
     return customerRepository.findAll();
   }
 
-  public void register(Customer customer) {
-    customerRepository.save(customer);
-  }
-
-  public void remove(Long id) {
-    customerRepository.delete(loadCustomerById(id));
-  }
-
-  public String validateRegistration(Authentication authentication, Customer customer) {
+  public String register(Authentication authentication, Customer customer) {
     if (!PermissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
@@ -44,13 +41,33 @@ public class CustomerService {
     if (emailInUse) {
       return "A customer with this email already exists";
     }
-    return "";
+
+    customerRepository.save(customer);
+    return "OK";
   }
 
-  public String validateRemoval(Authentication authentication) {
+  public String remove(Authentication authentication, Long id) {
     if (!PermissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
-    return "";
+
+    customerRepository.delete(loadCustomerById(id));
+    return "OK";
+  }
+
+  public String addAppointment(Authentication authentication, Appointment appointment, Long id) {
+    if (!PermissionValidator.isAdmin(authentication)) {
+      return "Permission denied";
+    }
+
+    Appointment appointmentWithStatus = appointmentService.add(new Appointment(
+      appointment.getComputer(),
+      appointment.getDescription(),
+      AppointmentStatus.REPORTED
+    ));
+
+    Customer customer = loadCustomerById(id);
+    customer.setAppointment(appointmentWithStatus);
+    return "OK";
   }
 }

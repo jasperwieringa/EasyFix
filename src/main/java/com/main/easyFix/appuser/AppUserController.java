@@ -23,15 +23,14 @@ public class AppUserController {
 
   @PostMapping("/employees/add")
   public String register(Authentication authentication, @Valid AppUser appUser, BindingResult result, Model model) {
-    String err = appUserService.validateRegistration(authentication, appUser);
+    String response = appUserService.register(authentication, appUser);
 
-    if (!err.isEmpty()) {
-      ObjectError error = new ObjectError("globalError", err);
+    if (!response.equals("OK")) {
+      ObjectError error = new ObjectError("globalError", response);
       result.addError(error);
     }
 
     if (!result.hasErrors()) {
-      appUserService.register(appUser);
       model.addAttribute("success_message", "Successfully added a new employee");
     }
 
@@ -41,10 +40,10 @@ public class AppUserController {
 
   @RequestMapping(value="/employees/remove/{id}", method = RequestMethod.DELETE)
   public String remove(Authentication authentication, AppUser appUser, @PathVariable Long id, BindingResult result, Model model) {
-    String err = appUserService.validateRemoval(authentication);
+    String response = appUserService.remove(authentication, id);
 
-    if (!err.isEmpty()) {
-      ObjectError error = new ObjectError("globalError", err);
+    if (!response.equals("OK")) {
+      ObjectError error = new ObjectError("globalError", response);
       result.addError(error);
     }
 
@@ -52,7 +51,6 @@ public class AppUserController {
       model.addAttribute("success_message", "Employee successfully removed");
     }
 
-    appUserService.remove(id);
     model.addAttribute("employees", appUserService.listAllEmployees());
     return "employees";
   }

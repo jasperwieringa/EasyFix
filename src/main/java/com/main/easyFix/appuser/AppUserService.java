@@ -33,19 +33,7 @@ public class AppUserService implements UserDetailsService {
     return appUserRepository.findAll();
   }
 
-  public void register(AppUser appUser) {
-    String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
-    appUser.setPassword(encodedPassword);
-
-    appUserRepository.save(appUser);
-    appUserRepository.enableAppUser(appUser.getEmail());
-  }
-
-  public void remove(Long id) {
-    appUserRepository.delete(loadUserById(id));
-  }
-
-  public String validateRegistration(Authentication authentication, AppUser appUser) {
+  public String register(Authentication authentication, AppUser appUser) {
     if (!PermissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
@@ -54,17 +42,25 @@ public class AppUserService implements UserDetailsService {
       return "Invalid email address";
     }
 
-    boolean userExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
-    if (userExists) {
+    boolean emailInUse = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
+    if (emailInUse) {
       return "This email address is already taken";
     }
-    return "";
+
+    String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
+    appUser.setPassword(encodedPassword);
+
+    appUserRepository.save(appUser);
+    appUserRepository.enableAppUser(appUser.getEmail());
+    return "OK";
   }
 
-  public String validateRemoval(Authentication authentication) {
+  public String remove(Authentication authentication, Long id) {
     if (!PermissionValidator.isAdmin(authentication)) {
       return "Permission denied";
     }
-    return "";
+
+    appUserRepository.delete(loadUserById(id));
+    return "OK";
   }
 }
