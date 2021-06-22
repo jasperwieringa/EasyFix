@@ -1,7 +1,7 @@
 INSERT INTO APPOINTMENT ( COMPUTER, DESCRIPTION, STATUS, DATE, ISSUES, ACTIVITIES, RECEIPT_ID ) VALUES
-    ( 'Alienware Aurora', 'Issues starting up the PC', 'COMPLETE', '2021-05-24', 'Broken SD cable and defect Harddrive', 'Replaced the SD cable and replaced the Harddrive', NULL ),
-    ( 'MacBook Air', 'Broken screen', 'REPORTED', '2021-06-18', '',  '', NULL ),
-    ( 'Dell Vostro 5880', 'Flickering screen', 'REPAIRING', '2021-06-18', 'GPU seems defect',  '', NULL );
+    ( 'Alienware Aurora', 'Issues starting up the PC', 'COMPLETE', '2021-05-24T16:00', 'Broken SD cable and defect Harddrive', 'Replaced the SD cable and replaced the Harddrive', NULL ),
+    ( 'MacBook Air', 'Broken screen', 'REPORTED', '2021-06-18T15:00', '',  '', NULL ),
+    ( 'Dell Vostro 5880', 'Flickering screen', 'REPAIRING', '2021-06-18T14:30', 'GPU seems defect',  '', NULL );
 
 INSERT INTO CUSTOMER ( FIRST_NAME, LAST_NAME, ADDRESS, POSTAL_CODE, TOWN, EMAIL, PHONE, APPOINTMENT_ID ) VALUES
     ( 'Joyce', 'Rocker', 'Markt 10', '9701CZ', 'Wageningen', 'isvemplwmrf@gmail.com', '06-20373233', 1 ),

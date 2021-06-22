@@ -8,33 +8,32 @@ Ik ga een backend systeem voor een IT winkel bouwen waarbij klanten hun computer
 
 ### Administratief medewerker
 Wanneer de klant voor het eerst de winkel betreed, voegt een administratief medewerker de klant en de computer toe aan het systeem.
-De medewerker selecteert een moment in het systeem waarop de computer kan worden bekeken.
+De afspraak wordt automatisch op 'Reported' gezet.
+De medewerker kan vervolgens een moment in het systeem selecteren waarop de computer kan worden bekeken.
 
 ### Expert
 Een expert controleert de computer en voegt eventueel gevonden tekortkomingen toe in het systeem.
 Nadat de computer is gecontroleerd neemt de expert contact op met de klant om de kosten voor het onderhoud te bespreken.
 
 #### Klant niet akkoord
-Is de klant niet akkoord dan zet de expert dat in het systeem, stelt hij de bon op voor de controle en kan de klant de computer ophalen.
-In het systeem wordt de reparatie op 'niet uitvoeren' gezet.
+Is de klant niet akkoord dan zet de expert de reparatie op 'Canceled', stelt hij de bon op voor de controle en kan de klant de computer ophalen.
 
 #### Klant akkoord
-Is de klant akkoord dan zet de expert een moment in het systeem waarop de computer zal worden gerepareerd.
+Is de klant akkoord dan kan de expert een nieuwe datum selecteren en kan hij de status van de reparatie op 'Repairing' zetten.
 De expert voert de reparatie uit en zet daarbij elk onderdeel die tijdens de reparatie is gebruikt in het systeem.
 Daarnaast worden alle handelingen toegevoegd aan het systeem.
 Stel: De expert vervangt de harde schijf, dan wordt de harde schijf aan de reparatie toegevoegd en worden de handelingen
-'backup van het systeem maken, harde schijf vervangen en herinstalleren OS' aan de reparatie toegevoegd.
-Al deze handelingen en onderdelen staan al in het systeem en dienen gemakkelijk geselecteerd te kunnen worden door de expert.
-Wanneer eventuele handelingen niet in het systeem staan, kan de expert zijn of haar eigen handelingen met bijbehorende kosten aan de reparatie toevoegen.
+'created a backup of the system, replaced the harddrive and reinstalled the OS' aan de reparatie toegevoegd.
+Al de gebruikte onderdelen staan in het systeem en dienen gemakkelijk geselecteerd te kunnen worden door de expert.
 
-Zodra de reparatie is afgerond, wordt de reparatie op 'voltooid' gezet en kan de klant worden teruggebeld.
+Zodra de reparatie is afgerond, kan de reparatie op 'Complete' worden gezet en kan de klant worden teruggebeld.
 De klant wordt opgebeld door een administratief medewerker.
 Deze medewerker kan een lijst opvragen met alle klanten die een computer ter reparatie hebben achtergelaten.
 
 ### Kassamedewerker
 Wanneer de klant de computer komt ophalen zal een kassamedewerker de bon laten uitdraaien door het systeem.
 De bon bevat de controle, de gebruikte onderdelen, de daarbij uitgevoerde handelingen en de bijbehorende bedragen.
-Zodra de klant heeft betaald, wordt de status van de klant op 'succes' gezet.
+Zodra de klant heeft betaald, wordt de status van de klant op 'Paid' gezet.
 
 ### Backoffice
 Er is een backoffice medewerker die:
