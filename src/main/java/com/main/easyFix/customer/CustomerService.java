@@ -4,12 +4,15 @@ import com.main.easyFix.appointment.Appointment;
 import com.main.easyFix.appointment.AppointmentRequest;
 import com.main.easyFix.appointment.AppointmentService;
 import com.main.easyFix.appointment.AppointmentStatus;
+import com.main.easyFix.utils.DateConverter;
 import com.main.easyFix.utils.EmailValidator;
 import com.main.easyFix.utils.PermissionValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
 
 @Service
 @AllArgsConstructor
@@ -53,20 +56,21 @@ public class CustomerService {
     customerRepository.delete(loadCustomerById(id));
   }
 
-  public void addAppointment(Authentication authentication, AppointmentRequest request, Long id) throws IllegalAccessException {
+  public void addAppointment(Authentication authentication, AppointmentRequest request, Long id) throws IllegalAccessException, ParseException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }
 
-    Appointment newAppointment = appointmentService.add(new Appointment(
+    // Create a new appointment with a default status and converted date
+    Appointment appointment = appointmentService.add(new Appointment(
       request.getComputer(),
       request.getDescription(),
       AppointmentStatus.REPORTED,
-      request.getDate()
+      DateConverter.convert(request.getDate())
     ));
 
     Customer customer = loadCustomerById(id);
-    customer.setAppointment(newAppointment);
+    customer.setAppointment(appointment);
     customerRepository.save(customer);
   }
 }

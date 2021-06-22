@@ -28,7 +28,6 @@ public class Appointment {
   private String description;
   @Enumerated(EnumType.STRING)
   private AppointmentStatus status;
-  @DateTimeFormat(pattern = "dd/MM/yyyy")
   private Date date;
   private String issues;
   private String activities;

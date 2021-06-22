@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 
 @Controller
 @AllArgsConstructor
@@ -53,7 +54,7 @@ public class CustomerController {
   }
 
   @PostMapping("/customer/{id}/appointment/add")
-  public String addAppointment(Authentication authentication, @PathVariable Long id, AppointmentRequest request) throws IllegalAccessException {
+  public String addAppointment(Authentication authentication, @PathVariable Long id, AppointmentRequest request) throws IllegalAccessException, ParseException {
     customerService.addAppointment(authentication, request, id);
     return "redirect:/customer/" + id;
   }

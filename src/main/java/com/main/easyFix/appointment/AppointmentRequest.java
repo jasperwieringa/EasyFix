@@ -5,8 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -14,5 +12,5 @@ import java.util.Date;
 public class AppointmentRequest {
   private final String computer;
   private final String description;
-  private final Date date;
+  private final String date;
 }
