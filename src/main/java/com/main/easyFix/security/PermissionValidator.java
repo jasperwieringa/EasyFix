@@ -1,4 +1,4 @@
-package com.main.easyFix.utils;
+package com.main.easyFix.security;
 
 import com.main.easyFix.appuser.AppUserDepartment;
 import org.springframework.security.core.Authentication;

@@ -1,10 +1,7 @@
 package com.main.easyFix.customer;
 
-import com.main.easyFix.appointment.Appointment;
-import com.main.easyFix.appointment.AppointmentService;
-import com.main.easyFix.appointment.AppointmentStatus;
 import com.main.easyFix.utils.EmailValidator;
-import com.main.easyFix.utils.PermissionValidator;
+import com.main.easyFix.security.PermissionValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
   private final static String CLIENT_NOT_FOUND_MSG = "Customer with %s: %s, not found";
   private final CustomerRepository customerRepository;
-  private final AppointmentService appointmentService;
   private final EmailValidator emailValidator;
 
   public Customer loadCustomerById(Long id) throws UsernameNotFoundException {
@@ -44,26 +40,14 @@ public class CustomerService {
     customerRepository.save(customer);
   }
 
+  public void update(Customer customer) {
+    customerRepository.save(customer);
+  }
+
   public void remove(Authentication authentication, Long id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }
-
     customerRepository.delete(loadCustomerById(id));
-  }
-
-  public void addAppointment(Authentication authentication, Appointment appointment, Long id) throws IllegalAccessException {
-    if (!PermissionValidator.isAdmin(authentication)) {
-      throw new IllegalAccessException("Permission denied");
-    }
-
-    // Overwrite the status
-    appointment.setStatus(AppointmentStatus.REPORTED);
-    appointmentService.add(appointment);
-
-    // Save the appointment to the customer
-    Customer customer = loadCustomerById(id);
-    customer.setAppointment(appointment);
-    customerRepository.save(customer);
   }
 }

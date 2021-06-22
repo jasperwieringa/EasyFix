@@ -1,7 +1,7 @@
 package com.main.easyFix.appuser;
 
 import com.main.easyFix.utils.EmailValidator;
-import com.main.easyFix.utils.PermissionValidator;
+import com.main.easyFix.security.PermissionValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
