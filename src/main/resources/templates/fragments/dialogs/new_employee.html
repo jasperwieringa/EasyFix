@@ -10,7 +10,8 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form class="needs-validation" novalidate th:action="@{/employees/add}" th:object="${appUser}" action="" method="post">
+				<form class="needs-validation" novalidate th:action="@{/employees/add}" th:object="${appUser}" action=""
+							method="post">
 					<div class="form-group">
 						<label for="firstName" class="control-label">First name</label>
 						<input id="firstName" class="form-control" th:field="*{firstName}" placeholder="First name" required/>
@@ -31,7 +32,8 @@
 					</div>
 					<div class="form-group">
 						<label for="password" class="control-label">Password</label>
-						<input id="password" class="form-control" type="password" th:field="*{password}" placeholder="A strong password" required/>
+						<input id="password" class="form-control" type="password" th:field="*{password}"
+									 placeholder="A strong password" required/>
 						<div class="valid-feedback">Looks good!</div>
 						<div class="invalid-feedback">The employee's password cannot be empty</div>
 					</div>

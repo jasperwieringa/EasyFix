@@ -1,15 +1,19 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
 <section id="hero" class="w-100 h-100 d-flex align-items-center" layout:fragment="content">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-				<h1 data-aos="fade-up" class="d-flex flex-wrap">Hey&nbsp;<span class="d-inline-block text-truncate" sec:authentication="name">name</span>
+				<h1 data-aos="fade-up" class="d-flex flex-wrap">Hey&nbsp;<span class="d-inline-block text-truncate"
+																																			 sec:authentication="name">name</span>
 				</h1>
 				<h2 data-aos="fade-up" data-aos-delay="400">What would you like to do?</h2>
 				<div data-aos="fade-up" data-aos-delay="800">
-					<a sec:authorize="!hasAuthority('BACKOFFICE')" th:href="@{/customers}" href="" class="mt-2 easy-btn">Manage customers</a>
-					<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employees}" href="" class="mt-2 easy-btn">Manage employees</a>
+					<a sec:authorize="!hasAuthority('BACKOFFICE')" th:href="@{/customers}" href="" class="mt-2 easy-btn">Manage
+						customers</a>
+					<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employees}" href="" class="mt-2 easy-btn">Manage
+						employees</a>
 				</div>
 			</div>
 			<div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">

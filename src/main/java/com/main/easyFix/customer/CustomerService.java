@@ -1,18 +1,14 @@
 package com.main.easyFix.customer;
 
 import com.main.easyFix.appointment.Appointment;
-import com.main.easyFix.appointment.AppointmentRequest;
 import com.main.easyFix.appointment.AppointmentService;
 import com.main.easyFix.appointment.AppointmentStatus;
-import com.main.easyFix.utils.DateConverter;
 import com.main.easyFix.utils.EmailValidator;
 import com.main.easyFix.utils.PermissionValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.text.ParseException;
 
 @Service
 @AllArgsConstructor
@@ -56,19 +52,16 @@ public class CustomerService {
     customerRepository.delete(loadCustomerById(id));
   }
 
-  public void addAppointment(Authentication authentication, AppointmentRequest request, Long id) throws IllegalAccessException, ParseException {
+  public void addAppointment(Authentication authentication, Appointment appointment, Long id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }
 
-    // Create a new appointment with a default status and converted date
-    Appointment appointment = appointmentService.add(new Appointment(
-      request.getComputer(),
-      request.getDescription(),
-      AppointmentStatus.REPORTED,
-      DateConverter.convert(request.getDate())
-    ));
+    // Overwrite the status
+    appointment.setStatus(AppointmentStatus.REPORTED);
+    appointmentService.add(appointment);
 
+    // Save the appointment to the customer
     Customer customer = loadCustomerById(id);
     customer.setAppointment(appointment);
     customerRepository.save(customer);

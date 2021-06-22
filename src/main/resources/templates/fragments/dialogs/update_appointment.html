@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div id="updateAppointmentModal" class="modal" tabindex="-1" th:fragment="dialog">
+	<div class="modal-dialog" th:if="${customer.appointment != null}">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Add appointment</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="needs-validation" novalidate action="" th:action="@{'/customer/{id}/appointment/update'(id=${customer.id})}" th:object="${appointment}" method="post">
+					<div class="form-group">
+						<label for="computer" class="control-label">Type of computer</label>
+						<input id="computer" class="form-control"
+									 th:field="*{computer}"
+									 th:value="${customer.appointment.computer}"
+									 placeholder="Give a description of the computer" required/>
+						<div class="valid-feedback">That is some badass computer!</div>
+						<div class="invalid-feedback">Please give a description of the customer's computer</div>
+					</div>
+					<div class="form-group" sec:authorize="hasAuthority('ADMIN')">
+						<label for="description" class="control-label">Description</label>
+						<textarea class="form-control" id="description" rows="3"
+											th:field="*{description}"
+											th:value="${customer.appointment.description}"
+											placeholder="What is wrong with the computer?" required></textarea>
+						<div class="valid-feedback">Aii, we'll fix this!</div>
+						<div class="invalid-feedback">Please describe what is wrong with the computer</div>
+					</div>
+					<div class="form-group">
+						<label for="department">Status</label>
+						<select id="department" name="color" class="form-control" th:field="*{status}">
+							<option th:each="status : ${T(com.main.easyFix.appointment.AppointmentStatus).values()}"
+											th:value="${status}"
+											th:text="${status.displayValue}"
+							></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="datepicker" class="control-label">Date</label>
+						<div class="input-group date">
+							<input type="text" class="form-control" id="datepicker" autocomplete="off" th:field="*{date}" required/>
+							<div class="input-group-append">
+								<span id="pickerButton" class="input-group-text">
+									<i class="bi bi-calendar-week"></i>
+								</span>
+							</div>
+							<div class="valid-feedback">Looks good!</div>
+							<div class="invalid-feedback">The appointment needs a date</div>
+						</div>
+					</div>
+					<div class="form-group" sec:authorize="hasAuthority('EXPERT')">
+						<label for="issues">Found issues</label>
+						<textarea class="form-control" id="issues" rows="3"
+											th:field="*{issues}"
+											th:value="${customer.appointment.issues}"
+											placeholder="Give a short description of the issues of this computer"></textarea>
+					</div>
+					<div class="form-group" sec:authorize="hasAuthority('EXPERT')">
+						<label for="activities">Executed activities</label>
+						<textarea class="form-control" id="activities" rows="3"
+											th:field="*{activities}"
+											th:value="${customer.appointment.activities}"
+											placeholder="Give a short description of the executed activities"></textarea>
+					</div>
+					<div class="form-group float-right">
+						<button type="submit" class="btn btn-success">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

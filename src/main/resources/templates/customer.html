@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
 <div class="h-100 p-3 overflow-auto" layout:fragment="content">
 	<section id="customer" class="d-flex mt-5">
 		<div class="container">
@@ -40,55 +41,71 @@
 				<h2>Appointments</h2>
 			</div>
 
-			<div th:switch="${customer.appointment}">
-				<div th:case="null">
-					<ul class="mt-2 mb-3 list-group list-group-horizontal">
-						<li class="list-group-item flex-fill">No appointments to display</li>
-					</ul>
+			<div th:if="${customer.appointment == null}">
+				<ul class="mt-2 list-group list-group-horizontal">
+					<li class="list-group-item flex-fill">No appointments to display</li>
+				</ul>
 
-					<!-- Admin functions -->
-					<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
-						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newAppointmentModal">
-							+ New appointment
-						</button>
-					</div>
+				<!-- Admin functions -->
+				<div class="mt-3 d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newAppointmentModal">
+						+ New appointment
+					</button>
 				</div>
-				<div th:case="*">
-					<ul class="mt-2 list-group list-group-horizontal">
-						<li class="list-group-item w-25">Computer</li>
-						<li class="list-group-item flex-fill" th:text="${customer.appointment.computer}">computer</li>
-					</ul>
-					<ul class="mt-2 list-group list-group-horizontal">
-						<li class="list-group-item w-25">Description</li>
-						<li class="list-group-item flex-fill" th:text="${customer.appointment.description}">description</li>
-					</ul>
-					<ul class="mt-2 list-group list-group-horizontal">
-						<li class="list-group-item w-25">Status</li>
-						<li class="list-group-item flex-fill">
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPORTED}" class="badge badge-info">Reported</span>
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPAIRING}" class="badge badge-warning">Repairing</span>
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).COMPLETE}" class="badge badge-primary">Complete</span>
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).PAID}" class="badge badge-success">Paid</span>
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}" class="badge badge-danger">Canceled</span>
-						</li>
-					</ul>
-					<ul class="mt-2 list-group list-group-horizontal">
-						<li class="list-group-item w-25">Date</li>
-						<li class="list-group-item flex-fill" th:text="${#dates.format(customer.appointment.date, 'dd-MMM-yyyy')}">date</li>
-					</ul>
-					<ul class="mt-2 list-group list-group-horizontal">
-						<li class="list-group-item w-25">Issues</li>
-						<li class="list-group-item flex-fill" th:text="${customer.appointment.issues}">issues</li>
-					</ul>
-					<ul class="mt-2 list-group list-group-horizontal">
-						<li class="list-group-item w-25">Executed activities</li>
-						<li class="list-group-item flex-fill" th:text="${customer.appointment.activities}">activities</li>
-					</ul>
+
+			</div>
+			<div th:unless="${customer.appointment == null}">
+				<ul class="mt-2 list-group list-group-horizontal">
+					<li class="list-group-item w-25">Computer</li>
+					<li class="list-group-item flex-fill" th:text="${customer.appointment.computer}">computer</li>
+				</ul>
+				<ul class="mt-2 list-group list-group-horizontal">
+					<li class="list-group-item w-25">Description</li>
+					<li class="list-group-item flex-fill" th:text="${customer.appointment.description}">description</li>
+				</ul>
+				<ul class="mt-2 list-group list-group-horizontal">
+					<li class="list-group-item w-25">Status</li>
+					<li class="list-group-item flex-fill">
+						<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPORTED}"
+									class="badge badge-info">Reported</span>
+						<span
+							th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPAIRING}"
+							class="badge badge-warning">Repairing</span>
+						<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).COMPLETE}"
+									class="badge badge-primary">Complete</span>
+						<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).PAID}"
+									class="badge badge-success">Paid</span>
+						<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}"
+									class="badge badge-danger">Canceled</span>
+					</li>
+				</ul>
+				<ul class="mt-2 list-group list-group-horizontal">
+					<li class="list-group-item w-25">Date</li>
+					<li class="list-group-item flex-fill" th:text="${#dates.format(customer.appointment.date, 'dd-MM-yyyy')}">
+						date
+					</li>
+				</ul>
+				<ul class="mt-2 list-group list-group-horizontal">
+					<li class="list-group-item w-25">Issues</li>
+					<li class="list-group-item flex-fill" th:text="${customer.appointment.issues}">issues</li>
+				</ul>
+				<ul class="mt-2 list-group list-group-horizontal">
+					<li class="list-group-item w-25">Executed activities</li>
+					<li class="list-group-item flex-fill" th:text="${customer.appointment.activities}">activities</li>
+				</ul>
+
+				<div class="mt-3 d-flex justify-content-end">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
 				</div>
 			</div>
 		</div>
-
-		<div th:insert="fragments/dialogs/new_appointment :: dialog">...</div>
 	</section>
+
+	<div th:if="${customer.appointment == null}">
+		<div th:insert="fragments/dialogs/new_appointment :: dialog">...</div>
+	</div>
+	<div th:unless="${customer.appointment == null}">
+		<div th:insert="fragments/dialogs/update_appointment :: dialog">...</div>
+	</div>
 </div>
 </html>

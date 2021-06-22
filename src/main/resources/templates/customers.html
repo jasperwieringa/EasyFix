@@ -1,75 +1,86 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
 <div class="h-100 p-3 overflow-auto" layout:fragment="content">
 	<section id="customers" class="d-flex mt-5">
-	<div class="container">
-		<div class="section-title" data-aos="fade-up">
-			<h2>Customers</h2>
+		<div class="container">
+			<div class="section-title" data-aos="fade-up">
+				<h2>Customers</h2>
+			</div>
+
+			<!-- Customer table -->
+			<div class="overflow-auto mb-3" style="max-height: 30rem;">
+				<table id="customerTable" class="mt-2 table table-striped">
+					<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Name</th>
+						<th scope="col">Email</th>
+						<th scope="col">Phone</th>
+						<th scope="col">Appointment</th>
+						<th scope="col">Status</th>
+						<th sec:authorize="hasAnyAuthority('ADMIN', 'EXPERT')">Actions</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:if="${#lists.isEmpty(customers)}">
+						<td colspan="7">No customers to display</td>
+					</tr>
+					<tr th:if="${not #lists.isEmpty(customers)}" th:each="customer : ${customers}">
+						<td th:text="${customer.id}">id</td>
+						<td th:text="${customer.firstName + ' ' + customer.lastName}">name</td>
+						<td th:text="${customer.email}">email</td>
+						<td th:text="${customer.phone}">phone</td>
+						<td th:switch="${customer.appointment}">
+							<span th:case="null">-</span>
+							<span th:case="*" th:text="${#dates.format(customer.appointment.date, 'dd-MM-yyyy')}">date</span>
+						</td>
+						<td th:switch="${customer.appointment}">
+							<span th:case="null">-</span>
+							<div th:case="*">
+								<span
+									th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPORTED}"
+									class="badge badge-info">Reported</span>
+								<span
+									th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPAIRING}"
+									class="badge badge-warning">Repairing</span>
+								<span
+									th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).COMPLETE}"
+									class="badge badge-primary">Complete</span>
+								<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).PAID}"
+											class="badge badge-success">Paid</span>
+								<span
+									th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}"
+									class="badge badge-danger">Canceled</span>
+							</div>
+						</td>
+						<td sec:authorize="hasAnyAuthority('ADMIN', 'EXPERT')" class="d-flex">
+							<form class="mr-2" action="" th:action="@{'/customer/{id}'(id=${customer.id})}" th:method="get">
+								<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+									<i class="bi bi-pencil"></i>
+								</button>
+							</form>
+							<form action="" sec:authorize="hasAuthority('ADMIN')"
+										th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
+								<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+									<i class="bi bi-trash"></i>
+								</button>
+							</form>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Admin functions -->
+			<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCustomerModal">
+					+ New customer
+				</button>
+			</div>
 		</div>
 
-		<!-- Customer table -->
-		<div class="overflow-auto mb-3" style="max-height: 30rem;">
-			<table id="customerTable" class="mt-2 table table-striped">
-				<thead>
-				<tr>
-					<th scope="col">Id</th>
-					<th scope="col">Name</th>
-					<th scope="col">Email</th>
-					<th scope="col">Phone</th>
-					<th scope="col">Appointment</th>
-					<th scope="col">Status</th>
-					<th sec:authorize="hasAuthority('ADMIN')">Actions</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr th:if="${#lists.isEmpty(customers)}">
-					<td colspan="7">No customers to display</td>
-				</tr>
-				<tr th:if="${not #lists.isEmpty(customers)}" th:each="customer : ${customers}">
-					<td th:text="${customer.id}">id</td>
-					<td th:text="${customer.firstName + ' ' + customer.lastName}">name</td>
-					<td th:text="${customer.email}">email</td>
-					<td th:text="${customer.phone}">phone</td>
-					<td th:switch="${customer.appointment}">
-						<span th:case="null">-</span>
-						<span th:case="*" th:text="${#dates.format(customer.appointment.date, 'dd-MMM-yyyy')}">date</span>
-					</td>
-					<td th:switch="${customer.appointment}">
-						<span th:case="null">-</span>
-						<div th:case="*">
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPORTED}" class="badge badge-info">Reported</span>
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPAIRING}" class="badge badge-warning">Repairing</span>
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).COMPLETE}" class="badge badge-primary">Complete</span>
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).PAID}" class="badge badge-success">Paid</span>
-							<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}" class="badge badge-danger">Canceled</span>
-						</div>
-					</td>
-					<td sec:authorize="hasAuthority('ADMIN')" class="d-flex">
-						<form class="mr-2" action="" th:action="@{'/customer/{id}'(id=${customer.id})}" th:method="get">
-							<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
-								<i class="bi bi-pencil"></i>
-							</button>
-						</form>
-						<form action="" th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
-							<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
-								<i class="bi bi-trash"></i>
-							</button>
-						</form>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<!-- Admin functions -->
-		<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCustomerModal">
-				+ New customer
-			</button>
-		</div>
-	</div>
-
-	<div th:insert="fragments/dialogs/new_customer :: dialog">...</div>
-</section>
+		<div th:insert="fragments/dialogs/new_customer :: dialog">...</div>
+	</section>
 </div>
 </html>

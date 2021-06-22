@@ -1,7 +1,6 @@
 package com.main.easyFix.customer;
 
 import com.main.easyFix.appointment.Appointment;
-import com.main.easyFix.appointment.AppointmentRequest;
 import com.main.easyFix.appointment.AppointmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.ParseException;
 
 @Controller
 @AllArgsConstructor
@@ -54,8 +52,8 @@ public class CustomerController {
   }
 
   @PostMapping("/customer/{id}/appointment/add")
-  public String addAppointment(Authentication authentication, @PathVariable Long id, AppointmentRequest request) throws IllegalAccessException, ParseException {
-    customerService.addAppointment(authentication, request, id);
+  public String addAppointment(Authentication authentication, @PathVariable Long id, Appointment appointment) throws IllegalAccessException {
+    customerService.addAppointment(authentication, appointment, id);
     return "redirect:/customer/" + id;
   }
 }
