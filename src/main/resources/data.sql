@@ -1,4 +1,4 @@
-INSERT INTO PARTS ( NAME, DESCRIPTION, CATEGORY, PRICE, IN_STOCK ) VALUES
+INSERT INTO PARTS ( NAME, DESCRIPTION, CATEGORY, PRICE, STOCK ) VALUES
     ( 'Gembird CC-SATAM-DATA 0.5m SATA III SATA III Zwart, Rood SATA-kabel', '', 'CABLE', 5.95, 30 ),
     ( 'Sharkoon SATA3 45cm Haaks Zwart', '', 'CABLE', 3.95, 30 ),
     ( 'StarTech.com 4x SATA Voedingskabel Splitter Adapter', '', 'CABLE', 7.95, 30 ),

@@ -31,9 +31,9 @@
 	<div class="invalid-feedback">Please write down the price</div>
 </div>
 
-<div class="form-group" th:fragment="in_stock">
-	<label for="in_stock" class="control-label">Price</label>
-	<input id="in_stock" type="number" min="1" class="form-control" th:field="*{in_stock}" required/>
+<div class="form-group" th:fragment="stock">
+	<label for="stock" class="control-label">Available in stock</label>
+	<input id="stock" type="number" min="1" class="form-control" th:field="*{stock}" required/>
 	<div class="valid-feedback">Seems okay!</div>
-	<div class="invalid-feedback">Please write down the price</div>
+	<div class="invalid-feedback">Please write down the availability in stock</div>
 </div>

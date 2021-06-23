@@ -6,15 +6,15 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum PartCategory {
-  CABLE("Cable"),
-  CASE("Case"),
-  MOTHERBOARD("Motherboard"),
-  PROCESSOR("Processor"),
-  GRAPHICS_CARD("Graphics card"),
+  CABLE("Cables"),
+  CASE("Cases"),
+  MOTHERBOARD("Motherboards"),
+  PROCESSOR("Processors"),
+  GRAPHICS_CARD("Graphics cards"),
   RAM("RAM"),
   COOLING("Cooling"),
-  POWER_SUPPLY("Power supply"),
-  OPERATING_SYSTEM("Operating system"),
+  POWER_SUPPLY("Power supplies"),
+  OPERATING_SYSTEM("Operating systems"),
   NETWORK("Network");
 
   private final String displayValue;

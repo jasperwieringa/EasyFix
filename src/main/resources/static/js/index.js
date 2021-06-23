@@ -19,7 +19,7 @@ $(function () {
   }, false);
 
   // Clear the dialogs on open
-  $("#newAppointmentModal, #newCustomerModal, #newEmployeeModal").on("shown.bs.modal", () => {
+  $("div[id^='new'].modal").on("shown.bs.modal", () => {
     $("input").val("");
     $("textarea").val("");
   })

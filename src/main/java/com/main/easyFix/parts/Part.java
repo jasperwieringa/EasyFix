@@ -27,5 +27,6 @@ public class Part {
   private PartCategory category;
   @NotEmpty(message = "Please write down the price")
   private Float price;
-  private Integer inStock;
+  @NotEmpty(message = "Please write down the availability in stock")
+  private Integer stock;
 }

@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         ).permitAll()
         .antMatchers("/customers/**").hasAnyAuthority("ADMIN", "EXPERT", "CASHIER")
         .antMatchers("/employees/**").hasAuthority("ADMIN")
+        .antMatchers("/parts/**").hasAuthority("BACKOFFICE")
         .antMatchers("/h2-console/**").permitAll()
         .anyRequest().authenticated()
       .and()
