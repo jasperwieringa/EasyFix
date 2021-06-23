@@ -12,7 +12,6 @@
 			<div class="modal-body">
 				<form class="needs-validation" novalidate action="" th:action="@{parts/update}" th:object="${part}" method="post">
 					<div th:insert="fragments/dialogs/parts/fields :: name">...</div>
-					<div th:insert="fragments/dialogs/parts/fields :: description">...</div>
 					<div th:insert="fragments/dialogs/parts/fields :: category">...</div>
 					<div th:insert="fragments/dialogs/parts/fields :: price">...</div>
 					<div th:insert="fragments/dialogs/parts/fields :: stock">...</div>

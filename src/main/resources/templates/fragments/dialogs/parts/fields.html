@@ -8,13 +8,6 @@
 	<div class="invalid-feedback">Please write down the name</div>
 </div>
 
-<div class="form-group" th:fragment="description">
-	<label for="description" class="control-label">Description</label>
-	<input id="description" class="form-control" th:field="*{description}" required/>
-	<div class="valid-feedback">Seems okay!</div>
-	<div class="invalid-feedback">Please write down a description</div>
-</div>
-
 <div class="form-group" th:fragment="category">
 	<label for="department">Category</label>
 	<select id="department" name="color" class="form-control" th:field="*{category}">

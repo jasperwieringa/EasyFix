@@ -21,8 +21,6 @@ public class Part {
   private Long id;
   @NotEmpty(message = "Please write down the name")
   private String name;
-  @NotEmpty(message = "Please write down a description")
-  private String description;
   @Enumerated(EnumType.STRING)
   private PartCategory category;
   @NotEmpty(message = "Please write down the price")
