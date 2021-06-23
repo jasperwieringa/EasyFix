@@ -41,6 +41,11 @@ Er is een backoffice medewerker die:
 2. Handelingen (naam, prijs) kan toevoegen, bewerken en verwijderen in het systeem.
 
 ## Installatiehandleiding
+### Database gegevens
+Gebruikersnaam: easyfixy_h2_admin
+Wachtwoord: ZrM4TnLFLH^fauxem*dkznPCLv9TKXn#j5fn6JAERtPh^yBLraQYR4um4ZPK
+
+### Voorbeeld employees
 Gebruikersnaam: admin@easyfix.nl
 Wachtwoord: EasyFixAdminLogin
 

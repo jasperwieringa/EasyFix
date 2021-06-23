@@ -1,7 +1,6 @@
 package com.main.easyFix.appointment;
 
 import com.main.easyFix.customer.Customer;
-import com.main.easyFix.receipt.Receipt;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "Appointments")
 public class Appointment {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +35,5 @@ public class Appointment {
 
   @OneToOne(mappedBy = "appointment")
   private Customer customer;
-
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "receipt_id", referencedColumnName = "id")
-  private Receipt receipt;
 }
 
