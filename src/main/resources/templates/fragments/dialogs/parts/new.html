@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div id="newAppointmentModal" class="modal" tabindex="-1" th:fragment="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Add part</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="needs-validation" novalidate action="" th:action="@{parts/add}" th:object="${part}" method="post">
+					<div th:insert="fragments/dialogs/parts/fields :: name">...</div>
+					<div th:insert="fragments/dialogs/parts/fields :: description">...</div>
+					<div th:insert="fragments/dialogs/parts/fields :: category">...</div>
+					<div th:insert="fragments/dialogs/parts/fields :: price">...</div>
+					<div th:insert="fragments/dialogs/parts/fields :: in_stock">...</div>
+					<div class="form-group float-right">
+						<button type="submit" class="btn btn-success">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

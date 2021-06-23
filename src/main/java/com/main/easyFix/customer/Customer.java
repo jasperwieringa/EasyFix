@@ -26,6 +26,7 @@ public class Customer {
   private String lastName;
   @NotEmpty(message = "The customer's address cannot be empty")
   private String address;
+  @NotEmpty(message = "The customer's postal code cannot be empty")
   private String postalCode;
   @NotEmpty(message = "The customer's town cannot be empty")
   private String town;

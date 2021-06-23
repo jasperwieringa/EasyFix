@@ -8,7 +8,7 @@
 				<h2>Parts</h2>
 			</div>
 
-			<!-- Customer table -->
+			<!-- Parts -->
 			<div class="overflow-auto mb-3" style="max-height: 30rem;">
 				<table id="customerTable" class="mt-2 table table-striped">
 					<thead>
@@ -73,9 +73,9 @@
 			</div>
 
 			<!-- Admin functions -->
-			<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
-				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCustomerModal">
-					+ New customer
+			<div class="d-flex justify-content-end" sec:authorize="hasAuthority('BACKOFFICE')">
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newPartModal">
+					+ New part
 				</button>
 			</div>
 		</div>

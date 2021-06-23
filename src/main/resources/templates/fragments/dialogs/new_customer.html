@@ -10,45 +10,46 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form class="needs-validation" novalidate th:action="@{/customers/add}" th:object="${customer}" action=""
-							method="post">
+				<form class="needs-validation" novalidate th:action="@{/customers/add}" th:object="${customer}" action="" method="post">
 					<div class="form-group">
 						<label for="firstName" class="control-label">First name</label>
-						<input id="firstName" class="form-control" th:field="*{firstName}" placeholder="First name" required/>
+						<input id="firstName" class="form-control" th:field="*{firstName}" required/>
 						<div class="valid-feedback">Looks good!</div>
 						<div class="invalid-feedback">The customer's name cannot be empty</div>
 					</div>
 					<div class="form-group">
 						<label for="lastName" class="control-label">Last name</label>
-						<input id="lastName" class="form-control" th:field="*{lastName}" placeholder="Last name" required/>
+						<input id="lastName" class="form-control" th:field="*{lastName}" required/>
 						<div class="valid-feedback">Looks good!</div>
 						<div class="invalid-feedback">The customer's lastname cannot be empty</div>
 					</div>
 					<div class="form-group">
 						<label for="address" class="control-label">Address</label>
-						<input id="address" class="form-control" th:field="*{address}" placeholder="Address" required/>
+						<input id="address" class="form-control" th:field="*{address}" required/>
 						<div class="valid-feedback">Looks good!</div>
 						<div class="invalid-feedback">The customer's address cannot be empty</div>
 					</div>
 					<div class="form-group">
 						<label for="postalCode" class="control-label">Postal Code</label>
-						<input id="postalCode" class="form-control" th:field="*{postalCode}" placeholder="Postal Code"/>
+						<input id="postalCode" class="form-control" th:field="*{postalCode}" required/>
+						<div class="valid-feedback">Looks good!</div>
+						<div class="invalid-feedback">The customer's postal code cannot be empty</div>
 					</div>
 					<div class="form-group">
 						<label for="town" class="control-label">Town</label>
-						<input id="town" class="form-control" th:field="*{town}" placeholder="Town" required/>
+						<input id="town" class="form-control" th:field="*{town}" required/>
 						<div class="valid-feedback">Looks good!</div>
 						<div class="invalid-feedback">The customer's town cannot be empty</div>
 					</div>
 					<div class="form-group">
 						<label for="email" class="control-label">E-mail</label>
-						<input id="email" class="form-control" th:field="*{email}" placeholder="Email address" required/>
+						<input id="email" class="form-control" th:field="*{email}" required/>
 						<div class="valid-feedback">Looks good!</div>
 						<div class="invalid-feedback">The customer's email cannot be empty</div>
 					</div>
 					<div class="form-group">
 						<label for="phone" class="control-label">Phone</label>
-						<input id="phone" class="form-control" th:field="*{phone}" placeholder="Phone number" required/>
+						<input id="phone" class="form-control" th:field="*{phone}" required/>
 						<div class="valid-feedback">Looks good!</div>
 						<div class="invalid-feedback">The customer's phone number cannot be empty</div>
 					</div>

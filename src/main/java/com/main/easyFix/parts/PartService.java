@@ -22,4 +22,11 @@ public class PartService {
     }
     partRepository.save(part);
   }
+
+  public void remove(Authentication authentication, Part part) throws IllegalAccessException {
+    if (!PermissionValidator.isBackoffice(authentication)) {
+      throw new IllegalAccessException("Permission denied");
+    }
+    partRepository.delete(part);
+  }
 }
