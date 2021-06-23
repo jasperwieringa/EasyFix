@@ -25,7 +25,7 @@ public class CustomerController {
   @GetMapping("/customer/{id}")
   public String customer(@PathVariable Long id, Model model) {
     Customer customer = customerService.loadCustomerById(id);
-    Appointment appointment = appointmentService.loadAppointmentByCustomerId(id);
+    Appointment appointment = customer.getAppointment();
 
     // Ensure that the Appointment Model exists within the Thymeleaf form
     if (appointment == null) {

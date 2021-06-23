@@ -11,6 +11,5 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
   Optional<Appointment> findById(Long id);
-  Appointment findByCustomerId(Long id);
   List<Appointment> findAll();
 }

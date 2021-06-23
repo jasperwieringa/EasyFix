@@ -13,10 +13,6 @@ public class AppointmentService {
   private final AppointmentRepository appointmentRepository;
   private final CustomerService customerService;
 
-  public Appointment loadAppointmentByCustomerId(Long id) {
-    return appointmentRepository.findByCustomerId(id);
-  }
-
   public void add(Authentication authentication, Appointment appointment, Long id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
