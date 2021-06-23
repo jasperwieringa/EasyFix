@@ -39,12 +39,5 @@ public class Appointment {
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "receipt_id", referencedColumnName = "id")
   private Receipt receipt;
-
-  public Appointment(String computer, String description, AppointmentStatus status, Date date) {
-    this.computer = computer;
-    this.description = description;
-    this.status = status;
-    this.date = date;
-  }
 }
 
