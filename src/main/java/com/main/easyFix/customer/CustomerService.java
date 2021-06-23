@@ -1,5 +1,6 @@
 package com.main.easyFix.customer;
 
+import com.main.easyFix.appointment.Appointment;
 import com.main.easyFix.utils.EmailValidator;
 import com.main.easyFix.security.PermissionValidator;
 import lombok.AllArgsConstructor;

@@ -10,10 +10,9 @@
 				</h1>
 				<h2 data-aos="fade-up" data-aos-delay="400">What would you like to do?</h2>
 				<div data-aos="fade-up" data-aos-delay="800">
-					<a sec:authorize="!hasAuthority('BACKOFFICE')" th:href="@{/customers}" href="" class="mt-2 easy-btn">Manage
-						customers</a>
-					<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employees}" href="" class="mt-2 easy-btn">Manage
-						employees</a>
+					<a sec:authorize="!hasAuthority('BACKOFFICE')" th:href="@{/customers}" href="" class="mt-2 easy-btn">Manage customers</a>
+					<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employees}" href="" class="mt-2 easy-btn">Manage employees</a>
+					<a sec:authorize="hasAuthority('BACKOFFICE')" th:href="@{/parts}" href="" class="mt-2 easy-btn">Manage stock</a>
 				</div>
 			</div>
 			<div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
