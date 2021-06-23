@@ -6,17 +6,14 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Categories {
-//  CABLE,
-//  CASE,
-//  MOTHERBOARD,
-//  PROCESSOR,
-//  GRAPHICS_CARD,
-//  RAM,
-  STORAGE,
+  CABLE,
+  CASE,
+  MOTHERBOARD,
+  PROCESSOR,
+  GRAPHICS_CARD,
+  RAM,
   COOLING,
   POWER_SUPPLY,
-  DISPLAY_DEVICE,
   OPERATING_SYSTEM,
-  INPUT_DEVICES,
   NETWORK,
 }

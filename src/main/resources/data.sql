@@ -73,9 +73,33 @@ INSERT INTO PARTS ( NAME, DESCRIPTION, CATEGORY, PRICE, IN_STOCK ) VALUES
     ( 'Adata Spectrix D80', '', 'RAM', 88.92, 5),
     ( 'G.Skill TridentZ Royal', '', 'RAM', 141.50, 5),
     ( 'Corsair Vengeance LPX', '', 'RAM', 48.25, 5),
-
-
-
+    ( 'Noctua NH-D15', '', 'COOLING', 80.90, 24 ),
+    ( 'Cooler Master Hyper 212 RGB Black Edition', '', 'COOLING', 41.04, 24 ),
+    ( 'Noctua NH-L9', '', 'COOLING', 43.95, 24 ),
+    ( 'NZXT Kraken Z-3', '', 'COOLING', 248.51, 24 ),
+    ( 'Corsair iCUE H115i Elite Capellix', '', 'COOLING', 176, 24 ),
+    ( 'Cooler Master MasterLiquid ML240P Mirage', '', 'COOLING', 104.90, 24 ),
+    ( 'Cooler Master MasterLiquid ML120R RGB', '', 'COOLING', 53.49, 24 ),
+    ( 'Arctic Liquid Freezer 120', '', 'COOLING', 61.87, 24 ),
+    ( 'Corsair Hydro Series H5 SF', '', 'COOLING', 77.44, 24 ),
+    ( 'asterLiquid ML360 Sub-Zero', '', 'COOLING', 119.90, 24 ),
+    ( 'Corsair CX450', '', 'POWER_SUPPLY', 57.90, 8 ),
+    ( 'Corsair RM550x', '', 'POWER_SUPPLY', 95.05, 8 ),
+    ( 'XPG Core Reactor 650W', '', 'POWER_SUPPLY', 108.98, 8 ),
+    ( 'Corsair RM750x ', '', 'POWER_SUPPLY', 123, 8 ),
+    ( 'Corsair AX850', '', 'POWER_SUPPLY', 386.52, 8 ),
+    ( 'Corsair AX1600i', '', 'POWER_SUPPLY', 536, 8),
+    ( 'Corsair SF750', '', 'POWER_SUPPLY', 151.90, 8),
+    ( 'Cooler Master MWE Gold 750', '', 'POWER_SUPPLY', 95.95, 8),
+    ( 'Windows 10 Home', '', 'OPERATING_SYSTEM', 116.40, 10),
+    ( 'Windows 10 Pro', '', 'OPERATING_SYSTEM', 170, 10),
+    ( 'Mac OS', '', 'OPERATING_SYSTEM', 0, 1000),
+    ( 'Ubuntu', '', 'OPERATING_SYSTEM', 0, 1000),
+    ( 'Gigabyte GC-WBAX200', '', 'NETWORK', 39.90, 1000),
+    ( 'Gigabyte GC-WBAX210', '', 'NETWORK', 44.90, 1000),
+    ( 'Asus WLAN PCI-Express PCE-AX3000', '', 'NETWORK', 37.90, 1000),
+    ( 'TP-LINK WLAN Adapter Archer TX3000', '', 'NETWORK', 44.95, 1000),
+    ( 'TP-LINK TL-WN881ND', '', 'NETWORK', 15.50, 1000);
 
 INSERT INTO APPOINTMENTS ( COMPUTER, DESCRIPTION, STATUS, DATE, ISSUES, ACTIVITIES ) VALUES
     ( 'Alienware Aurora', 'Issues starting up the PC', 'COMPLETE', '2021-05-24T16:00', 'Broken SD cable and defect Harddrive', 'Replaced the SD cable and replaced the Harddrive' ),
