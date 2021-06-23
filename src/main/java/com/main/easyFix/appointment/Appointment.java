@@ -29,7 +29,6 @@ public class Appointment {
   @Enumerated(EnumType.STRING)
   private AppointmentStatus status;
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-  @NotEmpty(message = "Please select a date")
   private Date date;
   private String issues;
   private String activities;

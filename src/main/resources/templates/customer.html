@@ -103,7 +103,7 @@
 		</div>
 	</section>
 
-	<div th:if="${customer.appointment == null}" th:insert="fragments/dialogs/appointment/new :: dialog">...</div>
-	<div th:unless="${customer.appointment == null}" th:insert="fragments/dialogs/appointment/update :: dialog">...</div>
+	<div th:if="${customer.appointment == null}" th:insert="dialogs/appointment/new :: dialog">...</div>
+	<div th:unless="${customer.appointment == null}" th:insert="dialogs/appointment/update :: dialog">...</div>
 </div>
 </html>

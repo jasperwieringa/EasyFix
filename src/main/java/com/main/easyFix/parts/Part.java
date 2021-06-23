@@ -19,12 +19,12 @@ public class Part {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
-  @NotEmpty(message = "Please write down the name")
+  @NotEmpty(message = "Please fill in the name")
   private String name;
   @Enumerated(EnumType.STRING)
   private PartCategory category;
-  @NotEmpty(message = "Please write down the price")
+  @NotEmpty(message = "Please fill in the price")
   private Float price;
-  @NotEmpty(message = "Please write down the availability in stock")
+  @NotEmpty(message = "Please fill in the availability in stock")
   private Integer stock;
 }
