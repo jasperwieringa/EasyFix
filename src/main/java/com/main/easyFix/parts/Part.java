@@ -21,7 +21,7 @@ public class Part {
   private String name;
   private String description;
   @Enumerated(EnumType.STRING)
-  private Categories category;
+  private Category category;
   private Float price;
   private Integer inStock;
 }
