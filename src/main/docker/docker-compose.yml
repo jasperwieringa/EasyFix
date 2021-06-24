@@ -2,6 +2,8 @@ version: '2'
 services:
   app:
     image: 'easyfix:latest'
+    ports:
+      - "8080:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
       - SPRING_DATASOURCE_USERNAME=compose-postgres
@@ -15,6 +17,8 @@ services:
 
   db:
     image: 'postgres:13.1-alpine'
+    ports:
+      - "3307:3306"
     container_name: db
     environment:
       - POSTGRES_USER=compose-postgres

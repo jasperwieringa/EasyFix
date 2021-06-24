@@ -42,8 +42,7 @@ Er is een backoffice medewerker die:
 ## Installatiehandleiding
 Download en installeer Docker voor Windows/Linux/Mac van de officiele website https://hub.docker.com/
 
-Type het volgende in de console vanuit de projectmap:
-`docker-compose -f docker-compose.yml up` om de applicatie en de database te starten.
+Type `docker-compose up` in de console vanuit de map [src > main > docker] om de applicatie en de database te starten.
 
 
 ### Database gegevens
