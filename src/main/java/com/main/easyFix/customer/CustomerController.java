@@ -41,7 +41,13 @@ public class CustomerController {
     return "redirect:/customers";
   }
 
-  @RequestMapping(value="/customers/remove/{id}", method = RequestMethod.DELETE)
+//  @PostMapping("/customers/{id}/update")
+//  public String update(Authentication authentication, Customer customer) throws IllegalAccessException {
+//    customerService.update(authentication, customer);
+//    return "redirect:/customers";
+//  }
+
+  @RequestMapping(value="/customers/{id}/remove", method = RequestMethod.DELETE)
   public String remove(Authentication authentication, @PathVariable Long id) throws IllegalAccessException {
     customerService.remove(authentication, id);
     return "redirect:/customers";

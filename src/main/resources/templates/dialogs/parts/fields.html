@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="form-group" th:fragment="name">
+	<label for="computer" class="control-label">Name</label>
+	<input id="computer" class="form-control" th:field="*{name}" required/>
+	<div class="valid-feedback">Seems okay!</div>
+	<div class="invalid-feedback">Please fill in the name</div>
+</div>
+
+<div class="form-group" th:fragment="category">
+	<label for="department">Category</label>
+	<select id="department" name="color" class="form-control" th:field="*{category}">
+		<option th:each="category : ${T(com.main.easyFix.parts.PartCategory).values()}"
+						th:value="${category}" th:text="${category.displayValue}"
+		></option>
+	</select>
+</div>
+
+<div class="form-group" th:fragment="price">
+	<label for="price" class="control-label">Price</label>
+	<div class="input-group">
+		<div class="input-group-prepend">
+			<div class="input-group-text">€</div>
+		</div>
+		<input id="price" type="number" step="any" class="form-control" th:field="*{price}" required/>
+	</div>
+	<div class="valid-feedback">Seems okay!</div>
+	<div class="invalid-feedback">Please fill in the price</div>
+</div>
+
+<div class="form-group" th:fragment="stock">
+	<label for="stock" class="control-label">Available in stock</label>
+	<input id="stock" type="number" min="1" class="form-control" th:field="*{stock}" required/>
+	<div class="valid-feedback">Seems okay!</div>
+	<div class="invalid-feedback">Please fill in the availability in stock</div>
+</div>

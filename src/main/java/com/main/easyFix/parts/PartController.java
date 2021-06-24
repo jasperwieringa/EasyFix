@@ -1,7 +1,5 @@
 package com.main.easyFix.parts;
 
-import com.main.easyFix.appointment.Appointment;
-import com.main.easyFix.customer.Customer;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;

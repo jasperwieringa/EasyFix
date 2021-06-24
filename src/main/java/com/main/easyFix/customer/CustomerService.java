@@ -1,8 +1,7 @@
 package com.main.easyFix.customer;
 
-import com.main.easyFix.appointment.Appointment;
-import com.main.easyFix.utils.EmailValidator;
 import com.main.easyFix.security.PermissionValidator;
+import com.main.easyFix.utils.EmailValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
