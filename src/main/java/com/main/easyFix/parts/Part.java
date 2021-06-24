@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -23,8 +24,8 @@ public class Part {
   private String name;
   @Enumerated(EnumType.STRING)
   private PartCategory category;
-  @NotEmpty(message = "Please fill in the price")
+  @NotNull(message = "Please fill in the price")
   private Float price;
-  @NotEmpty(message = "Please fill in the availability in stock")
+  @NotNull(message = "Please fill in the availability in stock")
   private Integer stock;
 }

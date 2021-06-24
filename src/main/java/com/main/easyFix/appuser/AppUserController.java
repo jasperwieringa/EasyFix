@@ -16,20 +16,18 @@ public class AppUserController {
   @GetMapping("/employees")
   public String customers(AppUser appUser, Model model) {
     model.addAttribute("employees", appUserService.listAllEmployees());
-    return "employees";
+    return "appuser/employees";
   }
 
   @PostMapping("/employees/add")
-  public String register(Authentication authentication, @Valid AppUser appUser, Model model) throws IllegalAccessException {
+  public String register(Authentication authentication, @Valid AppUser appUser) throws IllegalAccessException {
     appUserService.register(authentication, appUser);
-    model.addAttribute("employees", appUserService.listAllEmployees());
-    return "employees";
+    return "redirect:/employees";
   }
 
   @RequestMapping(value="/employees/remove/{id}", method = RequestMethod.DELETE)
-  public String remove(Authentication authentication, AppUser appUser, @PathVariable Long id, Model model) throws IllegalAccessException {
+  public String remove(Authentication authentication, @PathVariable Long id) throws IllegalAccessException {
     appUserService.remove(authentication, id);
-    model.addAttribute("employees", appUserService.listAllEmployees());
-    return "employees";
+    return "redirect:/employees";
   }
 }

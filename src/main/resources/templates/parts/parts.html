@@ -28,13 +28,15 @@
 					<tr th:if="${not #lists.isEmpty(parts)}" th:each="part : ${parts}">
 						<td th:text="${part.id}">id</td>
 						<td th:text="${part.name}">name</td>
-						<td th:text="${part.category}">category</td>
+						<td th:text="${part.category.displayValue}">category</td>
 						<td th:text="${part.price}">price</td>
 						<td th:text="${part.stock}">stock</td>
 						<td sec:authorize="hasAuthority('BACKOFFICE')" class="d-flex">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updatePartModal">
-								<i class="bi bi-pencil"></i>
-							</button>
+							<form class="mr-2" action="" th:action="@{'/parts/{id}'(id=${part.id})}" th:method="get">
+								<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+									<i class="bi bi-pencil"></i>
+								</button>
+							</form>
 						</td>
 					</tr>
 					</tbody>
@@ -50,7 +52,6 @@
 		</div>
 
 		<div th:insert="dialogs/parts/new :: dialog">...</div>
-		<div th:insert="dialogs/parts/update :: dialog">...</div>
 	</section>
 </div>
 </html>

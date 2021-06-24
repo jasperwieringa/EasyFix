@@ -14,12 +14,12 @@ public class AppointmentController {
   @PostMapping("/customer/{id}/appointment/add")
   public String add(Authentication authentication, @PathVariable Long id, Appointment appointment) throws IllegalAccessException {
     appointmentService.add(authentication, appointment, id);
-    return "redirect:/customer/" + id;
+    return "redirect:/customers/" + id;
   }
 
   @PostMapping("/customer/{id}/appointment/update")
   public String update(Authentication authentication, @PathVariable Long id, Appointment appointment) throws IllegalAccessException {
     appointmentService.update(authentication, appointment);
-    return "redirect:/customer/" + id;
+    return "redirect:/customers/" + id;
   }
 }

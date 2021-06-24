@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{base}">
+<div class="h-100 p-3 overflow-auto" layout:fragment="content">
+	<section id="part" class="d-flex mt-5">
+		<div class="container">
+			<div class="section-title" data-aos="fade-up">
+				<h2 th:text="${part.name}">name</h2>
+			</div>
+
+			<ul class="mt-2 list-group list-group-horizontal">
+				<li class="list-group-item w-25">Name</li>
+				<li class="list-group-item flex-fill" th:text="${part.name}">name</li>
+			</ul>
+			<ul class="mt-2 list-group list-group-horizontal">
+				<li class="list-group-item w-25">Category</li>
+				<li class="list-group-item flex-fill" th:text="${part.category}">category</li>
+			</ul>
+			<ul class="mt-2 list-group list-group-horizontal">
+				<li class="list-group-item w-25">Price</li>
+				<li class="list-group-item flex-fill" th:text="${'€' + part.price}">price</li>
+			</ul>
+			<ul class="mt-2 list-group list-group-horizontal">
+				<li class="list-group-item w-25">In stock</li>
+				<li class="list-group-item flex-fill" th:text="${part.stock}">stock</li>
+			</ul>
+
+			<div class="mt-3 d-flex justify-content-end">
+				<form class="mr-2" action="" th:action="@{'/parts/{id}/remove'(id=${part.id})}" th:method="delete">
+					<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+						<i class="bi bi-trash"></i>
+					</button>
+				</form>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updatePartModal">Edit part</button>
+			</div>
+		</div>
+	</section>
+
+	<div th:insert="dialogs/parts/update :: dialog">...</div>
+</div>
+</html>
