@@ -1,25 +1,25 @@
 # EasyFix
-Backend application for IT support
 De backend applicatie voor bedrijven die IT support verlenen.
 
-# Functioneel ontwerp
+## Functioneel ontwerp
 Voor mijn eindopdracht ga ik een variatie maken op de voorbeeldcasus zoals deze staat beschreven in het document 'Integrale eindopdracht Backend 1.02 (5).pdf'.
-Ik ga een backend systeem voor een IT winkel bouwen waarbij klanten hun computer kunnen afleveren voor onderhoud en/of reparatie.
+Ik ga een systeem bouwen voor een IT winkel genaamd 'EasyFix' waarbij klanten een computer kunnen afleveren voor onderhoud en/of reparatie.
 
-### Administratief medewerker
+### Administratief medewerker [ADMIN]
 Wanneer de klant voor het eerst de winkel betreed, voegt een administratief medewerker de klant en de computer toe aan het systeem.
 De afspraak wordt automatisch op 'Reported' gezet.
-De medewerker kan vervolgens een moment in het systeem selecteren waarop de computer kan worden bekeken.
+De medewerker kan vervolgens een moment in het systeem selecteren waarop de computer kan worden nagekeken.
 
-### Expert
-Een expert controleert de computer en voegt eventueel gevonden tekortkomingen toe in het systeem.
-Nadat de computer is gecontroleerd neemt de expert contact op met de klant om de kosten voor het onderhoud te bespreken.
+### Expert [EXPERT]
+Een expert kan in een handig overzicht, alle klanten met de status 'Reported' weergeven.
+De expert controleert de computer en voegt eventueel gevonden tekortkomingen toe in het systeem door de afspraak bij te werken.
+Nadat de computer is gecontroleerd neemt de expert contact op met de klant om de kosten voor het eventuele onderhoud te bespreken.
 
 #### Klant niet akkoord
 Is de klant niet akkoord dan zet de expert de reparatie op 'Canceled', stelt hij de bon op voor de controle en kan de klant de computer ophalen.
 
 #### Klant akkoord
-Is de klant akkoord dan kan de expert een nieuwe datum selecteren en kan hij de status van de reparatie op 'Repairing' zetten.
+Is de klant akkoord dan kan de expert een nieuwe datum selecteren en zet hij de status van de reparatie op 'Repairing'.
 De expert voert de reparatie uit en zet daarbij elk onderdeel die tijdens de reparatie is gebruikt in het systeem.
 Daarnaast worden alle handelingen toegevoegd aan het systeem.
 Stel: De expert vervangt de harde schijf, dan wordt de harde schijf aan de reparatie toegevoegd en worden de handelingen
@@ -30,28 +30,27 @@ Zodra de reparatie is afgerond, kan de reparatie op 'Complete' worden gezet en k
 De klant wordt opgebeld door een administratief medewerker.
 Deze medewerker kan een lijst opvragen met alle klanten die een computer ter reparatie hebben achtergelaten.
 
-### Kassamedewerker
+### Kassamedewerker [CASHIER]
 Wanneer de klant de computer komt ophalen zal een kassamedewerker de bon laten uitdraaien door het systeem.
 De bon bevat de controle, de gebruikte onderdelen, de daarbij uitgevoerde handelingen en de bijbehorende bedragen.
 Zodra de klant heeft betaald, wordt de status van de klant op 'Paid' gezet.
 
-### Backoffice
-Er is een backoffice medewerker die:
-1. Onderdelen (naam, prijs, voorraad) kan toevoegen, bewerken en verwijderen in het systeem.
+### Backoffice [BACKOFFICE]
+De backoffice-medewerker voegt onderdelen (naam, prijs, voorraad) toe aan het systeem en beheert deze.
 
 ## Installatiehandleiding
-Download en installeer Docker voor Windows/Linux/Mac van de officiele website https://hub.docker.com/
 
-Type `docker-compose up` in de console vanuit de map [src > main > docker] om de applicatie en de database te starten.
+### Docker
+Download en installeer Docker voor Windows/Linux/Mac via de officiële website https://www.docker.com/products/docker-desktop
 
+Navigeer naar de map waar het bestand `EasyFix-0.0.1-SNAPSHOT.jar` staat en voer het volgende commando uit in de console: `docker-compose up` 
+om de benodigde containers te starten en de bijbehorende 'images' te downloaden.
 
-### Database gegevens
+### En nu starten
+Wanneer in de console de regel 'Application successfully started!' verschijnt is de installatie voltooid en is deze klaar voor gebruik.
+Navigeer in de browser naar `localhost:8080` en log in met een van de hieronder vermelde gebruikers.
 
-| Username               | Password                                                     |
-| ---------------------- | :----------------------------------------------------------: |
-| easyfixy_h2_admin      | ZrM4TnLFLH^fauxem*dkznPCLv9TKXn#j5fn6JAERtPh^yBLraQYR4um4ZPK |
-
-### Voorbeeld employees
+### Voorbeeld gebruikers
 
 | Username              | Password               |
 | --------------------- | :--------------------: |
@@ -59,6 +58,5 @@ Type `docker-compose up` in de console vanuit de map [src > main > docker] om de
 | expert@easyfix.nl     | EasyFixExpertLogin     |
 | cashier@easyfix.nl    | EasyFixCashierLogin    |
 | backoffice@easyfix.nl | EasyFixBackofficeLogin |
-
 
 ## Verantwoording

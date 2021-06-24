@@ -21,9 +21,7 @@ public class EasyFixApplication extends SpringBootServletInitializer implements 
 		String sql = "INSERT INTO USERS ( APP_USER_DEPARTMENT, EMAIL, ENABLED, FIRST_NAME, LAST_NAME, LOCKED, PASSWORD ) VALUES (" +
 			"'ADMIN', 'admin@easyfix.nl', TRUE, 'Admin', 'EasyFix', FALSE, '$2y$12$zgwFyki4zI0WNZl9r9BZZeKIF7DbKoDLI46xJEg6zinwSiyHoyfLy')";
 
-		int rows = jdbcTemplate.update(sql);
-		if (rows > 0) {
-			System.out.println("A new row has been inserted.");
-		}
+		jdbcTemplate.update(sql);
+		System.out.println("Application successfully started!");
 	}
 }
