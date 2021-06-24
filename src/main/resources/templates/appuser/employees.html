@@ -10,14 +10,14 @@
 
 			<!-- Employee table -->
 			<div class="overflow-auto mb-3" style="max-height: 30rem;">
-				<table id="employeeTable" class="mt-2 table table-striped">
+				<table id="employeeTable" class="mt-2 table table-striped" data-pagination="true" data-filter-control="true">
 					<thead>
 					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Name</th>
-						<th scope="col">Email</th>
-						<th scope="col">Department</th>
-						<th sec:authorize="hasAuthority('ADMIN')">Actions</th>
+						<th data-field="id" scope="col">ID</th>
+						<th data-field="name" data-filter-control="input" scope="col">Name</th>
+						<th data-field="email" data-filter-control="input" scope="col">Email</th>
+						<th data-field="department" data-sortable="true" scope="col">Department</th>
+						<th sec:authorize="hasAuthority('ADMIN')" scope="col">Actions</th>
 					</tr>
 					</thead>
 					<tbody>

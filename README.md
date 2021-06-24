@@ -38,7 +38,6 @@ Zodra de klant heeft betaald, wordt de status van de klant op 'Paid' gezet.
 ### Backoffice
 Er is een backoffice medewerker die:
 1. Onderdelen (naam, prijs, voorraad) kan toevoegen, bewerken en verwijderen in het systeem.
-2. Handelingen (naam, prijs) kan toevoegen, bewerken en verwijderen in het systeem.
 
 ## Installatiehandleiding
 ### Database gegevens

@@ -10,16 +10,16 @@
 
 			<!-- Customer table -->
 			<div class="overflow-auto mb-3" style="max-height: 30rem;">
-				<table id="customerTable" class="mt-2 table table-striped">
+				<table id="customerTable" class="mt-2 table table-striped" data-pagination="true" data-filter-control="true">
 					<thead>
 					<tr>
-						<th scope="col">Id</th>
-						<th scope="col">Name</th>
-						<th scope="col">Email</th>
-						<th scope="col">Phone</th>
-						<th scope="col">Appointment</th>
-						<th scope="col">Status</th>
-						<th sec:authorize="hasAnyAuthority('ADMIN', 'EXPERT')">Actions</th>
+						<th data-field="id" scope="col">Id</th>
+						<th data-field="name" data-filter-control="input" scope="col">Name</th>
+						<th data-field="address" data-filter-control="input" scope="col">Address</th>
+						<th data-field="phone" scope="col">Phone</th>
+						<th data-field="appointment" data-sortable="true" scope="col">Appointment</th>
+						<th data-field="status" data-sortable="true" scope="col">Status</th>
+						<th sec:authorize="hasAnyAuthority('ADMIN', 'EXPERT')" scope="col">Actions</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -29,7 +29,7 @@
 					<tr th:if="${not #lists.isEmpty(customers)}" th:each="customer : ${customers}">
 						<td th:text="${customer.id}">id</td>
 						<td th:text="${customer.firstName + ' ' + customer.lastName}">name</td>
-						<td th:text="${customer.email}">email</td>
+						<td th:text="${customer.address}">address</td>
 						<td th:text="${customer.phone}">phone</td>
 						<td th:switch="${customer.appointment}">
 							<span th:case="null">-</span>
