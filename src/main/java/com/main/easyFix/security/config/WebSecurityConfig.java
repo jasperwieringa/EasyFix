@@ -34,7 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/customers/**").hasAnyAuthority("ADMIN", "EXPERT", "CASHIER")
         .antMatchers("/employees/**").hasAuthority("ADMIN")
         .antMatchers("/parts/**").hasAuthority("BACKOFFICE")
-        .antMatchers("/h2-console/**").permitAll()
         .anyRequest().authenticated()
       .and()
         .formLogin()
@@ -48,13 +47,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .logoutSuccessUrl("/login?logout")
         .permitAll();
       http.csrf().disable();
-  }
-
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-    web
-      .ignoring()
-      .antMatchers("/h2-console/**");
   }
 
   @Bean
