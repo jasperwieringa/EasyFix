@@ -40,21 +40,26 @@ Er is een backoffice medewerker die:
 1. Onderdelen (naam, prijs, voorraad) kan toevoegen, bewerken en verwijderen in het systeem.
 
 ## Installatiehandleiding
+Download en installeer Docker voor Windows/Linux/Mac van de officiele website https://hub.docker.com/
+
+Type het volgende in de console vanuit de projectmap:
+`docker-compose -f docker-compose.yml up` om de applicatie en de database te starten.
+
+
 ### Database gegevens
-Gebruikersnaam: easyfixy_h2_admin
-Wachtwoord: ZrM4TnLFLH^fauxem*dkznPCLv9TKXn#j5fn6JAERtPh^yBLraQYR4um4ZPK
+
+| Username               | Password                                                     |
+| ---------------------- | :----------------------------------------------------------: |
+| easyfixy_h2_admin      | ZrM4TnLFLH^fauxem*dkznPCLv9TKXn#j5fn6JAERtPh^yBLraQYR4um4ZPK |
 
 ### Voorbeeld employees
-Gebruikersnaam: admin@easyfix.nl
-Wachtwoord: EasyFixAdminLogin
 
-Gebruikersnaam: expert@easyfix.nl
-Wachtwoord: EasyFixExpertLogin
+| Username              | Password               |
+| --------------------- | :--------------------: |
+| admin@easyfix.nl      | EasyFixAdminLogin      |
+| expert@easyfix.nl     | EasyFixExpertLogin     |
+| cashier@easyfix.nl    | EasyFixCashierLogin    |
+| backoffice@easyfix.nl | EasyFixBackofficeLogin |
 
-Gebruikersnaam: cashier@easyfix.nl
-Wachtwoord: EasyFixCashierLogin
-
-Gebruikersnaam: backoffice@easyfix.nl
-Wachtwoord: EasyFixBackofficeLogin
 
 ## Verantwoording
