@@ -25,7 +25,7 @@ public class AppUserController {
     return "redirect:/employees";
   }
 
-  @RequestMapping(value="/employees/remove/{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value="/employees/{id}/remove", method = RequestMethod.DELETE)
   public String remove(Authentication authentication, @PathVariable Long id) throws IllegalAccessException {
     appUserService.remove(authentication, id);
     return "redirect:/employees";

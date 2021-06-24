@@ -30,7 +30,7 @@
 						<td th:text="${employee.email}">email</td>
 						<td th:text="${employee.appUserDepartment.displayValue}">department</td>
 						<td sec:authorize="hasAuthority('ADMIN')">
-							<form action="#" th:action="@{'/employees/remove/{id}'(id=${employee.id})}" th:method="delete">
+							<form action="#" th:action="@{'/employees/{id}/remove'(id=${employee.id})}" th:method="delete">
 								<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
 									<i class="bi bi-trash"></i>
 								</button>

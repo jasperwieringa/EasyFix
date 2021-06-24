@@ -61,7 +61,7 @@
 								</button>
 							</form>
 							<form action="" sec:authorize="hasAuthority('ADMIN')"
-										th:action="@{'/customers/remove/{id}'(id=${customer.id})}" th:method="delete">
+										th:action="@{'/customers/{id}/remove'(id=${customer.id})}" th:method="delete">
 								<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
 									<i class="bi bi-trash"></i>
 								</button>
