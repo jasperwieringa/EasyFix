@@ -39,9 +39,5 @@ public class Appointment {
 
   @OneToOne(mappedBy = "appointment")
   private Customer customer;
-
-  @OneToMany(targetEntity = Part.class, cascade = CascadeType.ALL)
-  @JoinColumn(name = "ap_fk", referencedColumnName = "id")
-  private List<Part> parts;
 }
 

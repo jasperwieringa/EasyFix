@@ -98,12 +98,6 @@
 
 				<div class="mt-2 d-flex justify-content-end">
 					<button type="button" class="mr-2 btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
-					<form action="" sec:authorize="hasAuthority('ADMIN')"
-								th:action="@{'/customer/{id}/remove_appointment'(id=${customer.id})}" th:method="delete">
-						<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
-							<i class="bi bi-trash"></i>
-						</button>
-					</form>
 				</div>
 			</div>
 		</div>
