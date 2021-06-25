@@ -32,7 +32,7 @@
 						<td th:text="${part.price}">price</td>
 						<td th:text="${part.stock}">stock</td>
 						<td sec:authorize="hasAuthority('BACKOFFICE')" class="d-flex">
-							<form class="mr-2" action="" th:action="@{'/parts/{id}'(id=${part.id})}" th:method="get">
+							<form class="mr-2" action="" th:action="@{'/part/{id}'(id=${part.id})}" th:method="get">
 								<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
 									<i class="bi bi-pencil"></i>
 								</button>

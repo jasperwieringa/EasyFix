@@ -18,25 +18,25 @@ public class PartController {
     return "parts/parts";
   }
 
-  @GetMapping("/parts/{id}")
-  public String part(@PathVariable int id, Part part, Model model) throws NotFoundException {
-    model.addAttribute("part", partService.loadPartById(id));
-    return "parts/part";
-  }
-
   @PostMapping("/parts/add")
   public String add(Authentication authentication, Part part) throws IllegalAccessException {
     partService.save(authentication, part);
     return "redirect:/parts";
   }
 
-  @PostMapping("/parts/{id}/update")
+  @GetMapping("/part/{id}")
+  public String part(@PathVariable int id, Part part, Model model) throws NotFoundException {
+    model.addAttribute("part", partService.loadPartById(id));
+    return "parts/part";
+  }
+
+  @PostMapping("/part/{id}/update")
   public String update(Authentication authentication, Part part) throws IllegalAccessException {
     partService.update(authentication, part);
     return "redirect:/parts";
   }
 
-  @RequestMapping(value="/parts/{id}/remove", method = RequestMethod.DELETE)
+  @RequestMapping(value="/part/{id}/remove", method = RequestMethod.DELETE)
   public String remove(Authentication authentication, @PathVariable int id) throws IllegalAccessException, NotFoundException {
     partService.remove(authentication, id);
     return "redirect:/parts";

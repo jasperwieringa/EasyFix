@@ -10,7 +10,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form class="needs-validation" novalidate action="" th:action="@{'/parts/{id}/update'(id=${part.id})}" th:object="${part}" method="post">
+				<form class="needs-validation" novalidate action="" th:action="@{'/part/{id}/update'(id=${part.id})}" th:object="${part}" method="post">
 					<div th:insert="dialogs/parts/fields :: name">...</div>
 					<div th:insert="dialogs/parts/fields :: category">...</div>
 					<div th:insert="dialogs/parts/fields :: price">...</div>

@@ -1,6 +1,7 @@
 package com.main.easyFix.appointment;
 
 import com.main.easyFix.customer.Customer;
+import com.main.easyFix.parts.Part;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,5 +39,9 @@ public class Appointment {
 
   @OneToOne(mappedBy = "appointment")
   private Customer customer;
+
+  @OneToMany(targetEntity = Part.class, cascade = CascadeType.ALL)
+  @JoinColumn(name = "ap_fk", referencedColumnName = "id")
+  private List<Part> parts;
 }
 
