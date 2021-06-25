@@ -9,8 +9,8 @@
 			</div>
 
 			<!-- Employee table -->
-			<div class="overflow-auto mb-3" style="max-height: 30rem;">
-				<table id="employeeTable" class="mt-2 table table-striped" data-pagination="true" data-filter-control="true">
+			<div class="overflow-auto" style="max-height: 30rem;">
+				<table id="employeeTable" class="table table-striped" data-pagination="true" data-filter-control="true">
 					<thead>
 					<tr>
 						<th data-field="id" scope="col">ID</th>
@@ -42,7 +42,7 @@
 			</div>
 
 			<!-- Admin functions	-->
-			<div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
+			<div class="mt-2 d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newEmployeeModal">
 					+ New employee
 				</button>

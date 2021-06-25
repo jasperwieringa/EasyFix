@@ -9,8 +9,8 @@
 			</div>
 
 			<!-- Parts table -->
-			<div class="overflow-auto mb-3" style="max-height: 30rem;">
-				<table id="partsTable" class="mt-2 table table-striped" data-pagination="true" data-filter-control="true">
+			<div class="overflow-auto" style="max-height: 30rem;">
+				<table id="partsTable" class="table table-striped" data-pagination="true" data-filter-control="true">
 					<thead>
 					<tr>
 						<th data-field="id" scope="col">Id</th>
@@ -44,7 +44,7 @@
 			</div>
 
 			<!-- Backoffice functions -->
-			<div class="d-flex justify-content-end" sec:authorize="hasAuthority('BACKOFFICE')">
+			<div class="mt-2 d-flex justify-content-end" sec:authorize="hasAuthority('BACKOFFICE')">
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newPartModal">
 					+ Add part
 				</button>
