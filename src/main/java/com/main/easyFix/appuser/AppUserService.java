@@ -24,7 +24,7 @@ public class AppUserService implements UserDetailsService {
       new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, "email", email)));
   }
 
-  public AppUser loadUserById(Long id) throws UsernameNotFoundException {
+  public AppUser loadUserById(int id) throws UsernameNotFoundException {
     return appUserRepository.findById(id).orElseThrow(() ->
       new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, "id", id)));
   }
@@ -54,7 +54,7 @@ public class AppUserService implements UserDetailsService {
     appUserRepository.enableAppUser(appUser.getEmail());
   }
 
-  public void remove(Authentication authentication, Long id) throws IllegalAccessException {
+  public void remove(Authentication authentication, int id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }

@@ -22,7 +22,7 @@ public class Appointment {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private Long id;
+  private int id;
   @NotEmpty(message = "Please give a description of the computer")
   private String computer;
   @NotEmpty(message = "Please describe what is wrong with the computer")

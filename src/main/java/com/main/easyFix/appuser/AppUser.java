@@ -23,7 +23,7 @@ public class AppUser implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private Long id;
+  private int id;
   @NotEmpty(message = "The employee's name cannot be empty")
   private String firstName;
   @NotEmpty(message = "The employee's lastname cannot be empty")

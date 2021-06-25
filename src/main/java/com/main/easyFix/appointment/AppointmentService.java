@@ -13,7 +13,7 @@ public class AppointmentService {
   private final AppointmentRepository appointmentRepository;
   private final CustomerService customerService;
 
-  public void add(Authentication authentication, Appointment appointment, Long id) throws IllegalAccessException {
+  public void add(Authentication authentication, Appointment appointment, int id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }

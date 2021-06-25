@@ -33,26 +33,22 @@ public class EasyFixApplication extends SpringBootServletInitializer {
 		SpringApplication.run(EasyFixApplication.class, args);
 	}
 
+	// TODO: Remove this (Only used to pre-populate the database with test data)
 	@EventListener(ApplicationReadyEvent.class)
-	//	TODO: Remove, The loadData method is only used to add some test data for the assignment.
 	public void loadData() {
-		System.out.println("Pre-populating the database with test data");
-
-		ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(
-			false,
-			false,
-			"UTF-8",
-			new ClassPathResource("data.sql"));
-		resourceDatabasePopulator.execute(dataSource);
-
 		List<AppUser> allUsers = appUserRepository.findAll();
 		List<Customer> allCustomers = customerRepository.findAll();
 		List<Part> allPArts = partRepository.findAll();
 
-		if (allUsers.size() != 0 && allCustomers.size() != 0 && allPArts.size() != 0) {
-			System.out.println("Database successfully pre-populated with test data!");
-		} else {
-			System.out.println("Could not pre-populate database with test data!");
+		if (allUsers.size() == 0 && allCustomers.size() == 0 && allPArts.size() == 0) {
+			System.out.println("Pre-populating the database with test data");
+
+			ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(
+				false,
+				false,
+				"UTF-8",
+				new ClassPathResource("data.sql"));
+			resourceDatabasePopulator.execute(dataSource);
 		}
 		System.out.println("Application successfully started!");
 	}

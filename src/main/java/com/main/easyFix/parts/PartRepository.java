@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface PartRepository extends JpaRepository<Part, Long> {
-  Optional<Part> findById(Long id);
+public interface PartRepository extends JpaRepository<Part, Integer> {
+  Optional<Part> findById(int id);
   List<Part> findAll();
 }

@@ -19,7 +19,7 @@ public class PartController {
   }
 
   @GetMapping("/parts/{id}")
-  public String part(@PathVariable Long id, Part part, Model model) throws NotFoundException {
+  public String part(@PathVariable int id, Part part, Model model) throws NotFoundException {
     model.addAttribute("part", partService.loadPartById(id));
     return "parts/part";
   }
@@ -37,7 +37,7 @@ public class PartController {
   }
 
   @RequestMapping(value="/parts/{id}/remove", method = RequestMethod.DELETE)
-  public String remove(Authentication authentication, @PathVariable Long id) throws IllegalAccessException, NotFoundException {
+  public String remove(Authentication authentication, @PathVariable int id) throws IllegalAccessException, NotFoundException {
     partService.remove(authentication, id);
     return "redirect:/parts";
   }

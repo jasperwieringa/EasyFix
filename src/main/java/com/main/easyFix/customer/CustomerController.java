@@ -21,7 +21,7 @@ public class CustomerController {
   }
 
   @GetMapping("/customers/{id}")
-  public String customer(@PathVariable Long id, Model model) {
+  public String customer(@PathVariable int id, Model model) {
     Customer customer = customerService.loadCustomerById(id);
     Appointment appointment = customer.getAppointment();
 
@@ -42,7 +42,7 @@ public class CustomerController {
   }
 
   @RequestMapping(value="/customers/{id}/remove", method = RequestMethod.DELETE)
-  public String remove(Authentication authentication, @PathVariable Long id) throws IllegalAccessException {
+  public String remove(Authentication authentication, @PathVariable int id) throws IllegalAccessException {
     customerService.remove(authentication, id);
     return "redirect:/customers";
   }

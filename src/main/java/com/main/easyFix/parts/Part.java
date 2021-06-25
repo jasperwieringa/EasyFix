@@ -19,7 +19,7 @@ public class Part {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private Long id;
+  private int id;
   @NotEmpty(message = "Please fill in the name")
   private String name;
   @Enumerated(EnumType.STRING)

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-  Optional<Appointment> findById(Long id);
+public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
+  Optional<Appointment> findById(int id);
   List<Appointment> findAll();
 }

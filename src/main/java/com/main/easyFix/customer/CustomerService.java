@@ -14,7 +14,7 @@ public class CustomerService {
   private final CustomerRepository customerRepository;
   private final EmailValidator emailValidator;
 
-  public Customer loadCustomerById(Long id) throws UsernameNotFoundException {
+  public Customer loadCustomerById(int id) throws UsernameNotFoundException {
     return customerRepository.findById(id).orElseThrow(() ->
       new UsernameNotFoundException(String.format(CLIENT_NOT_FOUND_MSG, "id", id)));
   }
@@ -44,7 +44,7 @@ public class CustomerService {
     customerRepository.save(customer);
   }
 
-  public void remove(Authentication authentication, Long id) throws IllegalAccessException {
+  public void remove(Authentication authentication, int id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }

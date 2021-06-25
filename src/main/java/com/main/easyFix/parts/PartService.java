@@ -14,7 +14,7 @@ public class PartService {
   private final static String PART_NOT_FOUND_MSG = "Part with %s: %s, not found";
   private final PartRepository partRepository;
 
-  public Part loadPartById(Long id) throws NotFoundException {
+  public Part loadPartById(int id) throws NotFoundException {
     return partRepository.findById(id).orElseThrow(() ->
       new NotFoundException(String.format(PART_NOT_FOUND_MSG, "id", id)));
   }
@@ -37,7 +37,7 @@ public class PartService {
     partRepository.save(part);
   }
 
-  public void remove(Authentication authentication, Long id) throws IllegalAccessException, NotFoundException {
+  public void remove(Authentication authentication, int id) throws IllegalAccessException, NotFoundException {
     if (!PermissionValidator.isBackoffice(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }

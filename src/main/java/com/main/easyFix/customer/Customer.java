@@ -19,7 +19,7 @@ public class Customer {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private Long id;
+  private int id;
   @NotEmpty(message = "The customer's name cannot be empty")
   private String firstName;
   @NotEmpty(message = "The customer's lastname cannot be empty")
