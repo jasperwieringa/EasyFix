@@ -41,7 +41,7 @@
 				<h2>Appointment</h2>
 			</div>
 
-			<div th:if="${appointment.id == null}">
+			<div th:if="${customer.appointment == null}">
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item flex-fill">No appointments to display</li>
 				</ul>
@@ -54,7 +54,7 @@
 				</div>
 
 			</div>
-			<div th:unless="${appointment.id == null}">
+			<div th:unless="${customer.appointment == null}">
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item w-25">Computer</li>
 					<li class="list-group-item flex-fill" th:text="${appointment.computer}">computer</li>
@@ -97,13 +97,19 @@
 				</ul>
 
 				<div class="mt-2 d-flex justify-content-end">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
+					<button type="button" class="mr-2 btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
+					<form action="" sec:authorize="hasAuthority('ADMIN')"
+								th:action="@{'/customer/{id}/remove_appointment'(id=${customer.id})}" th:method="delete">
+						<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+							<i class="bi bi-trash"></i>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<section th:if="${appointment.id != null}" id="usedParts" class="mt-5">
+	<section th:if="${customer.appointment != null}" id="usedParts" class="mt-5">
 		<div class="container">
 			<div class="section-title" data-aos="fade-up">
 				<h2>Used parts</h2>
@@ -119,7 +125,7 @@
 						<th data-field="price" data-sortable="true" scope="col">Price per Unit</th>
 						<th data-field="stock" scope="col">Amount</th>
 						<th data-field="total" scope="col">Price total</th>
-						<th scope="col">Actions</th>
+						<th scope="col" sec:authorize="hasAuthority('EXPERT')" >Actions</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -133,7 +139,7 @@
 						<td th:text="${'€' + usedPart.part.price}">price</td>
 						<td th:text="${usedPart.quantity}">quantity</td>
 						<td th:text="${'€' + usedPart.quantity * usedPart.part.price}">total</td>
-						<td sec:authorize="hasAuthority('BACKOFFICE')" class="d-flex">
+						<td sec:authorize="hasAuthority('EXPERT')" class="d-flex">
 							TODO
 						</td>
 					</tr>
@@ -143,7 +149,7 @@
 		</div>
 	</section>
 
-	<div th:if="${appointment.id == null}" th:insert="dialogs/appointment/new :: dialog">...</div>
-	<div th:unless="${appointment.id == null}" th:insert="dialogs/appointment/update :: dialog">...</div>
+	<div th:if="${customer.appointment == null}" th:insert="dialogs/appointment/new :: dialog">...</div>
+	<div th:unless="${customer.appointment == null}" th:insert="dialogs/appointment/update :: dialog">...</div>
 </div>
 </html>

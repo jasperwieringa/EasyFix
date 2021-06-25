@@ -20,7 +20,7 @@ public class AppUserController {
   }
 
   @PostMapping("/employees/add")
-  public String register(Authentication authentication, @Valid AppUser appUser) throws IllegalAccessException {
+  public String add(Authentication authentication, AppUser appUser) throws IllegalAccessException {
     appUserService.register(authentication, appUser);
     return "redirect:/employees";
   }

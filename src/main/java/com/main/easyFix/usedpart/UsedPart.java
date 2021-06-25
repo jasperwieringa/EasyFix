@@ -21,11 +21,11 @@ public class UsedPart {
   @Column(name = "id")
   private int id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "appointment_id")
   private Appointment appointment;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "part_id")
   private Part part;
 

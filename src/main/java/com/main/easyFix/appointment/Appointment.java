@@ -1,7 +1,5 @@
 package com.main.easyFix.appointment;
 
-import com.main.easyFix.customer.Customer;
-import com.main.easyFix.parts.Part;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -36,8 +33,5 @@ public class Appointment {
   private Date date;
   private String issues;
   private String activities;
-
-  @OneToOne(mappedBy = "appointment")
-  private Customer customer;
 }
 

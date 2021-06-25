@@ -3,32 +3,18 @@ package com.main.easyFix.appointment;
 import com.main.easyFix.customer.Customer;
 import com.main.easyFix.customer.CustomerService;
 import com.main.easyFix.security.PermissionValidator;
-import com.main.easyFix.usedpart.UsedPart;
-import com.main.easyFix.usedpart.UsedPartRepository;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class AppointmentService {
   private final AppointmentRepository appointmentRepository;
   private final CustomerService customerService;
-  private final UsedPartRepository usedPartRepository;
 
-  public List<UsedPart> usedParts(Appointment appointment) {
-    return usedPartRepository.findByAppointment(appointment);
-  }
-
-  public Appointment loadAppointmentByCustomer(Customer customer) {
-    return appointmentRepository.findByCustomer(customer);
-  }
-
-  public void add(Authentication authentication, Appointment appointment, int id) throws IllegalAccessException {
+  public void add(Authentication authentication, Appointment appointment, int customer_id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }
@@ -38,15 +24,34 @@ public class AppointmentService {
     appointmentRepository.save(appointment);
 
     // Update the customer
-    Customer customer = customerService.loadCustomerById(id);
+    Customer customer = customerService.loadCustomerById(customer_id);
     customer.setAppointment(appointment);
     customerService.update(customer);
   }
 
-  public void update(Authentication authentication, Appointment appointment) throws IllegalAccessException {
+  public void update(Authentication authentication, Appointment appointment, int customer_id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication) && !PermissionValidator.isExpert(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }
-    appointmentRepository.save(appointment);
+
+    // Update the customer
+    Customer customer = customerService.loadCustomerById(customer_id);
+    customer.setAppointment(appointment);
+    customerService.update(customer);
+  }
+
+  public void remove(Authentication authentication, int customer_id) throws IllegalAccessException, NotFoundException {
+    if (!PermissionValidator.isAdmin(authentication) && !PermissionValidator.isExpert(authentication)) {
+      throw new IllegalAccessException("Permission denied");
+    }
+
+    // Update the customer
+    Customer customer = customerService.loadCustomerById(customer_id);
+    Appointment appointment = customer.getAppointment();
+    customer.setAppointment(null);
+    customerService.update(customer);
+    
+    // Remove the appointment
+    appointmentRepository.delete(appointment);
   }
 }

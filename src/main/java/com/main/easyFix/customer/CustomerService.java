@@ -1,7 +1,10 @@
 package com.main.easyFix.customer;
 
+import com.main.easyFix.appointment.Appointment;
 import com.main.easyFix.security.PermissionValidator;
+import com.main.easyFix.usedpart.UsedPartService;
 import com.main.easyFix.utils.EmailValidator;
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
   private final static String CLIENT_NOT_FOUND_MSG = "Customer with %s: %s, not found";
   private final CustomerRepository customerRepository;
+  private final UsedPartService usedPartService;
   private final EmailValidator emailValidator;
 
   public Customer loadCustomerById(int id) throws UsernameNotFoundException {
@@ -44,10 +48,18 @@ public class CustomerService {
     customerRepository.save(customer);
   }
 
-  public void remove(Authentication authentication, int id) throws IllegalAccessException {
+  public void remove(Authentication authentication, int customer_id) throws IllegalAccessException, NotFoundException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }
-    customerRepository.delete(loadCustomerById(id));
+
+    Customer customer = loadCustomerById(customer_id);
+    Appointment appointment = customer.getAppointment();
+
+    // Remove the appointment and the associated used parts
+    usedPartService.removeAll(authentication, appointment);
+
+    // Finally delete the customer
+    customerRepository.delete(loadCustomerById(customer_id));
   }
 }
