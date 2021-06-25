@@ -29,7 +29,7 @@ public class UsedPartTests {
   @Test
   public void testAddOneUsedPart() {
     Part part = entityManager.find(Part.class, 101);
-    Appointment appointment = entityManager.find(Appointment.class, 3);
+    Appointment appointment = entityManager.find(Appointment.class, 1);
 
     UsedPart usedPart = new UsedPart();
     usedPart.setAppointment(appointment);
@@ -44,7 +44,7 @@ public class UsedPartTests {
   @Test
   public void testAddMultipleUsedPart() {
     Part part = entityManager.find(Part.class, 10);
-    Appointment appointment = entityManager.find(Appointment.class, 3);
+    Appointment appointment = entityManager.find(Appointment.class, 1);
 
     UsedPart usedPart = new UsedPart();
     usedPart.setAppointment(appointment);

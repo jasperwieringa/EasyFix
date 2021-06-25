@@ -3,6 +3,7 @@ package com.main.easyFix.appointment;
 import com.main.easyFix.customer.Customer;
 import com.main.easyFix.customer.CustomerService;
 import com.main.easyFix.security.PermissionValidator;
+import com.main.easyFix.usedpart.UsedPartService;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class AppointmentService {
   private final AppointmentRepository appointmentRepository;
   private final CustomerService customerService;
+  private final UsedPartService usedPartService;
 
   public void add(Authentication authentication, Appointment appointment, int customer_id) throws IllegalAccessException {
     if (!PermissionValidator.isAdmin(authentication)) {
@@ -50,6 +52,9 @@ public class AppointmentService {
     Appointment appointment = customer.getAppointment();
     customer.setAppointment(null);
     customerService.update(customer);
+
+    // Remove the associated used_parts
+    usedPartService.removeAll(authentication, appointment);
     
     // Remove the appointment
     appointmentRepository.delete(appointment);
