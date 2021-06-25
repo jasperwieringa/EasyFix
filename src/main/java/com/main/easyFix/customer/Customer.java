@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Customers")
+@Table(name = "customers")
 public class Customer {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

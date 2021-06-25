@@ -5,8 +5,10 @@ import com.main.easyFix.customer.CustomerService;
 import com.main.easyFix.security.PermissionValidator;
 import com.main.easyFix.usedpart.UsedPart;
 import com.main.easyFix.usedpart.UsedPartRepository;
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public class AppointmentService {
 
   public List<UsedPart> usedParts(Appointment appointment) {
     return usedPartRepository.findByAppointment(appointment);
+  }
+
+  public Appointment loadAppointmentByCustomer(Customer customer) {
+    return appointmentRepository.findByCustomer(customer);
   }
 
   public void add(Authentication authentication, Appointment appointment, int id) throws IllegalAccessException {

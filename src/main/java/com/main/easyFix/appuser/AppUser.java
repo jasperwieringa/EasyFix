@@ -18,7 +18,7 @@ import java.util.Collections;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class AppUser implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -35,13 +35,13 @@
 		</div>
 	</section>
 
-	<section id="appointments" class="appointments mt-5">
+	<section id="appointments" class="mt-5">
 		<div class="container">
 			<div class="section-title" data-aos="fade-up">
-				<h2>Appointments</h2>
+				<h2>Appointment</h2>
 			</div>
 
-			<div th:if="${customer.appointment == null}">
+			<div th:if="${appointment.id == null}">
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item flex-fill">No appointments to display</li>
 				</ul>
@@ -54,56 +54,96 @@
 				</div>
 
 			</div>
-			<div th:unless="${customer.appointment == null}">
+			<div th:unless="${appointment.id == null}">
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item w-25">Computer</li>
-					<li class="list-group-item flex-fill" th:text="${customer.appointment.computer}">computer</li>
+					<li class="list-group-item flex-fill" th:text="${appointment.computer}">computer</li>
 				</ul>
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item w-25">Description</li>
-					<li class="list-group-item flex-fill" th:text="${customer.appointment.description}">description</li>
+					<li class="list-group-item flex-fill" th:text="${appointment.description}">description</li>
 				</ul>
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item w-25">Status</li>
 					<li class="list-group-item flex-fill">
-						<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPORTED}"
+						<span th:if="${appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPORTED}"
 									class="badge badge-info">Reported</span>
 						<span
-							th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPAIRING}"
+							th:if="${appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).REPAIRING}"
 							class="badge badge-warning">Repairing</span>
-						<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).COMPLETE}"
+						<span th:if="${appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).COMPLETE}"
 									class="badge badge-primary">Complete</span>
-						<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).PAID}"
+						<span th:if="${appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).PAID}"
 									class="badge badge-success">Paid</span>
-						<span th:if="${customer.appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}"
+						<span th:if="${appointment.status == T(com.main.easyFix.appointment.AppointmentStatus).CANCELED}"
 									class="badge badge-danger">Canceled</span>
 					</li>
 				</ul>
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item w-25">Date</li>
-					<li class="list-group-item flex-fill" th:text="${#dates.format(customer.appointment.date, 'dd-MM-yyyy')}">date</li>
+					<li class="list-group-item flex-fill" th:text="${#dates.format(appointment.date, 'dd-MM-yyyy')}">date</li>
 				</ul>
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item w-25">Time</li>
-					<li class="list-group-item flex-fill" th:text="${#dates.format(customer.appointment.date, 'HH:mm')}">time</li>
+					<li class="list-group-item flex-fill" th:text="${#dates.format(appointment.date, 'HH:mm')}">time</li>
 				</ul>
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item w-25">Issues</li>
-					<li class="list-group-item flex-fill" th:text="${customer.appointment.issues}">issues</li>
+					<li class="list-group-item flex-fill" th:text="${appointment.issues}">issues</li>
 				</ul>
 				<ul class="mt-2 list-group list-group-horizontal">
 					<li class="list-group-item w-25">Executed activities</li>
-					<li class="list-group-item flex-fill" th:text="${customer.appointment.activities}">activities</li>
+					<li class="list-group-item flex-fill" th:text="${appointment.activities}">activities</li>
 				</ul>
 
 				<div class="mt-2 d-flex justify-content-end">
-					<button type="button" class="mr-2 btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<div th:if="${customer.appointment == null}" th:insert="dialogs/appointment/new :: dialog">...</div>
-	<div th:unless="${customer.appointment == null}" th:insert="dialogs/appointment/update :: dialog">...</div>
+	<section th:if="${appointment.id != null}" id="usedParts" class="mt-5">
+		<div class="container">
+			<div class="section-title" data-aos="fade-up">
+				<h2>Used parts</h2>
+			</div>
+
+			<div class="overflow-auto" style="max-height: 30rem;">
+				<table id="partsTable" class="table table-striped" data-pagination="true" data-filter-control="true">
+					<thead>
+					<tr>
+						<th data-field="id" scope="col">Id</th>
+						<th data-field="name" data-filter-control="input" scope="col">Name</th>
+						<th data-field="category" data-filter-control="select" data-sortable="true" scope="col">Category</th>
+						<th data-field="price" data-sortable="true" scope="col">Price per Unit</th>
+						<th data-field="stock" scope="col">Amount</th>
+						<th data-field="total" scope="col">Price total</th>
+						<th scope="col">Actions</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:if="${#lists.isEmpty(usedParts)}">
+						<td colspan="7">No parts to display</td>
+					</tr>
+					<tr th:unless="${#lists.isEmpty(usedParts)}" th:each="usedPart : ${usedParts}">
+						<td th:text="${usedPart.part.id}">id</td>
+						<td th:text="${usedPart.part.name}">name</td>
+						<td th:text="${usedPart.part.category.displayValue}">category</td>
+						<td th:text="${'€' + usedPart.part.price}">price</td>
+						<td th:text="${usedPart.quantity}">quantity</td>
+						<td th:text="${'€' + usedPart.quantity * usedPart.part.price}">total</td>
+						<td sec:authorize="hasAuthority('BACKOFFICE')" class="d-flex">
+							TODO
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<div th:if="${appointment.id == null}" th:insert="dialogs/appointment/new :: dialog">...</div>
+	<div th:unless="${appointment.id == null}" th:insert="dialogs/appointment/update :: dialog">...</div>
 </div>
 </html>

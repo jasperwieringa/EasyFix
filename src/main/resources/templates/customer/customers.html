@@ -26,7 +26,7 @@
 					<tr th:if="${#lists.isEmpty(customers)}">
 						<td colspan="7">No customers to display</td>
 					</tr>
-					<tr th:if="${not #lists.isEmpty(customers)}" th:each="customer : ${customers}">
+					<tr th:unless="${#lists.isEmpty(customers)}" th:each="customer : ${customers}">
 						<td th:text="${customer.id}">id</td>
 						<td th:text="${customer.firstName + ' ' + customer.lastName}">name</td>
 						<td th:text="${customer.address}">address</td>

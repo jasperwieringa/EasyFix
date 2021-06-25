@@ -18,14 +18,14 @@
 						<th data-field="category" data-filter-control="select" data-sortable="true" scope="col">Category</th>
 						<th data-field="price" data-sortable="true" scope="col">Price</th>
 						<th data-field="stock" scope="col">In stock</th>
-						<th scope="col">Actions</th>
+						<th scope="col" sec:authorize="hasAuthority('BACKOFFICE')">Actions</th>
 					</tr>
 					</thead>
 					<tbody>
 					<tr th:if="${#lists.isEmpty(parts)}">
 						<td colspan="7">No parts to display</td>
 					</tr>
-					<tr th:if="${not #lists.isEmpty(parts)}" th:each="part : ${parts}">
+					<tr th:unless="${#lists.isEmpty(parts)}" th:each="part : ${parts}">
 						<td th:text="${part.id}">id</td>
 						<td th:text="${part.name}">name</td>
 						<td th:text="${part.category.displayValue}">category</td>

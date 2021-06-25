@@ -37,10 +37,10 @@ public class PartService {
     partRepository.save(part);
   }
 
-  public void remove(Authentication authentication, int id) throws IllegalAccessException, NotFoundException {
+  public void remove(Authentication authentication, Part part) throws IllegalAccessException {
     if (!PermissionValidator.isBackoffice(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }
-    partRepository.delete(loadPartById(id));
+    partRepository.delete(part);
   }
 }

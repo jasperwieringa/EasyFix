@@ -33,12 +33,12 @@ public class PartController {
   @PostMapping("/part/{id}/update")
   public String update(Authentication authentication, Part part) throws IllegalAccessException {
     partService.update(authentication, part);
-    return "redirect:/parts";
+    return "redirect:/part/" + part.getId();
   }
 
   @RequestMapping(value="/part/{id}/remove", method = RequestMethod.DELETE)
-  public String remove(Authentication authentication, @PathVariable int id) throws IllegalAccessException, NotFoundException {
-    partService.remove(authentication, id);
+  public String remove(Authentication authentication, Part part) throws IllegalAccessException {
+    partService.remove(authentication, part);
     return "redirect:/parts";
   }
 }
