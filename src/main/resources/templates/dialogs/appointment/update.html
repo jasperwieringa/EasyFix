@@ -10,7 +10,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form class="needs-validation" novalidate action="" th:action="@{'/customer/{id}/appointment/update'(id=${customer.id})}" th:object="${appointment}" method="post">
+				<form class="needs-validation" novalidate action="" th:action="@{'/customer/{id}/update_appointment'(id=${customer.id})}" th:object="${appointment}" method="post">
 					<div th:insert="dialogs/appointment/fields :: computer">...</div>
 					<div th:insert="dialogs/appointment/fields :: description">...</div>
 					<div th:insert="dialogs/appointment/fields :: status">...</div>

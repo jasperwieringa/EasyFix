@@ -20,7 +20,13 @@ public class CustomerController {
     return "customer/customers";
   }
 
-  @GetMapping("/customers/{id}")
+  @PostMapping("/customers/add")
+  public String add(Authentication authentication, @Valid Customer customer) throws IllegalAccessException {
+    customerService.add(authentication, customer);
+    return "redirect:/customers";
+  }
+
+  @GetMapping("/customer/{id}")
   public String customer(@PathVariable int id, Model model) {
     Customer customer = customerService.loadCustomerById(id);
     Appointment appointment = customer.getAppointment();
@@ -35,13 +41,7 @@ public class CustomerController {
     return "customer/customer";
   }
 
-  @PostMapping("/customers/add")
-  public String add(Authentication authentication, @Valid Customer customer) throws IllegalAccessException {
-    customerService.add(authentication, customer);
-    return "redirect:/customers";
-  }
-
-  @RequestMapping(value="/customers/{id}/remove", method = RequestMethod.DELETE)
+  @RequestMapping(value="/customer/{id}/remove", method = RequestMethod.DELETE)
   public String remove(Authentication authentication, @PathVariable int id) throws IllegalAccessException {
     customerService.remove(authentication, id);
     return "redirect:/customers";

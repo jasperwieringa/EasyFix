@@ -34,4 +34,17 @@ public class AppointmentService {
     }
     appointmentRepository.save(appointment);
   }
+
+  public void remove(Authentication authentication, int id) throws IllegalAccessException {
+    if (!PermissionValidator.isAdmin(authentication) && !PermissionValidator.isExpert(authentication)) {
+      throw new IllegalAccessException("Permission denied");
+    }
+
+    Customer customer = customerService.loadCustomerById(id);
+    Appointment appointment = customer.getAppointment();
+
+    customer.setAppointment(null);
+    customerService.update(customer);
+    appointmentRepository.delete(appointment);
+  }
 }
