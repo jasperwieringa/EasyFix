@@ -24,6 +24,18 @@ public class UsedPartService {
     return usedPartRepository.findByAppointment(appointment);
   }
 
+  public void add(Authentication authentication, int customer_id) throws IllegalAccessException {
+    if (!PermissionValidator.isExpert(authentication)) {
+      throw new IllegalAccessException("Permission denied");
+    }
+  }
+
+  public void remove(Authentication authentication, int customer_id) throws IllegalAccessException {
+    if (!PermissionValidator.isAdmin(authentication) && !PermissionValidator.isExpert(authentication)) {
+      throw new IllegalAccessException("Permission denied");
+    }
+  }
+
   public void removeAll(Authentication authentication, Appointment appointment) throws IllegalAccessException, NotFoundException {
     if (!PermissionValidator.isAdmin(authentication)) {
       throw new IllegalAccessException("Permission denied");

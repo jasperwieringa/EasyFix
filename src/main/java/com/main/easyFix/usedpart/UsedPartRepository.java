@@ -12,5 +12,5 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface UsedPartRepository extends JpaRepository<UsedPart, Integer> {
   Optional<UsedPart> findById(int id);
-  public List<UsedPart> findByAppointment(Appointment appointment);
+  List<UsedPart> findByAppointment(Appointment appointment);
 }

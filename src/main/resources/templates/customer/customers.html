@@ -80,7 +80,7 @@
 			</div>
 		</div>
 
-		<div th:insert="dialogs/person/new_customer :: dialog">...</div>
+		<div th:insert="dialogs/person/new_customer :: dialog" sec:authorize="hasAuthority('ADMIN')">...</div>
 	</section>
 </div>
 </html>

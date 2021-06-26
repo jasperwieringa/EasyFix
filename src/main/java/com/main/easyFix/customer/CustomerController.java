@@ -2,6 +2,8 @@ package com.main.easyFix.customer;
 
 import com.main.easyFix.appointment.Appointment;
 import com.main.easyFix.appointment.AppointmentService;
+import com.main.easyFix.parts.Part;
+import com.main.easyFix.parts.PartService;
 import com.main.easyFix.usedpart.UsedPart;
 import com.main.easyFix.usedpart.UsedPartService;
 import javassist.NotFoundException;
@@ -17,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerController {
   private final CustomerService customerService;
+  private final PartService partService;
   private final UsedPartService usedPartService;
 
   @GetMapping("/customers")
@@ -35,6 +38,7 @@ public class CustomerController {
   public String customer(@PathVariable int customer_id, Model model) {
     Customer customer = customerService.loadCustomerById(customer_id);
     Appointment appointment = customer.getAppointment();
+    List<Part> availableParts = partService.listAllParts();
     List<UsedPart> usedParts = usedPartService.loadUsedPartsByAppointment(appointment);
 
     // Ensure that the Appointment Model exists within the Thymeleaf form
@@ -44,6 +48,7 @@ public class CustomerController {
 
     model.addAttribute("customer", customer);
     model.addAttribute("appointment", appointment);
+    model.addAttribute("availableParts", availableParts);
     model.addAttribute("usedParts", usedParts);
     return "customer/customer";
   }

@@ -96,7 +96,7 @@
 					<li class="list-group-item flex-fill" th:text="${appointment.activities}">activities</li>
 				</ul>
 
-				<div class="mt-2 d-flex justify-content-end">
+				<div sec:authorize="hasAnyAuthority('ADMIN', 'EXPERT')" class="mt-2 d-flex justify-content-end">
 					<button type="button" class="mr-2 btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
 					<form action="" sec:authorize="hasAuthority('ADMIN')"
 								th:action="@{'/customer/{id}/remove_appointment'(id=${customer.id})}" th:method="delete">
@@ -125,7 +125,7 @@
 						<th data-field="price" data-sortable="true" scope="col">Price per Unit</th>
 						<th data-field="stock" scope="col">Amount</th>
 						<th data-field="total" scope="col">Price total</th>
-						<th scope="col" sec:authorize="hasAuthority('EXPERT')" >Actions</th>
+						<th scope="col" sec:authorize="hasAuthority('EXPERT')">Actions</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -146,10 +146,18 @@
 					</tbody>
 				</table>
 			</div>
+
+			<!-- Expert functions -->
+			<div class="mt-2 d-flex justify-content-end" sec:authorize="hasAuthority('EXPERT')">
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newUsedPartModal">
+					+ Add used part
+				</button>
+			</div>
 		</div>
 	</section>
 
-	<div th:if="${customer.appointment == null}" th:insert="dialogs/appointment/new :: dialog">...</div>
-	<div th:unless="${customer.appointment == null}" th:insert="dialogs/appointment/update :: dialog">...</div>
+	<div th:if="${customer.appointment == null}" sec:authorize="hasAuthority('ADMIN')" th:insert="dialogs/appointment/new :: dialog">...</div>
+	<div th:unless="${customer.appointment == null}" sec:authorize="hasAnyAuthority('ADMIN', 'EXPERT')" th:insert="dialogs/appointment/update :: dialog">...</div>
+	<div th:if="${customer.appointment != null && not #lists.isEmpty(availableParts)}" sec:authorize="hasAuthority('EXPERT')" th:insert="dialogs/usedparts/new :: dialog">...</div>
 </div>
 </html>
