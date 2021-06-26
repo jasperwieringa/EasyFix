@@ -1,5 +1,7 @@
 package com.main.easyFix;
 
+import com.main.easyFix.appointment.Appointment;
+import com.main.easyFix.appointment.AppointmentRepository;
 import com.main.easyFix.appuser.AppUser;
 import com.main.easyFix.appuser.AppUserRepository;
 import com.main.easyFix.customer.Customer;
@@ -23,6 +25,8 @@ public class EasyFixApplication extends SpringBootServletInitializer {
 	@Autowired
 	private DataSource dataSource;
 	@Autowired
+	private AppointmentRepository appointmentRepository;
+	@Autowired
 	private AppUserRepository appUserRepository;
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -36,11 +40,16 @@ public class EasyFixApplication extends SpringBootServletInitializer {
 	// TODO: Remove this (Only used to pre-populate the database with test data)
 	@EventListener(ApplicationReadyEvent.class)
 	public void loadData() {
+		List<Appointment> allAppointments = appointmentRepository.findAll();
 		List<AppUser> allUsers = appUserRepository.findAll();
 		List<Customer> allCustomers = customerRepository.findAll();
-		List<Part> allPArts = partRepository.findAll();
+		List<Part> allParts = partRepository.findAll();
 
-		if (allUsers.size() == 0 && allCustomers.size() == 0 && allPArts.size() == 0) {
+		if (allAppointments.size() == 0 &&
+			allUsers.size() == 0 &&
+			allCustomers.size() == 0 &&
+			allParts.size() == 0)
+		{
 			System.out.println("Pre-populating the database with test data");
 
 			ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(

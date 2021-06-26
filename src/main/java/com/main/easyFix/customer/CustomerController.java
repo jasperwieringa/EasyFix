@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerController {
   private final CustomerService customerService;
-  private final AppointmentService appointmentService;
   private final UsedPartService usedPartService;
 
   @GetMapping("/customers")

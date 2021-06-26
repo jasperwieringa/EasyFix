@@ -56,10 +56,10 @@ public class CustomerService {
     Customer customer = loadCustomerById(customer_id);
     Appointment appointment = customer.getAppointment();
 
-    // Remove the appointment and the associated used parts
+    // Remove the associated used parts from the appointment
     usedPartService.removeAll(authentication, appointment);
 
     // Finally delete the customer
-    customerRepository.delete(loadCustomerById(customer_id));
+    customerRepository.delete(customer);
   }
 }

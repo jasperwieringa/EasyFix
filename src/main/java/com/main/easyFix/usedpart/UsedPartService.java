@@ -35,7 +35,4 @@ public class UsedPartService {
       usedPartRepository.delete(loadUsedPartById(usedPart.getId()));
     }
   }
-
-  public void remove(Authentication authentication, int id) {
-  }
 }
