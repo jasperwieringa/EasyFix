@@ -55,12 +55,12 @@
 							</div>
 						</td>
 						<td sec:authorize="hasAnyAuthority('ADMIN', 'EXPERT')" class="d-flex">
-							<form class="mr-2" action="" th:action="@{'/customer/{id}'(id=${customer.id})}" th:method="get">
+							<form action="" th:action="@{'/customer/{id}'(id=${customer.id})}" th:method="get">
 								<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit">
 									<i class="bi bi-pencil"></i>
 								</button>
 							</form>
-							<form action="" sec:authorize="hasAuthority('ADMIN')"
+							<form class="ml-2" action="" sec:authorize="hasAuthority('ADMIN')"
 										th:action="@{'/customer/{id}/remove'(id=${customer.id})}" th:method="delete">
 								<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
 									<i class="bi bi-trash"></i>

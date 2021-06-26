@@ -97,8 +97,8 @@
 				</ul>
 
 				<div sec:authorize="hasAnyAuthority('ADMIN', 'EXPERT')" class="mt-2 d-flex justify-content-end">
-					<button type="button" class="mr-2 btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
-					<form action="" sec:authorize="hasAuthority('ADMIN')"
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateAppointmentModal">Edit appointment</button>
+					<form class="ml-2" action="" sec:authorize="hasAuthority('ADMIN')"
 								th:action="@{'/customer/{id}/remove_appointment'(id=${customer.id})}" th:method="delete">
 						<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
 							<i class="bi bi-trash"></i>
@@ -119,7 +119,6 @@
 				<table id="partsTable" class="table table-striped" data-pagination="true" data-filter-control="true">
 					<thead>
 					<tr>
-						<th data-field="id" scope="col">Id</th>
 						<th data-field="name" data-filter-control="input" scope="col">Name</th>
 						<th data-field="category" data-filter-control="select" data-sortable="true" scope="col">Category</th>
 						<th data-field="price" data-sortable="true" scope="col">Price per Unit</th>
@@ -133,7 +132,6 @@
 						<td colspan="7">No parts to display</td>
 					</tr>
 					<tr th:unless="${#lists.isEmpty(usedParts)}" th:each="usedPart : ${usedParts}">
-						<td th:text="${usedPart.part.id}">id</td>
 						<td th:text="${usedPart.part.name}">name</td>
 						<td th:text="${usedPart.part.category.displayValue}">category</td>
 						<td th:text="${'€' + usedPart.part.price}">price</td>

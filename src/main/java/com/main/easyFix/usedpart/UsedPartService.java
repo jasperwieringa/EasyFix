@@ -24,10 +24,11 @@ public class UsedPartService {
     return usedPartRepository.findByAppointment(appointment);
   }
 
-  public void add(Authentication authentication, int customer_id) throws IllegalAccessException {
+  public void add(Authentication authentication, UsedPart usedPart) throws IllegalAccessException {
     if (!PermissionValidator.isExpert(authentication)) {
       throw new IllegalAccessException("Permission denied");
     }
+    usedPartRepository.save(usedPart);
   }
 
   public void remove(Authentication authentication, int customer_id) throws IllegalAccessException {

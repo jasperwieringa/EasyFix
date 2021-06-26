@@ -13,7 +13,6 @@
 				<table id="partsTable" class="table table-striped" data-pagination="true" data-filter-control="true">
 					<thead>
 					<tr>
-						<th data-field="id" scope="col">Id</th>
 						<th data-field="name" data-filter-control="input" scope="col">Name</th>
 						<th data-field="category" data-filter-control="select" data-sortable="true" scope="col">Category</th>
 						<th data-field="price" data-sortable="true" scope="col">Price</th>
@@ -26,7 +25,6 @@
 						<td colspan="7">No parts to display</td>
 					</tr>
 					<tr th:unless="${#lists.isEmpty(parts)}" th:each="part : ${parts}">
-						<td th:text="${part.id}">id</td>
 						<td th:text="${part.name}">name</td>
 						<td th:text="${part.category.displayValue}">category</td>
 						<td th:text="${part.price}">price</td>

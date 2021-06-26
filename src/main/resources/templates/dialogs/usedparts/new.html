@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div id="newUsedPartModal" class="modal" tabindex="-1" th:fragment="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
+	<div class="modal-dialog modal-xl">
+		<form id="newUsedPartForm" th:data-id="${customer.id}" class="modal-content" action="" method="post">
 			<div class="modal-header">
 				<h5 class="modal-title">Add parts</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -10,14 +10,14 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<table id="table" data-toggle="table" data-height="299">
+				<table id="table" data-toggle="table" data-height="600">
 					<thead>
 					<tr>
-						<th data-field="id" scope="col">Id</th>
-						<th data-field="name" data-filter-control="input" scope="col">Name</th>
-						<th data-field="category" data-filter-control="select" data-sortable="true" scope="col">Category</th>
-						<th data-field="price" data-sortable="true" scope="col">Price</th>
+						<th data-field="name" scope="col">Name</th>
+						<th data-field="category" scope="col">Category</th>
+						<th data-field="price" scope="col">Price</th>
 						<th data-field="stock" scope="col">In stock</th>
+						<th scope="col">Use</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -25,15 +25,20 @@
 						<td colspan="7">No parts to display</td>
 					</tr>
 					<tr th:unless="${#lists.isEmpty(availableParts)}" th:each="part : ${availableParts}">
-						<td th:text="${part.id}">id</td>
 						<td th:text="${part.name}">name</td>
 						<td th:text="${part.category.displayValue}">category</td>
 						<td th:text="${part.price}">price</td>
 						<td th:text="${part.stock}">stock</td>
+						<td class="d-flex">
+							<input type="number" min="0" th:max="${part.stock}" class="form-control" th:name="${part.id}"/>
+						</td>
 					</tr>
 					</tbody>
 				</table>
 			</div>
-		</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
 	</div>
 </div>
